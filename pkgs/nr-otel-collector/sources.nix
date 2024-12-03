@@ -5,7 +5,7 @@
   ocb,
 }:
 let
-  distVersion = "0.7.1";
+  distVersion = "0.8.5";
 in
 stdenv.mkDerivation {
   name = "collector-dist-${distVersion}";
