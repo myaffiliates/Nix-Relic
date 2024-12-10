@@ -8,7 +8,7 @@ let
   distName = "nr-otel-collector";
   distVersion = "0.8.5";
   generated-sources = pkgs.callPackage ./sources.nix { inherit ocb; };
-  
+
 in
 buildGoModule {
   pname = distName;
@@ -16,7 +16,7 @@ buildGoModule {
 
   src = generated-sources;
 
-  vendorHash = "sha256-1HgCRsIhwSnsbodtREMgoxH6+G2BDbIRh9jLhGePQOE=";
+  vendorHash = "sha256-sxkGGqJp35Pg+2Wsxz4+h1Wne7rFaAU6fAu7muVPFwk=";
 
   ldflags = [
     "-s"
