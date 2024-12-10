@@ -16,7 +16,8 @@ buildGoModule {
 
   src = generated-sources;
 
-  vendorHash = "sha256-sxkGGqJp35Pg+2Wsxz4+h1Wne7rFaAU6fAu7muVPFwk=";
+  vendorHash = "sha256-CV+Azc/dEYLun1LxAixtC7s7Z+ijTdwGwrjo8UHPAYw=";
+  # "sha256-sxkGGqJp35Pg+2Wsxz4+h1Wne7rFaAU6fAu7muVPFwk="; 0.8.5
 
   ldflags = [
     "-s"
