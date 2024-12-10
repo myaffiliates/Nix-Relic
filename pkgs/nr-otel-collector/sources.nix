@@ -13,7 +13,7 @@ stdenv.mkDerivation {
     owner = "newrelic";
     repo = "opentelemetry-collector-releases";
     rev = "nr-otel-collector-${distVersion}";
-    hash = "sha256-JmqW8BtFl1p2SPy/kDKNNcgkDwMef4pKiFrNcHsaqkU=";
+    hash = "sha256-CkjJMVDcOnfOI76VkEQetDDST85/32s1jayCYlCDdHI=";
   };
   nativeBuildInputs =
     (with pkgs; [
