@@ -6,7 +6,7 @@
 }:
 let
   distName = "nr-otel-collector";
-  distVersion = "0.8.3";
+  distVersion = "0.8.5";
   generated-sources = pkgs.callPackage ./sources.nix { inherit ocb; };
 
 in
@@ -16,8 +16,8 @@ buildGoModule {
 
   src = generated-sources;
 
-  vendorHash = "sha256-CV+Azc/dEYLun1LxAixtC7s7Z+ijTdwGwrjo8UHPAYw=";
-  # "sha256-sxkGGqJp35Pg+2Wsxz4+h1Wne7rFaAU6fAu7muVPFwk="; 0.8.5
+  # vendorHash = "sha256-CV+Azc/dEYLun1LxAixtC7s7Z+ijTdwGwrjo8UHPAYw="; # 0.8.3
+  vendorHash = "sha256-sxkGGqJp35Pg+2Wsxz4+h1Wne7rFaAU6fAu7muVPFwk="; # 0.8.5
 
   ldflags = [
     "-s"

@@ -6,7 +6,7 @@
   nr-otel-collector = pkgs.callPackage ./nr-otel-collector {
     # nr-otel-collector needs a specific version of ocb at this moment, hence this hack
     ocb = let
-      version = "0.115.0";
+      version = "0.108.0";
       src = pkgs.fetchFromGitHub {
         owner = "open-telemetry";
         repo = "opentelemetry-collector";
