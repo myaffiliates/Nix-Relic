@@ -1,4 +1,4 @@
-{ lib, buildGoPackage, fetchFromGitHub }:
+{ lib, buildGoModule, fetchFromGitHub }:
 
 buildGoModule rec {
   pname = "go-agent";
