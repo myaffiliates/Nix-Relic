@@ -2,6 +2,8 @@
 {pkgs}: rec {
   infrastructure-agent = pkgs.callPackage ./infrastructure-agent.nix {};
   ocb = pkgs.callPackage ./ocb.nix {};
+  go-agent = pkgs.callPackage ./go-agent.nix {};
+  newrelic-php-agent = pkgs.callPackage ./newrelic-php-agent.nix {};
 
   nr-otel-collector = pkgs.callPackage ./nr-otel-collector {
     # nr-otel-collector needs a specific version of ocb at this moment, hence this hack

@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   stdenv,
   fetchFromGitHub,
@@ -20,11 +21,11 @@ stdenv.mkDerivation {
     ]);
   buildPhase = ''
     # script run by make needs the correct bash location
-    patchShebangs ./scripts/build.sh
+    # patchShebangs ./scripts/build.sh
 
     export HOME=$TMPDIR
     chmod -R u+w .
-    make generate-sources
+    make
   '';
   installPhase = ''
     # Remove log files as they make the build non-reproducible (contain dates)
@@ -34,5 +35,5 @@ stdenv.mkDerivation {
   '';
   outputHashAlgo = "sha256";
   outputHashMode = "recursive";
-  outputHash = "sha256-a8LhKZB5vRDNpRi94ZARG/ARdrsl4kcyda62BZ20nNg="; # 0.8.5
+  outputHash = "sha256-=";
 }
