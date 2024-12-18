@@ -13,7 +13,7 @@ stdenv.mkDerivation {
     owner = "newrelic";
     repo = "newrelic-php-agent";
     rev = "v${distVersion}";
-    #hash = "";
+    hash = lib.fakeHash;
   };
   nativeBuildInputs =
     (with pkgs; [
