@@ -1,6 +1,6 @@
 { lib, buildGoPackage, fetchFromGitHub }:
 
-buildGoPackage rec {
+buildGoModule rec {
   pname = "go-agent";
   version = "3.35.1";
     
