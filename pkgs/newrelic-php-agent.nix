@@ -1,13 +1,14 @@
 {
   lib,
   stdenv,
-  #fetchzip,
   fetchFromGitHub,
+  php,
+  pkg-config,
+  protobuf-c,
 }:
 let
   version = "11.4.0.17";
 in
-
 
 stdenv.mkDerivation {
   pname = "newrelic-php-agent";
@@ -20,8 +21,16 @@ stdenv.mkDerivation {
     sha256 = "GOtjX8Oa6gkD28sFVsoVjI537MpABIAInNHJGjsul7U=";
   };
 
-  # src = fetchzip {
-  #   url = "https://github.com/newrelic/newrelic-php-agent/archive/refs/tags/v${version}.tar.gz";
-  #   sha256 = "0xw6cr5jgi1ir13q6apvrivwmmpr5j8vbymp0x6ll0kcv6366hnn";
-  # };
+  # internalDeps = [
+  #   php.extensions.pgsql
+  # ];
+
+  nativeBuildInputs = [ pkg-config ];
+  buildInputs = [ pcre2 protobuf-c php ];
+
+  installPhase = ''
+     cp -r agent/.libs/newrelic.so $out
+     cp -r newrelic-php-agent/bin $out  
+  '';
+
 }
