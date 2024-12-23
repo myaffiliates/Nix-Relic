@@ -34,4 +34,4 @@ buildPecl rec {
      cp -r newrelic-php-agent/bin $out  
   '';
 
-})
+}
