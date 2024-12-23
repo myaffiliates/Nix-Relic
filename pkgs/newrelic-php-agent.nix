@@ -1,12 +1,11 @@
 {
-  php,
   buildPecl,
   lib,
   fetchFromGitHub,
   php,
-  # pkg-config,
-  # protobufc,
-  # pcre2,
+  pkg-config,
+  protobufc,
+  pcre2,
 }:
 let
   version = "11.4.0.17";
