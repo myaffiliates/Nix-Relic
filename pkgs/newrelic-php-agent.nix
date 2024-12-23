@@ -1,17 +1,18 @@
 {
   lib,
-  stdenv,
+  #stdenv,
   fetchFromGitHub,
   php,
-  pkg-config,
-  protobufc,
-  pcre2,
+  # pkg-config,
+  # protobufc,
+  # pcre2,
 }:
 let
   version = "11.4.0.17";
 in
 
-stdenv.mkDerivation {
+#stdenv.mkDerivation {
+php.buildComposerProject (finalAttrs: {
   pname = "newrelic-php-agent";
   inherit version;
 
@@ -26,12 +27,12 @@ stdenv.mkDerivation {
   #   php.extensions.pgsql
   # ];
 
-  nativeBuildInputs = [ pkg-config ];
-  buildInputs = [ pcre2 protobufc php ];
+  # nativeBuildInputs = [ pkg-config ];
+  # buildInputs = [ pcre2 protobufc php ];
 
   installPhase = ''
      cp -r agent/.libs/newrelic.so $out
      cp -r newrelic-php-agent/bin $out  
   '';
 
-}
+})
