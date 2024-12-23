@@ -10,7 +10,7 @@ let
   version = "11.4.0.17";
 
   myPhp = (pkgs.php82.buildEnv {
-    extensions = ({ all, enabled, ... }: (lib.filter (e: e !=  php82.extensions.openssl) enabled) ++ (with all; [ 
+    extensions = ({ all, enabled, ... }: (lib.filter (e: e !=  pkgs.php82.extensions.openssl) enabled) ++ (with all; [ 
       openssl-legacy 
     ])); 
   });
