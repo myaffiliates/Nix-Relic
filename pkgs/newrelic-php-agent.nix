@@ -2,7 +2,7 @@
   stdenv,
   lib,
   fetchFromGitHub,
-  php,
+  php82,
   pkg-config,
   pcre2,
 }:
@@ -12,7 +12,7 @@ in
 
 stdenv.mkDerivation rec {
   pname = "newrelic-php-agent";
-  inherit version;
+  inherit (php82.unwrapped) version;
 
   src = fetchFromGitHub {
     owner = "newrelic";
@@ -26,7 +26,7 @@ stdenv.mkDerivation rec {
   # ];
 
   nativeBuildInputs = [ pkg-config ];
-  buildInputs = [ pcre2 php ];
+  buildInputs = [ pcre2 php82 ];
 
   installPhase = ''
      cp -r agent/.libs/newrelic.so $out
