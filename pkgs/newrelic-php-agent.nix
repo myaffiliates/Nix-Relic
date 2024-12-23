@@ -1,17 +1,16 @@
 {
-  buildPecl,
+  stdenv,
   lib,
   fetchFromGitHub,
   php,
   pkg-config,
-  protobufc,
   pcre2,
 }:
 let
   version = "11.4.0.17";
 in
 
-buildPecl {
+stdenv.mkDerivation rec {
   pname = "newrelic-php-agent";
   inherit version;
 
@@ -26,8 +25,8 @@ buildPecl {
   #   php.extensions.pgsql
   # ];
 
-  # nativeBuildInputs = [ pkg-config ];
-  # buildInputs = [ pcre2 protobufc php ];
+  nativeBuildInputs = [ pkg-config ];
+  buildInputs = [ pcre2 php ];
 
   installPhase = ''
      cp -r agent/.libs/newrelic.so $out
