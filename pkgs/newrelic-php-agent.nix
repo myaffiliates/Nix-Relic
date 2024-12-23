@@ -27,7 +27,7 @@ stdenv.mkDerivation {
   # ];
 
   nativeBuildInputs = [ pkg-config ];
-  buildInputs = [ pcre2 protobuf-c php ];
+  buildInputs = [ pcre2 protobufc php ];
 
   installPhase = ''
      cp -r agent/.libs/newrelic.so $out
