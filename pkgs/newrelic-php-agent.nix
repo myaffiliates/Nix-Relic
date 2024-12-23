@@ -1,6 +1,6 @@
 {
-  lib,
   buildPecl,
+  lib,
   fetchFromGitHub,
   php,
   # pkg-config,
@@ -11,7 +11,7 @@ let
   version = "11.4.0.17";
 in
 
-buildPecl rec {
+buildPecl {
   pname = "newrelic-php-agent";
   inherit version;
 
