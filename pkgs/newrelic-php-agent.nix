@@ -4,7 +4,7 @@
   fetchFromGitHub,
   php,
   pkg-config,
-  protobuf-c,
+  protobufc,
   pcre2,
 }:
 let
