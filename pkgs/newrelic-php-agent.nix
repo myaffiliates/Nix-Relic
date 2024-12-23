@@ -4,10 +4,14 @@
   #fetchzip,
   fetchFromGitHub,
 }:
+let
+  version = "11.4.0.17";
+in
+
 
 stdenv.mkDerivation {
   pname = "newrelic-php-agent";
-  version = "11.4.0.17";
+  inherit version;
 
   src = fetchFromGitHub {
     owner = "newrelic";
