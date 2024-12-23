@@ -1,18 +1,25 @@
 {
+  pkgs,
   stdenv,
   lib,
   fetchFromGitHub,
-  php,
   pkg-config,
   pcre2,
 }:
 let
   version = "11.4.0.17";
+
+  myPhp = (pkgs.php82.buildEnv {
+    extensions = ({ all, enabled, ... }: (lib.filter (e: e !=  php82.extensions.openssl) enabled) ++ (with all; [ 
+      openssl-legacy 
+    ])); 
+  });
+
 in
 
 stdenv.mkDerivation rec {
   pname = "newrelic-php-agent";
-  inherit (php.unwrapped) version;
+  inherit (myPhp.unwrapped) version;
 
   src = fetchFromGitHub {
     owner = "newrelic";
@@ -26,7 +33,7 @@ stdenv.mkDerivation rec {
   # ];
 
   nativeBuildInputs = [ pkg-config ];
-  buildInputs = [ pcre2 php ];
+  buildInputs = [ pcre2 myPhp ];
 
   installPhase = ''
      cp -r agent/.libs/newrelic.so $out/libs
