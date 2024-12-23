@@ -1,39 +1,15 @@
 {
   lib,
-  pkgs,
   stdenv,
   fetchFromGitHub,
 }:
-let
-  distVersion = "11.4.0.17";
-in
-stdenv.mkDerivation {
-  name = "newrelic-php-agent";
-  src = fetchFromGitHub {
-    owner = "newrelic";
-    repo = "newrelic-php-agent";
-    rev = "v${distVersion}";
-    hash = lib.fakeHash;
-  };
-  nativeBuildInputs =
-    (with pkgs; [
-      gnumake
-    ]);
-  buildPhase = ''
-    # script run by make needs the correct bash location
-    # patchShebangs ./scripts/build.sh
 
-    export HOME=$TMPDIR
-    chmod -R u+w .
-    make
-  '';
-  installPhase = ''
-    # Remove log files as they make the build non-reproducible (contain dates)
-    #rm -rf distributions/nr-otel-collector/_build/build.log
-    cp -r agent/.libs/newrelic.so $out
-    cp -r newrelic-php-agent/bin $out
-  '';
-  outputHashAlgo = "sha256";
-  outputHashMode = "recursive";
-  outputHash = "sha256-=";
+stdenv.mkDerivation {
+  pname = "newrelic-php-agent";
+  version = "11.4.0.17";
+
+  src = fetchzip {
+    url = "https://github.com/newrelic/newrelic-php-agent/archive/refs/tags/v${version}.tar.gz";
+    sha256 = "0xw6cr5jgi1ir13q6apvrivwmmpr5j8vbymp0x6ll0kcv6366hnn";
+  };
 }
