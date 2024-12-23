@@ -1,6 +1,6 @@
 {
   lib,
-  #stdenv,
+  buildPecl,
   fetchFromGitHub,
   php,
   # pkg-config,
@@ -11,8 +11,7 @@ let
   version = "11.4.0.17";
 in
 
-#stdenv.mkDerivation {
-php.buildComposerProject (finalAttrs: {
+buildPecl rec {
   pname = "newrelic-php-agent";
   inherit version;
 
@@ -22,8 +21,6 @@ php.buildComposerProject (finalAttrs: {
     rev = "v${version}";
     sha256 = "GOtjX8Oa6gkD28sFVsoVjI537MpABIAInNHJGjsul7U=";
   };
-
-  vendorHash = lib.fakeHash;
 
   # internalDeps = [
   #   php.extensions.pgsql
