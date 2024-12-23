@@ -1,4 +1,5 @@
 {
+  php,
   buildPecl,
   lib,
   fetchFromGitHub,
