@@ -17,7 +17,7 @@ stdenv.mkDerivation {
     owner = "newrelic";
     repo = "newrelic-php-agent";
     rev = "v${version}";
-    sha256 = lib.fakeSha256;
+    sha256 = "GOtjX8Oa6gkD28sFVsoVjI537MpABIAInNHJGjsul7U=";
   };
 
   # src = fetchzip {
