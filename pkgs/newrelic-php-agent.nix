@@ -23,6 +23,8 @@ php.buildComposerProject (finalAttrs: {
     sha256 = "GOtjX8Oa6gkD28sFVsoVjI537MpABIAInNHJGjsul7U=";
   };
 
+  vendorHash = lib.fakeHash;
+
   # internalDeps = [
   #   php.extensions.pgsql
   # ];
