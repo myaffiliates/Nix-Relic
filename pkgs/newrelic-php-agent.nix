@@ -5,6 +5,7 @@
   php,
   pkg-config,
   protobuf-c,
+  pcre2,
 }:
 let
   version = "11.4.0.17";
