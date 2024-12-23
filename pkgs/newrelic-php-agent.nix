@@ -9,7 +9,7 @@
 let
   version = "11.4.0.17";
 
-  myPhp = (pkgs.php82.buildEnv {
+  myPhp = (pkgs.php82.unwrapped.buildEnv {
     extensions = { enabled, all }: enabled ++ (with all; [ yaml ]); 
   });
 
@@ -17,7 +17,7 @@ in
 
 stdenv.mkDerivation rec {
   pname = "newrelic-php-agent";
-  inherit (myPhp.unwrapped) version;
+  inherit myPhp version;
 
   src = fetchFromGitHub {
     owner = "newrelic";
