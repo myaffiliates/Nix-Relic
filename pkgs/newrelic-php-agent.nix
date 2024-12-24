@@ -31,7 +31,7 @@ stdenv.mkDerivation rec {
   # ];
 
   nativeBuildInputs = [ pkg-config ];
-  buildInputs = [ pcre2 myPhp git];
+  buildInputs = [ pcre2 myPhp pkgs.git ];
 
   installPhase = ''
      cp -r agent/.libs/newrelic.so $out/libs
