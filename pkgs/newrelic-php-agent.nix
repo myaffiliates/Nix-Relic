@@ -30,8 +30,8 @@ stdenv.mkDerivation rec {
   #   php.extensions.pgsql
   # ];
 
-  nativeBuildInputs = [ myPhp pkg-config ];
-  buildInputs = [ pcre2 ];
+  nativeBuildInputs = [ pkg-config ];
+  buildInputs = [ pcre2 myPhp git];
 
   installPhase = ''
      cp -r agent/.libs/newrelic.so $out/libs
