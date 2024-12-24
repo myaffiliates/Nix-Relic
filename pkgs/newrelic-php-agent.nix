@@ -9,7 +9,7 @@
 let
   version = "11.4.0.17";
 
-  myPhp = (pkgs.php82.buildEnv {
+  myPhp = (pkgs.php82.unwrapped.dev.buildEnv {
     extensions = { enabled, all }: enabled ++ (with all; [ yaml ]); 
   });
 
@@ -17,7 +17,7 @@ in
 
 stdenv.mkDerivation rec {
   pname = "newrelic-php-agent";
-  inherit (myPhp.unwrapped) version;
+  inherit myPhp version;
 
   src = fetchFromGitHub {
     owner = "newrelic";
@@ -30,7 +30,7 @@ stdenv.mkDerivation rec {
   #   php.extensions.pgsql
   # ];
 
-  nativeBuildInputs = [ (myPhp.unwrapped) pkg-config ];
+  nativeBuildInputs = [ myPhp pkg-config ];
   buildInputs = [ pcre2 ];
 
   installPhase = ''
