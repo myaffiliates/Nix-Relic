@@ -19,7 +19,7 @@ let
     owner = "php";
     repo = "php-src";
     rev = "php-8.2.27";
-    sha256 = lib.fakeSha256;
+    sha256 = "sha256-UbS+4kBrc3ohSHyl0VyjeeS72ZDjLh8PIIylodZFYOE=";
   };
 in
 
