@@ -38,7 +38,7 @@ stdenv.mkDerivation rec {
   # ];
 
   nativeBuildInputs = [ pkg-config pkgs.php82.unwrapped ];
-  buildInputs = [ pcre2 pkgs.autoconf ];
+  buildInputs = [ pcre2 pkgs.autoconf pkgs.automake pkgs.libtool ];
 
   installPhase = ''
      cp -r agent/.libs/newrelic.so $out/libs
