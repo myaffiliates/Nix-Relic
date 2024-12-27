@@ -33,9 +33,9 @@ stdenv.mkDerivation rec {
 
   buildPhase = ''
     substituteInPlace agent/php_includes.h \
-      --replace "ext/pdo/php_pdo_driver.h" "${php-src}/ext/pdo/php_pdo_driver.h"
+      --replace-quiet "ext/pdo/php_pdo_driver.h" "${php-src}/ext/pdo/php_pdo_driver.h"
   '';
-  
+
 #include "ext/standard/info.h"
 
   installPhase = ''
