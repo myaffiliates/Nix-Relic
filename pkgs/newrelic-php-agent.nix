@@ -26,12 +26,7 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-GOtjX8Oa6gkD28sFVsoVjI537MpABIAInNHJGjsul7U=";
   };
 
-
-  # internalDeps = [
-  #   pkgs.php82.extensions.pdo_unwrapped
-  # ];
-
-  nativeBuildInputs = [ pkg-config php-src ];
+  nativeBuildInputs = [ pkg-config pkgs.php82.unwrapped php-src ];
   buildInputs = [ pkgs.pcre pkgs.protobufc pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git ];
 
   env.NIX_CFLAGS_COMPILE = "-O2";
