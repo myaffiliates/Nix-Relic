@@ -27,11 +27,14 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ pkg-config pkgs.php82.unwrapped php-src ];
-  buildInputs = [ pkgs.pcre pkgs.protobufc pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git ];
+  buildInputs = [ pkgs.pcre pkgs.protobufc pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git pkgs.bash ];
 
   env.NIX_CFLAGS_COMPILE = "-O2";
 
   buildPhase = ''
+  substituteInPlace Makefile \
+    --replace-quiet "/bin/bash" "${pkgs.bash}/bin/bash"
+  
     substituteInPlace agent/php_includes.h \
       --replace-quiet "ext/pdo/php_pdo_driver.h" "${php-src}/ext/pdo/php_pdo_driver.h"
 
