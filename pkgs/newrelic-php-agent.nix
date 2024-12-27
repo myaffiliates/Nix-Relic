@@ -35,8 +35,8 @@ stdenv.mkDerivation rec {
     substituteInPlace agent/php_includes.h \
       --replace-quiet "ext/pdo/php_pdo_driver.h" "${php-src}/ext/pdo/php_pdo_driver.h"
 
-    cd agent
-    make
+    make -C daemon
+    make -C agent
   '';
 
 #include "ext/standard/info.h"
