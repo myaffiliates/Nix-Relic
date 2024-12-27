@@ -5,7 +5,7 @@
   #fetchFromGitHub,
   fetchzip,
   pkg-config,
-  pcre2,
+  pcre,
 }:
 let
   version = "11.4.0.17";
@@ -38,7 +38,9 @@ stdenv.mkDerivation rec {
   # ];
 
   nativeBuildInputs = [ pkg-config pkgs.php82.unwrapped ];
-  buildInputs = [ pkgs.pcre pkgs.protobufc pkgs.autoconf pkgs.automake pkgs.libtool pkgs.git ];
+  buildInputs = [ pkgs.pcre pkgs.protobufc pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git ];
+
+  env.NIX_CFLAGS_COMPILE = "-O2";
 
   installPhase = ''
      cp -r agent/.libs/newrelic.so $out/libs
