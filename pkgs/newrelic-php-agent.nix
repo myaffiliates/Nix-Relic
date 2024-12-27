@@ -2,32 +2,38 @@
   pkgs,
   stdenv,
   lib,
-  #fetchFromGitHub,
+  fetchFromGitHub,
   fetchzip,
   pkg-config,
   pcre,
 }:
 let
   version = "11.4.0.17";
-
-  php-src = fetchzip {
-    url = "https://github.com/php/php-src/archive/refs/tags/php-8.2.27.tar.gz";
-    sha256 = "sha256-GOtjX8Oa6gkD28sFVsoVjI537MpABIAInNHJGjsul7U=";
+ 
+  # phpSource = fetchzip {
+  #   url = "https://github.com/php/php-src/archive/refs/tags/php-8.2.27.tar.gz";
+  #   sha256 = "";
+  # };
+ 
+  phpSource = pkgs.fetchFromGitHub {
+    owner = "php";
+    repo = "php-src";
+    rev = "php-8.2.27";
+    sha256 = "sha256-0Zz5";
   };
-
 in
 
 stdenv.mkDerivation rec {
   pname = "newrelic-php-agent";
-  inherit php-src version;
+  inherit phpSource version;
 
   src = fetchzip {
     url = "https://github.com/newrelic/newrelic-php-agent/archive/refs/tags/v${version}.tar.gz";
     sha256 = "sha256-GOtjX8Oa6gkD28sFVsoVjI537MpABIAInNHJGjsul7U=";
   };
 
-  nativeBuildInputs = [ pkg-config pkgs.php82.unwrapped php-src ];
-  buildInputs = [ pkgs.pcre pkgs.protobufc pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git pkgs.bash ];
+  nativeBuildInputs = [ pkg-config pkgs.php82.unwrapped ];
+  buildInputs = [ pkgs.pcre pkgs.protobufc pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git pkgs.bash phpSource ];
 
   env.NIX_CFLAGS_COMPILE = "-O2";
 
@@ -36,7 +42,7 @@ stdenv.mkDerivation rec {
     --replace-quiet "/bin/bash" "${pkgs.bash}/bin/bash"
   
     substituteInPlace agent/php_includes.h \
-      --replace-quiet "ext/pdo/php_pdo_driver.h" "${php-src}/ext/pdo/php_pdo_driver.h"
+      --replace-quiet "ext/pdo/php_pdo_driver.h" "${phpSource}/ext/pdo/php_pdo_driver.h"
 
     make agent
     make daemon
