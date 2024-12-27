@@ -17,7 +17,7 @@ in
 
 stdenv.mkDerivation rec {
   pname = "newrelic-php-agent";
-  inherit pkgs version;
+  inherit version;
 
   src = fetchFromGitHub {
     owner = "newrelic";
