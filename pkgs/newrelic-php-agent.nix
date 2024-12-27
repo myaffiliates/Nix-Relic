@@ -26,7 +26,7 @@ stdenv.mkDerivation rec {
   };
 
   internalDeps = [
-    php.extensions.pdo
+    pkgs.php.extensions.pdo
   ];
 
   nativeBuildInputs = [ pkg-config pkgs.php82.unwrapped ];
