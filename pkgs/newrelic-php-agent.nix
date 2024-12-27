@@ -10,26 +10,28 @@
 let
   version = "11.4.0.17";
 
-  # myPhp = (pkgs.php82.unwrapped.dev.buildEnv {
-  #   extensions = { enabled, all }: enabled ++ (with all; [ yaml ]); 
-  # });
+  php-src = fetchzip {
+    url = "https://github.com/php/php-src/archive/refs/tags/php-8.2.27.tar.gz";
+    sha256 = "sha256-GOtjX8Oa6gkD28sFVsoVjI537MpABIAInNHJGjsul7U=";
+  };
 
 in
 
 stdenv.mkDerivation rec {
   pname = "newrelic-php-agent";
-  inherit version;
+  inherit php-src version;
 
   src = fetchzip {
     url = "https://github.com/newrelic/newrelic-php-agent/archive/refs/tags/v${version}.tar.gz";
     sha256 = "sha256-GOtjX8Oa6gkD28sFVsoVjI537MpABIAInNHJGjsul7U=";
   };
 
-  internalDeps = [
-    pkgs.php.extensions.pdo
-  ];
 
-  nativeBuildInputs = [ pkg-config pkgs.php82.unwrapped ];
+  # internalDeps = [
+  #   pkgs.php82.extensions.pdo_unwrapped
+  # ];
+
+  nativeBuildInputs = [ pkg-config php-src ];
   buildInputs = [ pkgs.pcre pkgs.protobufc pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git ];
 
   env.NIX_CFLAGS_COMPILE = "-O2";
