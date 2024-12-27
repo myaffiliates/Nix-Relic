@@ -32,7 +32,7 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-GOtjX8Oa6gkD28sFVsoVjI537MpABIAInNHJGjsul7U=";
   };
 
-  nativeBuildInputs = [ pkg-config makeWrapper pkgs.php82.unwrapped ];
+  nativeBuildInputs = [ pkg-config pkgs.php82.unwrapped ];
   buildInputs = [ pkgs.pcre pkgs.protobufc pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git pkgs.bash pkgs.go phpSource ];
 
   env.NIX_CFLAGS_COMPILE = "-O2";
