@@ -31,6 +31,13 @@ stdenv.mkDerivation rec {
 
   env.NIX_CFLAGS_COMPILE = "-O2";
 
+  buildPhase = ''
+    substituteInPlace agent/php_includes.h \
+      --replace "ext/pdo/php_pdo_driver.h" "${php-src}/ext/pdo/php_pdo_driver.h"
+  '';
+  
+#include "ext/standard/info.h"
+
   installPhase = ''
      cp -r agent/.libs/newrelic.so $out/libs
      cp -r newrelic-php-agent/bin $out/bin  
