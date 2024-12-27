@@ -60,7 +60,7 @@ stdenv.mkDerivation rec {
   '';
 
   postInstall = ''
-    echo "extension=${out}/lib/newrelic.so" > /myaffiliates/_bootstrap/php/php8.2/newrelic.ini  
+    echo "extension=$out/lib/newrelic.so" > /myaffiliates/_bootstrap/php/php8.2/newrelic.ini  
 
     wrapProgram $out/bin/newrelic-php-agent \
       --prefix PATH : ${lib.makeBinPath [ newrelic-php-agent ]}
