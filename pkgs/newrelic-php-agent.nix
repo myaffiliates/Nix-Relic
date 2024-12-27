@@ -19,7 +19,7 @@ let
     owner = "php";
     repo = "php-src";
     rev = "php-8.2.27";
-    sha256 = "sha256-0Zz5";
+    sha256 = lib.fakeSha256;
   };
 in
 
@@ -38,8 +38,8 @@ stdenv.mkDerivation rec {
   env.NIX_CFLAGS_COMPILE = "-O2";
 
   buildPhase = ''
-  substituteInPlace Makefile \
-    --replace-quiet "/bin/bash" "${pkgs.bash}/bin/bash"
+    substituteInPlace Makefile \
+      --replace-quiet "/bin/bash" "${pkgs.bash}/bin/bash"
   
     substituteInPlace agent/php_includes.h \
       --replace-quiet "ext/pdo/php_pdo_driver.h" "${phpSource}/ext/pdo/php_pdo_driver.h"
