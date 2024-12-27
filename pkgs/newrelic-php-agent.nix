@@ -33,7 +33,7 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ pkg-config pkgs.php82.unwrapped ];
-  buildInputs = [ pkgs.pcre pkgs.protobufc pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git pkgs.bash phpSource ];
+  buildInputs = [ pkgs.pcre pkgs.protobufc pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git pkgs.bash pkgs.go phpSource ];
 
   env.NIX_CFLAGS_COMPILE = "-O2";
 
@@ -43,6 +43,15 @@ stdenv.mkDerivation rec {
   
     substituteInPlace agent/php_includes.h \
       --replace-quiet "ext/pdo/php_pdo_driver.h" "${phpSource}/ext/pdo/php_pdo_driver.h"
+
+    substituteInPlace daemon/Makefile \
+      --replace-quiet "go" "${pkgs.go}/bin/go"
+
+	# NewrelicCollectorHost = ""
+	# NewrelicLicenseKey    = ""
+	# NewrelicCollectorKeys = ""
+	# NewrelicAccountId     = ""
+	# NewrelicAppId         = ""
 
     make agent
     make daemon
