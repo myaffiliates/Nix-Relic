@@ -9,15 +9,15 @@
 let
   version = "11.4.0.17";
 
-  myPhp = (pkgs.php82.unwrapped.dev.buildEnv {
-    extensions = { enabled, all }: enabled ++ (with all; [ yaml ]); 
-  });
+  # myPhp = (pkgs.php82.unwrapped.dev.buildEnv {
+  #   extensions = { enabled, all }: enabled ++ (with all; [ yaml ]); 
+  # });
 
 in
 
 stdenv.mkDerivation rec {
   pname = "newrelic-php-agent";
-  inherit myPhp version;
+  inherit pkgs version;
 
   src = fetchFromGitHub {
     owner = "newrelic";
@@ -30,8 +30,8 @@ stdenv.mkDerivation rec {
   #   php.extensions.pgsql
   # ];
 
-  nativeBuildInputs = [ pkg-config ];
-  buildInputs = [ pcre2 myPhp pkgs.git ];
+  nativeBuildInputs = [ pkg-config pkgs.php82.unwrapped ];
+  buildInputs = [ pcre2 pkgs.git ];
 
   installPhase = ''
      cp -r agent/.libs/newrelic.so $out/libs
