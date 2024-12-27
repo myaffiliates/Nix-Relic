@@ -33,7 +33,7 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ pkg-config pkgs.php82.unwrapped ];
-  buildInputs = [ pkgs.pcre pkgs.protobufc pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git pkgs.bash pkgs.go.withproxy phpSource ];
+  buildInputs = [ pkgs.pcre pkgs.protobufc pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git pkgs.bash pkgs.go phpSource ];
 
   env.NIX_CFLAGS_COMPILE = "-O2";
 
