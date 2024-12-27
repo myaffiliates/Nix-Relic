@@ -38,6 +38,8 @@ stdenv.mkDerivation rec {
   env.NIX_CFLAGS_COMPILE = "-O2";
 
   buildPhase = ''
+    export HOME=$(pwd)
+
     substituteInPlace Makefile \
       --replace-quiet "/bin/bash" "${pkgs.bash}/bin/bash"
   
@@ -47,22 +49,22 @@ stdenv.mkDerivation rec {
     substituteInPlace daemon/Makefile \
       --replace-quiet "go" "${pkgs.go}/bin/go"
 
-	# NewrelicCollectorHost = ""
-	# NewrelicLicenseKey    = ""
-	# NewrelicCollectorKeys = ""
-	# NewrelicAccountId     = ""
-	# NewrelicAppId         = ""
-
     make agent
     make daemon
   '';
-
-#include "ext/standard/info.h"
-
   installPhase = ''
-     cp -r agent/.libs/newrelic.so $out/libs
+     mkdir -p $out/lib
+     mkdir -p $out/bin
+     cp -r agent/.libs/newrelic.so $out/lib
      cp -r newrelic-php-agent/bin $out/bin  
   '';
+
+  postInstall = ''
+    echo "extension=${out}/lib/newrelic.so" > /myaffiliates/_bootstrap/php/php8.2/newrelic.ini  
+
+    wrapProgram $out/bin/newrelic-php-agent \
+      --prefix PATH : ${lib.makeBinPath [ newrelic-php-agent ]}
+     
 
   meta = {
     description = "New Relic PHP Agent";
