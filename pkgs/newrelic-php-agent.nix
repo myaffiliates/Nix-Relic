@@ -64,7 +64,7 @@ stdenv.mkDerivation rec {
 
     wrapProgram $out/bin/newrelic-php-agent \
       --prefix PATH : ${lib.makeBinPath [ newrelic-php-agent ]}
-     
+    ''; 
 
   meta = {
     description = "New Relic PHP Agent";
