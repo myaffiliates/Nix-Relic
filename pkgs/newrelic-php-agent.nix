@@ -39,7 +39,7 @@ stdenv.mkDerivation rec {
 
   buildPhase = ''
     export HOME=$(pwd)
-    export GOPROXY=https://proxy.golang.org
+    export GOPROXY="direct"
 
     substituteInPlace Makefile \
       --replace-quiet "/bin/bash" "${pkgs.bash}/bin/bash"
@@ -51,13 +51,14 @@ stdenv.mkDerivation rec {
       --replace-quiet "go" "${pkgs.go}/bin/go"
 
     make agent
-    make daemon
+    #make daemon
   '';
   installPhase = ''
      mkdir -p $out/lib
-     mkdir -p $out/bin
+     #mkdir -p $out/bin
+
      cp -r agent/.libs/newrelic.so $out/lib
-     cp -r newrelic-php-agent/bin $out/bin  
+     #cp -r newrelic-php-agent/bin $out/bin  
   '';
 
   postInstall = ''
