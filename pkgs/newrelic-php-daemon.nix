@@ -38,6 +38,7 @@ newrelic-php-daemon = buildGoModule rec {
 
      cp -r newrelic-php-agent/bin $out/bin  
   '';
+  };
 
   meta = {
     description = "New Relic PHP Agent";
