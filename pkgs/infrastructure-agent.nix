@@ -6,7 +6,7 @@
 }:
 buildGoModule rec {
   pname = "infrastructure-agent";
-  version = "1.59.0";
+  version = "1.58.0";
 
   src = fetchFromGitHub {
     owner = "newrelic";
