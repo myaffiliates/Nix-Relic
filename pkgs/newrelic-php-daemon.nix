@@ -13,9 +13,9 @@
 
   sourceRoot = "${src.name}/daemon";
   
-  installPhase = ''
-     mkdir -p $out/bin
+  # installPhase = ''
+  #    mkdir -p $out/bin
 
-     cp -r newrelic-php-agent/bin $out/bin  
-  '';
+  #    cp -r newrelic-php-agent/bin $out/bin  
+  # '';
 }
