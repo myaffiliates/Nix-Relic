@@ -6,11 +6,11 @@
 }: let
   inherit (lib) mkEnableOption mkIf mkOption types;
 
-  cfg = config.services.newrelic-php-daemon;
+  cfg = config.services.newrelic-daemon;
   settingsFormat = pkgs.formats.yaml {};
 in {
-  options.services.newrelic-php-daemon = {
-    enable = lib.mkEnableOption "newrelic-php-daemon service";
+  options.services.newrelic-daemon = {
+    enable = lib.mkEnableOption "newrelic-daemon service";
 
     settings = mkOption {
       type = settingsFormat.type;
@@ -23,7 +23,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    systemd.services.newrelic-php-daemon = {
+    systemd.services.newrelic-daemon = {
       description = "New Relic PHP Agent Daemon";
 
       after = [
@@ -43,7 +43,7 @@ in {
       serviceConfig = {
         RuntimeDirectory = "newrelic";
         Type = "simple";
-        ExecStart = "${pkgs.newrelic-php-daemon}/bin/daemon -f -c ${conf}";
+        ExecStart = "${pkgs.newrelic-daemon}/bin/daemon -f -c ${conf}";
         ExecReload = "${pkgs.coreutils}/bin/kill -USR2 $MAINPID";
         ExecStop = "${pkgs.coreutils}/bin/kill -TERM $MAINPID";
         ReadWritePaths = [ "/var/log" "/etc/newrelic" "/etc/php" ];        
