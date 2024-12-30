@@ -11,7 +11,7 @@
     sha256 = "1zbp1cqhxp0sz3faymam6h1f91r1gl8dnnjx7qg8r06bd5fbzllb";
   };
 
-  vendorHash = lib.fakeHash;
+  vendorHash = "sha256-5baGIv8K5U2qH9Ly4YDirVQsEV09aVdyGZ+ohiTO7oc=";
 
   sourceRoot = "${src.name}/v3";
 }
