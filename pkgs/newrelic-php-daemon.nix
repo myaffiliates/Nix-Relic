@@ -9,7 +9,7 @@
     sha256 = "sha256-GOtjX8Oa6gkD28sFVsoVjI537MpABIAInNHJGjsul7U=";
   };
 
-  vendorHash = lib.fakeHash;
+  vendorHash = "sha256-B5EJDzZlUMt70ndCe7anEQQ1inU7NQQ7m05E/mpCmT4=";
 
   sourceRoot = "${src.name}/daemon";
   
