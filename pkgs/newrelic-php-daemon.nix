@@ -1,28 +1,8 @@
-{
-  pkgs,
-  buildGoModule,
-  lib,
-  fetchzip,
-}:
-let
-  version = "11.4.0.17";
- 
-  # phpSource = fetchzip {
-  #   url = "https://github.com/php/php-src/archive/refs/tags/php-8.2.27.tar.gz";
-  #   sha256 = "";
-  # };
- 
-  # phpSource = pkgs.fetchFromGitHub {
-  #   owner = "php";
-  #   repo = "php-src";
-  #   rev = "php-8.2.27";
-  #   sha256 = "sha256-UbS+4kBrc3ohSHyl0VyjeeS72ZDjLh8PIIylodZFYOE=";
-  # };
-in
-{
-newrelic-php-daemon = buildGoModule rec {
+{ buildGoModule, lib, fetchzip }:
+
+ buildGoModule rec {
   pname = "newrelic-php-agent";
-  inherit version;
+  version = "11.4.0.17";
 
   src = fetchzip {
     url = "https://github.com/newrelic/newrelic-php-agent/archive/refs/tags/v${version}.tar.gz";
@@ -38,10 +18,4 @@ newrelic-php-daemon = buildGoModule rec {
 
      cp -r newrelic-php-agent/bin $out/bin  
   '';
-  };
-
-  meta = {
-    description = "New Relic PHP Agent";
-    homepage = "https://github.com/newrelic/newrelic-php-agent";
-  };
 }
