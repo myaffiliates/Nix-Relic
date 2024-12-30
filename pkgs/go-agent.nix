@@ -13,5 +13,9 @@
 
   vendorHash = lib.fakeHash;
 
+  checkFlags = [ "-skip TestGenerateAndCompile" ];
+  GOFLAGS = [ "-trimpath" ];
+  CGO_ENABLED = 0;
+
   sourceRoot = "${src.name}/v3";
 }
