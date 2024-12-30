@@ -19,11 +19,11 @@ let
 in
 
 stdenv.mkDerivation rec {
-  pname = "newrelic-php-agent";
+  pname = "newrelic-agent";
   inherit phpSource version;
 
   src = fetchzip {
-    url = "https://github.com/newrelic/newrelic-php-agent/archive/refs/tags/v${version}.tar.gz";
+    url = "https://github.com/newrelic/newrelic-agent/archive/refs/tags/v${version}.tar.gz";
     sha256 = "sha256-GOtjX8Oa6gkD28sFVsoVjI537MpABIAInNHJGjsul7U=";
   };
 
