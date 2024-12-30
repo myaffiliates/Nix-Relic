@@ -8,10 +8,10 @@
     owner = "newrelic";
     repo = "go-agent";
     rev =  "v${version}";
-    sha256 = "1zbp1cqhxp0sz3faymam6h1f91r1gl8dnnjx7qg8r06bd5fbzllb";
+    hash = "sha256-5baGIv8K5U2qH9Ly4YDirVQsEV09aVdyGZ+ohiTO7oc=";
   };
 
-  vendorHash = "sha256-5baGIv8K5U2qH9Ly4YDirVQsEV09aVdyGZ+ohiTO7oc=";
+  vendorHash = lib.fakeHash;
 
   sourceRoot = "${src.name}/v3";
 }
