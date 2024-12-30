@@ -12,10 +12,5 @@
   vendorHash = "sha256-B5EJDzZlUMt70ndCe7anEQQ1inU7NQQ7m05E/mpCmT4=";
 
   sourceRoot = "${src.name}/daemon";
-  
-  # installPhase = ''
-  #    mkdir -p $out/bin
 
-  #    cp -r newrelic-php-agent/bin $out/bin  
-  # '';
 }
