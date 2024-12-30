@@ -1,7 +1,7 @@
 { buildGoModule, lib, fetchzip }:
 
   buildGoModule rec {
-    pname = "newrelic-php-agent";
+    pname = "newrelic-agent";
     version = "11.4.0.17";
 
     src = fetchzip {
