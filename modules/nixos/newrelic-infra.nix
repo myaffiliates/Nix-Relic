@@ -50,6 +50,8 @@ in {
         RuntimeDirectory = "newrelic-infra";
         Type = "simple";
         ExecStart = "${pkgs.infrastructure-agent}/bin/newrelic-infra-service -config ${conf}";
+        ReadWritePaths = [ "/etc/newrelic-infra" "/var/db/newrelic-infra" ];
+        LogsDirectory = "newrelic";        
         MemoryMax = "1G";
         Restart = "always";
         RestartSec = 20;
