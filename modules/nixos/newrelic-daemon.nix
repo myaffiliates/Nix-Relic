@@ -4,13 +4,13 @@
   config,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf mkOption types mdDoc;
+  inherit (lib) mkEnableOption mkIf mkOption types;
 
   cfg = config.services.newrelic-php-daemon;
   settingsFormat = pkgs.formats.yaml {};
 in {
   options.services.newrelic-php-daemon = {
-    enable = lib.mkEnableOption "newrelic-daemon service";
+    enable = lib.mkEnableOption "newrelic-php-daemon service";
 
     settings = mkOption {
       type = settingsFormat.type;
