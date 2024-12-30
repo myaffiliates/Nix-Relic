@@ -17,5 +17,5 @@
   GOFLAGS = [ "-trimpath" ];
   CGO_ENABLED = 0;
 
-  sourceRoot = "${src.name}/v3";
+  sourceRoot = "${src.name}/v3/newrelic";
 }
