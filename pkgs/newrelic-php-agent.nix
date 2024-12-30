@@ -10,11 +10,6 @@
 let
   version = "11.4.0.17";
  
-  # phpSource = fetchzip {
-  #   url = "https://github.com/php/php-src/archive/refs/tags/php-8.2.27.tar.gz";
-  #   sha256 = "";
-  # };
- 
   phpSource = pkgs.fetchFromGitHub {
     owner = "php";
     repo = "php-src";
@@ -51,19 +46,12 @@ stdenv.mkDerivation rec {
       --replace-quiet "go" "${pkgs.go}/bin/go"
 
     make agent
-    #make daemon
   '';
   installPhase = ''
      mkdir -p $out/lib
-     #mkdir -p $out/bin
 
      cp -r agent/.libs/newrelic.so $out/lib
-     #cp -r newrelic-php-agent/bin $out/bin  
   '';
-
-  postInstall = ''
-    echo "extension=$out/lib/newrelic.so" >> /myaffiliates/_bootstrap/php/php8.2/newrelic.ini  
-    ''; 
 
   meta = {
     description = "New Relic PHP Agent";
