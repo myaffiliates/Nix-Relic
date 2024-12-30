@@ -4,7 +4,7 @@
     pname = "go-agent";
     version = "3.35.1";
     
-  sce = fetchFromGitHub {
+  src = fetchFromGitHub {
     owner = "newrelic";
     repo = "go-agent";
     rev =  "v${version}";
