@@ -11,7 +11,7 @@
     hash = "sha256-5baGIv8K5U2qH9Ly4YDirVQsEV09aVdyGZ+ohiTO7oc=";
   };
 
-  buildInputs = [ pkgs.gprc pkgs.protobuf pkgs.go ];
+  buildInputs = [ pkgs.protobuf pkgs.go ];
 
   vendorHash = lib.fakeHash;
 
