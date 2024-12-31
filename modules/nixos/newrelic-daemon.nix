@@ -34,7 +34,6 @@ in {
 
       after = [
         "dbus.service"
-        "syslog.target"
         "network.target"
       ];
 
