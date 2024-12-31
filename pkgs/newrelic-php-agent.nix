@@ -6,6 +6,7 @@
   fetchzip,
   pkg-config,
   pcre,
+  ...
 }:
 let
   version = "11.4.0.17";
@@ -19,7 +20,7 @@ let
 in
 
 stdenv.mkDerivation rec {
-  pname = "newrelic-agent";
+  pname = "newrelic-php-agent";
   inherit phpSource version;
 
   src = fetchzip {
