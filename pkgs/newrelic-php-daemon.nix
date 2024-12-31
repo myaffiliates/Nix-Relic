@@ -18,6 +18,6 @@
   sourceRoot = "${src.name}/daemon";
   meta = {
     description = "New Relic PHP Agent Daemon";
-    mainProgram = "newrelic-infra";
+    mainProgram = "newrelic-php-daemon";
   };
 }
