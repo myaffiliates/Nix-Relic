@@ -19,13 +19,7 @@
       forAllSystems = nixpkgs.lib.genAttrs systems;
     in
     {
-      packages = forAllSystems (system: {
-         infrastructure-agent = nixpkgs.legacyPackages.${system}.callPackage ./pkgs/infrastructure-agent.nix {};   
-        # newrelic-php-daemon = nixpkgs.legacyPackages.${system}.callPackage ./pkgs/newrelic-php-daemon.nix {};
-        # newrelic-php-agent = nixpkgs.legacyPackages.${system}.callPackage ./pkgs/newrelic-php-agent.nix {};
-        ${system}.newrelic-php-daemon = nixpkgs.legacyPackages.${system}.callPackage ./pkgs/newrelic-php-daemon.nix {};
-      });
-
+      packages = forAllSystems (system: import ./pkgs { pkgs = nixpkgs.legacyPackages.${system}; });
 
       nixosModules = import ./modules/nixos;
 
