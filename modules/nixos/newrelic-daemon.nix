@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf mkOption types;
+  inherit (lib) mkEnableOption mkIf mkOption types mdDoc;
 
   cfg = config.services.newrelic-daemon;
   settingsFormat = pkgs.formats.yaml {};
@@ -15,10 +15,16 @@ in {
     settings = mkOption {
       type = settingsFormat.type;
       default = {};
+      description = mdDoc ''
+        Specify the configuration for the Newrelic PHP Agent in Nix.
+     '';
     };
     configFile = mkOption {
       type = types.nullOr types.path;
       default = null;
+      description = mdDoc ''
+        Specify a path to a configuration file that the Daemon should use.
+      '';
     };
   };
 
@@ -38,9 +44,6 @@ in {
           then settingsFormat.generate "config.yaml" cfg.settings
           else cfg.configFile;
       in {
-
-      after = [ "network.target" ];
-      serviceConfig = {
         RuntimeDirectory = "newrelic";
         Type = "simple";
         ExecStart = "${pkgs.newrelic-php-daemon}/bin/daemon -f -c ${conf}";
@@ -58,7 +61,6 @@ in {
       };
 
       wantedBy = ["multi-user.target"];
-      };
     };
   };
 }
