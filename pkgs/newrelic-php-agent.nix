@@ -57,5 +57,6 @@ stdenv.mkDerivation rec {
   meta = {
     description = "New Relic PHP Agent";
     homepage = "https://github.com/newrelic/newrelic-php-agent";
+    mainProgram = "newrelic-php-agent";
   };
 }
