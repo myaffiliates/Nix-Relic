@@ -1,4 +1,4 @@
-{ buildGoModule, lib, fetchzip, ... }:
+{ pkgs, stdenv, buildGoModule, lib, fetchzip, ... }:
 
   buildGoModule rec {
     pname = "newrelic-php-daemon";
@@ -10,7 +10,14 @@
     };
 
   vendorHash = "sha256-B5EJDzZlUMt70ndCe7anEQQ1inU7NQQ7m05E/mpCmT4=";
+  ldflags = [
+    "-w"
+    "-s"
+  ];
 
   sourceRoot = "${src.name}/daemon";
-
+  meta = {
+    description = "New Relic PHP Agent Daemon";
+    mainProgram = "newrelic-infra";
+  };
 }
