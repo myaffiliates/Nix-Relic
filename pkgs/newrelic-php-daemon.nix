@@ -1,4 +1,4 @@
-{ buildGoModule, lib, fetchzip }:
+{ buildGoModule, lib, fetchzip, ... }:
 
   buildGoModule rec {
     pname = "newrelic-agent";
