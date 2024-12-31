@@ -1,5 +1,11 @@
-{ pkgs, stdenv, buildGoModule, lib, fetchzip, ... }:
-
+{ 
+  lib,
+  stdenv,
+  buildGoModule,
+  fetchFromGitHub,
+  fetchzip,
+  ... 
+}:
   buildGoModule rec {
     pname = "newrelic-php-daemon";
     version = "11.4.0.17";
@@ -10,14 +16,19 @@
     };
 
   vendorHash = "sha256-B5EJDzZlUMt70ndCe7anEQQ1inU7NQQ7m05E/mpCmT4=";
+
   ldflags = [
     "-w"
     "-s"
+    "-X main.version=${version}"
   ];
 
+  env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
+
   sourceRoot = "${src.name}/daemon";
+  
   meta = {
     description = "New Relic PHP Agent Daemon";
-    mainProgram = "newrelic-php-daemon";
+    mainProgram = "daemon";
   };
 }
