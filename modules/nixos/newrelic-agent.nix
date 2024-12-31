@@ -5,8 +5,6 @@
   ...
 }:
 {
-environment.systemPackages = with pkgs; [
-  newrelic-php-agent
-];
+  environment.systemPackages = with pkgs; [ newrelic-php-agent ];
 }
 
