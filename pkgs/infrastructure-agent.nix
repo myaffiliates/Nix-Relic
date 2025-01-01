@@ -36,6 +36,9 @@ stdenv.mkDerivation rec {
     cp -r target/bin/x86_64-linux/ $out/bin
   '';
 
+    
+  vendorHash = lib.fakeHash;
+
   meta = {
     description = "New Relic Infrastructure Agent";
     homepage = "https://github.com/newrelic/infrastructure-agent.git";
