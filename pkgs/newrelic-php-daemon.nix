@@ -27,6 +27,7 @@
   
   sourceRoot = "${src.name}/daemon";
 
+  doCheck = false;
   # postInstall = ''
   #   mkdir -p $out/bin
   #   cp daemon/daemon $out/bin

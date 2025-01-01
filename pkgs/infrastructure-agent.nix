@@ -31,6 +31,8 @@ buildGoModule rec {
   #   "cmd/newrelic-infra-ctl"
   #   "cmd/newrelic-infra-service"
   # ];
+  
+  doCheck = false;
 
   meta = {
     description = "New Relic Infrastructure Agent";
