@@ -1,10 +1,13 @@
 {
+  pkgs,
   lib,
   stdenv,
   buildGoModule,
   fetchFromGitHub,
+  pkg-config,
+  pcre,
 }:
-buildGoModule rec {
+stdenv.mkDerivation rec {
   pname = "infrastructure-agent";
   version = "1.59.0";
 
@@ -15,28 +18,26 @@ buildGoModule rec {
     hash = "sha256-Kf7C4vJXjoJB+B695DQA3XWtm8IuBby8sKqH7F68Oy8=";
   };
 
+  nativeBuildInputs = [ pkg-config ];
+  buildInputs = [ pkgs.pcre pkgs.protobufc pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git pkgs.bash pkgs.go ];
+
+  buildPhase = ''
+    export HOME=$(pwd)
+    export GOPROXY="direct"
+
+    substituteInPlace Makefile \
+      --replace-quiet "go" "${pkgs.go}/bin/go"
+    
+    make compile
+    make dist
+  '';
+  installPhase = ''
+    mkdir -p $out/bin
+    cp -r target/bin/x86_64-linux/ $out/bin
+  '';
+
+    
   vendorHash = lib.fakeHash;
-
-  ldflags = [
-    "-s"
-    "-w"
-    "-X main.buildVersion=${version}"
-    "-X main.gitCommit=${src.rev}"
-  ];
-
-  env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
-
-  subPackages = [
-    "cmd/newrelic-infra"
-    "cmd/newrelic-infra-ctl"
-    "cmd/newrelic-infra-service"
-    "internal/agent"
-    "internal/instrumentation"
-    "internal/integrations"
-    "internal/plugins"
-  ];
-  
-  doCheck = false;
 
   meta = {
     description = "New Relic Infrastructure Agent";
