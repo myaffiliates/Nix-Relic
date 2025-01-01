@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
     owner = "newrelic";
     repo = "infrastructure-agent";
     rev = version;
-    hash = lib.fakeHash;
+    hash = "sha256-Kf7C4vJXjoJB+B695DQA3XWtm8IuBby8sKqH7F68Oy8=";
   };
 
   nativeBuildInputs = [ pkg-config ];
