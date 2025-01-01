@@ -24,10 +24,18 @@
   ];
 
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
-
-  subPackages = [ "." ];
-
+  
   sourceRoot = "${src.name}/daemon";
+
+  subPackages = [     
+    "cmd/daemon"
+    "cmd/client"
+  ];
+
+  postInstall = ''
+    mkdir -p $out/bin
+    cp daemon/daemon $out/bin
+  '';
 
   meta = {
     description = "New Relic PHP Agent Daemon";
