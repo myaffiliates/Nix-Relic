@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
 
   buildPhase = ''
     export HOME=$(pwd)
-    export GOPROXY="off"
+    export GOPROXY="https://proxy.golang.org"
 
     substituteInPlace Makefile \
       --replace-quiet "go" "${pkgs.go}/bin/go"
