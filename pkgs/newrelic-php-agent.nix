@@ -48,11 +48,11 @@ stdenv.mkDerivation rec {
 
     make agent
   '';
-  installPhase = ''
-     mkdir -p $out/lib
+  # installPhase = ''
+  #    mkdir -p $out/lib
 
-     cp -r agent/.libs/newrelic.so $out/lib
-  '';
+  #    cp -r agent/.libs/newrelic.so $out/lib
+  # '';
 
   meta = {
     description = "New Relic PHP Agent";
