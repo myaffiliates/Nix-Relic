@@ -27,15 +27,10 @@
   
   sourceRoot = "${src.name}/daemon";
 
-  subPackages = [     
-    "cmd/daemon"
-    "cmd/client"
-  ];
-
-  postInstall = ''
-    mkdir -p $out/bin
-    cp daemon/daemon $out/bin
-  '';
+  # postInstall = ''
+  #   mkdir -p $out/bin
+  #   cp daemon/daemon $out/bin
+  # '';
 
   meta = {
     description = "New Relic PHP Agent Daemon";
