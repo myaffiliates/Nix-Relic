@@ -4,6 +4,7 @@
   stdenv,
   buildGoModule,
   fetchFromGitHub,
+  pkg-config,
 }:
 stdenv.mkDerivation rec {
   pname = "infrastructure-agent";
@@ -17,7 +18,7 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ pkg-config ];
-  buildInputs = [ pkgs.pcre pkgs.protobufc pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git pkgs.bash pkgs.go ];
+  buildInputs = [ pkgs.protobufc pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git pkgs.bash pkgs.go ];
 
   buildPhase = ''
     export HOME=$(pwd)
