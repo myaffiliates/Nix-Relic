@@ -5,6 +5,7 @@
   buildGoModule,
   fetchFromGitHub,
   pkg-config,
+  pcre,
 }:
 stdenv.mkDerivation rec {
   pname = "infrastructure-agent";
@@ -18,11 +19,11 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ pkg-config ];
-  buildInputs = [ pkgs.protobufc pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git pkgs.bash pkgs.go ];
+  buildInputs = [ pkgs.pcre pkgs.protobufc pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git pkgs.bash pkgs.go ];
 
   buildPhase = ''
     export HOME=$(pwd)
-    # export GOPROXY="direct"
+    export GOPROXY="off"
 
     substituteInPlace Makefile \
       --replace-quiet "go" "${pkgs.go}/bin/go"
