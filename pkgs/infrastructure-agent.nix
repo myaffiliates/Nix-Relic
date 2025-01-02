@@ -37,7 +37,7 @@ stdenv.mkDerivation rec {
 
   php-sce =  fetchzip {
     url = "https://download.newrelic.com/php_agent/release/newrelic-php5-${phpVersion}-linux.tar.gz";
-    sha256 = "08l1wydfj7s09xn16k9xlgkp67ra21flgga9wd61iydy6r7j5s9a";
+    sha256 = "sha256-acTNfszCcX6RKF+XY2yb4S/dahuyHoEWa11//ua6MaY=";
 
   };
 
