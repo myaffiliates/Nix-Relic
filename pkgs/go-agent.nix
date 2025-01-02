@@ -20,6 +20,8 @@
   ];
   
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
+  env.HOME = "$(pwd)";
+  env.GOPROXY = "direct";
 
   checkFlags = [ "-skip TestGenerateAndCompile" ];
 
