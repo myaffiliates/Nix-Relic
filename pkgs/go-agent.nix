@@ -11,12 +11,19 @@
     hash = "sha256-5baGIv8K5U2qH9Ly4YDirVQsEV09aVdyGZ+ohiTO7oc=";
   };
 
-  buildInputs = [ pkgs.protobuf pkgs.go ];
-
   vendorHash = lib.fakeHash;
+  
+ subPackages = [
+    "v3/newrelic"
+  ];
+  buildInputs = [ pkgs.grpc pkgs.protobuf pkgs.go ];
+
+
+
+  env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
 
   checkFlags = [ "-skip TestGenerateAndCompile" ];
-  CGO_ENABLED = 0;
 
-  sourceRoot = "${src.name}/v3/newrelic";
+  doCheck = false;
+
 }
