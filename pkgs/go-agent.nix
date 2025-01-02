@@ -13,13 +13,12 @@
 
   vendorHash = lib.fakeHash;
 
- subPackages = [
+  sourceRoot = "${src.name}/v3/newrelic";
+
+  subPackages = [
     "v3/newrelic"
   ];
-  buildInputs = [ pkgs.grpc pkgs.protobuf pkgs.go ];
-
-
-
+  
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
 
   checkFlags = [ "-skip TestGenerateAndCompile" ];
