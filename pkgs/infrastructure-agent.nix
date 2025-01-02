@@ -62,9 +62,9 @@ stdenv.mkDerivation rec {
     mkdir -p $out/lib
     mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/logging
 
-    cp -r ${src}/newrelic-infra/usr/bin/* $out/bin
-    cp -r ${nag-sce}/* $out
-    cp -r ${nginx-sce}/* $out
+    cp -r ${src}/newrelic-infra/usr/bin $out/
+    cp -r ${nag-sce}/* $out/
+    cp -r ${nginx-sce}/* $out/
     cp -r ${php-sce}/agent/x64/newrelic-20220829.so $out/lib/newrelic.so
     cp -r ${php-sce}/daemon/newrelic-daemon.x64 $out/bin/daemon
     cp -r ${flex-sce}/nri-flex $out/var/db/newrelic-infra/newrelic-integrations/bin
