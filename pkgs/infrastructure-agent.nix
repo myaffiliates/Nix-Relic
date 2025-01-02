@@ -54,8 +54,7 @@ stdenv.mkDerivation rec {
 
   fbParsers = builtins.fetchurl {
     url = "https://github.com/newrelic/fluent-bit-package/blob/main/parsers.conf";
-    sha256 = "sha256-0nrb6mmzmv01wd83a8zmf03jrjml7xnwwjjs4j9w37q=";
-  };
+    sha256 = "1rgc61mwczn31rs33w8ha843z2ywdjqn9aiilxp5v8w4q4gqp4l3";
 
 
   installPhase = ''
