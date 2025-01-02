@@ -26,6 +26,10 @@ buildGoModule rec {
 
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
 
+  excludedPackages = [
+    "tools/cdn-purge"
+  ];
+
   # subPackages = [
   #   "cmd/newrelic-infra"
   #   "cmd/newrelic-infra-ctl"
