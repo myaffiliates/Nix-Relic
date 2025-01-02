@@ -84,8 +84,8 @@ buildGoModule rec {
 
   buildInputs = [ pkgs.curl ];
 
-  installPhase = ''
-    # mkdir -p $out/bin
+  patchPhase = ''
+    mkdir -p $out/bin
     mkdir -p $out/etc/newrelic-infra/logging.d
     mkdir -p $out/etc/newrelic-infra/integrations.d
     mkdir -p $out/lib
