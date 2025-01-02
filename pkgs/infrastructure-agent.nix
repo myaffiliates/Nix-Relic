@@ -8,6 +8,11 @@
   pkg-config,
 }: 
 let 
+  fbVersion = "2.1.0";
+  nagVersion = "2.9.7";
+  nginxVersion = "3.5.0";
+  phpVersion = "11.4.0.17";
+  flexVersion = "1.16.3";
 
   nag-sce = fetchzip {
     url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/nri-nagios_linux_${nagVersion}_amd64.tar.gz";
@@ -48,11 +53,6 @@ in
 buildGoModule rec {
   pname = "infrastructure-agent";
   version = "1.59.0";
-  fbVersion = "2.1.0";
-  nagVersion = "2.9.7";
-  nginxVersion = "3.5.0";
-  phpVersion = "11.4.0.17";
-  flexVersion = "1.16.3";
 
   # src = fetchzip {
   #   url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/newrelic-infra_linux_${version}_amd64.tar.gz";
