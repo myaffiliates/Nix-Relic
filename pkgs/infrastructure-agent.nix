@@ -20,31 +20,31 @@ stdenv.mkDerivation rec {
 
   src = fetchzip {
     url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/newrelic-infra_linux_${version}_amd64.tar.gz";
-    sha256 = "sha256-02gfbrj3rwzvw4pgnic2xp11j3j7p4j0pnjy3lwzlg4=";
+    sha256 = "02gfbrj3rwzvw4pgnic2xp11j3j7p4j0pnjy3lwzlg4x536izz8p";
   };
 
   nag-sce = fetchzip {
     url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/nri-nagios_linux_${nagVersion}_amd64.tar.gz";
     stripRoot = false;
-    sha256 = "sha256-1grajwz0iypdhxkaadrrc115cya763qfas35d7fn24p=";
+    sha256 = "1grajwz0iypdhxkaadrrc115cya763qfas35d7fn24p7mdikx6ga";
   };
 
   nginx-sce = fetchzip {
     url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/nri-nginx_linux_${nginxVersion}_amd64.tar.gz";
     stripRoot = false;
-    sha256 = "sha256-y1sNjQf8MPTUHWlRO4szk1jm4/Q/lXIKM7+aI4LcMQ0=";
+    sha256 = "0y6dzwd8v9ypfvw0bfcr7g2237gfjkr6v27yiwd8yqdy40xfzpmw";
   };
 
   php-sce =  fetchzip {
     url = "https://download.newrelic.com/php_agent/release/newrelic-php5-${phpVersion}-linux.tar.gz";
-    sha256 = "sha256-08l1wydfj7s09xn16k9xlgkp67ra21flgga9wd61iyd=";
+    sha256 = "08l1wydfj7s09xn16k9xlgkp67ra21flgga9wd61iydy6r7j5s9a";
 
   };
 
   flex-sce = fetchzip {
     url = "https://github.com/newrelic/nri-flex/releases/download/v${flexVersion}/nri-flex_linux_${flexVersion}_amd64.tar.gz";
     stripRoot = false;
-    sha256 = "sha256-01mzsqm52qiha6i0ycw589j0pwavzhha98klzd38jc1=";
+    sha256 = "01mzsqm52qiha6i0ycw589j0pwavzhha98klzd38jc1dgfv7h63n";
   };
 
   fb =  builtins.fetchurl {
@@ -55,7 +55,7 @@ stdenv.mkDerivation rec {
   fbParsers = builtins.fetchurl {
     url = "https://github.com/newrelic/fluent-bit-package/blob/main/parsers.conf";
     sha256 = "1rgc61mwczn31rs33w8ha843z2ywdjqn9aiilxp5v8w4q4gqp4l3";
-
+  };
 
   installPhase = ''
     mkdir -p $out/bin
