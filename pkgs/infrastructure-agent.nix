@@ -20,39 +20,39 @@ stdenv.mkDerivation rec {
 
   src = fetchzip {
     url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/newrelic-infra_linux_${version}_amd64.tar.gz";
-    sha256 = "sha256-K4woRT9CN7ZMyLInm1eaca2byMpYSNXcq7txLuKrYzM=";
+    sha256 = "sha256-02gfbrj3rwzvw4pgnic2xp11j3j7p4j0pnjy3lwzlg4=";
   };
 
   nag-sce = fetchzip {
     url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/nri-nagios_linux_${nagVersion}_amd64.tar.gz";
     stripRoot = false;
-    sha256 = "sha256-GMB86hg6B3WB1C6x5JzdO7Uo0lf0iyBXNqqfE5sXP+Q=";
+    sha256 = "sha256-1grajwz0iypdhxkaadrrc115cya763qfas35d7fn24p=";
   };
 
   nginx-sce = fetchzip {
-    url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/newrelic-infra_linux_${nginxVersion}_amd64.tar.gz";
-    sha256 = "sha256-GMB86hg6B3WB1C6x5JzdO7Uo0lf0iyBXNqqfE5sXP+Q=";
+    url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/nri-nginx_linux_${nginxVersion}_amd64.tar.gz";
+    sha256 = "sha256-0y6dzwd8v9ypfvw0bfcr7g2237gfjkr6v27yiwd8yqd=";
   };
 
   php-sce =  fetchzip {
     url = "https://download.newrelic.com/php_agent/release/newrelic-php5-${phpVersion}-linux.tar.gz";
-    sha256 = "sha256-GMB86hg6B3WB1C6x5JzdO7Uo0lf0iyBXNqqfE5sXP+Q=";
+    sha256 = "sha256-08l1wydfj7s09xn16k9xlgkp67ra21flgga9wd61iyd=";
   };
 
   flex-sce = fetchzip {
     url = "https://github.com/newrelic/nri-flex/releases/download/v${flexVersion}/nri-flex_linux_${flexVersion}_amd64.tar.gz";
     stripRoot = false;
-    sha256 = "sha256-GMB86hg6B3WB1C6x5JzdO7Uo0lf0iyBXNqqfE5sXP+Q=";
+    sha256 = "sha256-01mzsqm52qiha6i0ycw589j0pwavzhha98klzd38jc1=";
   };
 
   fb =  builtins.fetchurl {
     url = "https://github.com/newrelic/newrelic-fluent-bit-output/releases/download/v${fbVersion}/out_newrelic-linux-amd64-${fbVersion}.so";
-    sha256 = "sha256:0chy0w7aajb5mhxa6k1nbsgd2670xvsxj96wvchachf751ibdwzs";
-  };
+    sha256 = "sha256:0chy0w7aajb5mhxa6k1nbsgd2670xvsxj96wvchachf=";
+  };                 
 
   fbParsers = builtins.fetchurl {
     url = "https://github.com/newrelic/fluent-bit-package/blob/main/parsers.conf";
-    sha256 = "sha256:0nrb6mmzmv01wd83a8zmf03jrjml7xnwwjjs4j9w37qyqia7ynjc";
+    sha256 = "sha256:0nrb6mmzmv01wd83a8zmf03jrjml7xnwwjjs4j9w37qy=";
   };
 
 
