@@ -1,10 +1,13 @@
 {
+  pkgs,
   lib,
   stdenv,
   buildGoModule,
   fetchFromGitHub,
+  pkg-config,
+  pcre,
 }:
-buildGoModule rec {
+stdenv.mkDerivation rec {
   pname = "infrastructure-agent";
   version = "1.59.0";
 
@@ -15,33 +18,33 @@ buildGoModule rec {
     hash = "sha256-Kf7C4vJXjoJB+B695DQA3XWtm8IuBby8sKqH7F68Oy8=";
   };
 
-  vendorHash = "sha256-0WLL15CXRi/flp4EV3Qt0wO1VaUmAokzsChpiqjs+YQ=";
+  nativeBuildInputs = [ pkg-config ];
+  buildInputs = [ pkgs.pcre pkgs.protobufc pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git pkgs.bash pkgs.go ];
 
-  ldflags = [
-    "-s"
-    "-w"
-    "-X main.buildVersion=${version}"
-    "-X main.gitCommit=${src.rev}"
-  ];
+  buildPhase = ''
+    export HOME=$(pwd)
+    export GOPROXY="direct"
 
-  env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
+    substituteInPlace Makefile \
+      --replace-quiet "go" "${pkgs.go}/bin/go"
 
-  excludedPackages = [
-    "test/"
-    "tools/"
-  ];
+    substituteInPlace Makefile \
+      --replace-quiet "include \$\(INCLUDE_TEST_DIR\)" "\# include \$\(INCLUDE_TEST_DIR\)"
+    
+    substituteInPlace Makefile \
+      --replace-quiet "include \$\(INCLUDE_TOOLS_DIR\)" "\# include \$\(INCLUDE_TOOLS_DIR\)"
+    
 
-  # subPackages = [
-  #   "cmd/newrelic-infra"
-  #   "cmd/newrelic-infra-ctl"
-  #   "cmd/newrelic-infra-service"
-  #   "internal/agent"
-  #   "internal/instrumentation"
-  #   "internal/integrations"
-  #   "internal/plugins"
-  # ];
-  
-  doCheck = false;
+    make compile
+    make dist
+  '';
+  installPhase = ''
+    mkdir -p $out/bin
+    cp -r target/bin/x86_64-linux/ $out/bin
+  '';
+
+    
+  vendorHash = lib.fakeHash;
 
   meta = {
     description = "New Relic Infrastructure Agent";
