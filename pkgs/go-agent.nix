@@ -1,4 +1,4 @@
-{ pkgs, lib, buildGoModule, fetchFromGitHub }:
+{ pkgs, lib, stdenv, buildGoModule, fetchFromGitHub }:
 
   buildGoModule rec {
     pname = "go-agent";
@@ -12,7 +12,7 @@
   };
 
   vendorHash = lib.fakeHash;
-  
+
  subPackages = [
     "v3/newrelic"
   ];
