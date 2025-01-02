@@ -60,8 +60,10 @@ stdenv.mkDerivation rec {
   installPhase = ''
     mkdir -p $out/bin
     mkdir -p $out/etc/newrelic-infra/logging.d
+    mkdir -p $out/etc/newrelic-infra/integrations.d
     mkdir -p $out/lib
     mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/logging
+    mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/bin/
 
     cp -r ${src}/usr/bin/* $out/bin
     cp -r ${nag-sce}/* $out/
