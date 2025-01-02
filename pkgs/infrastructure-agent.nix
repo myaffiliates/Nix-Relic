@@ -25,6 +25,7 @@ stdenv.mkDerivation rec {
 
   nag-sce = fetchzip {
     url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/nri-nagios_linux_${nagVersion}_amd64.tar.gz";
+    stripRoot = false;
     sha256 = lib.fakeHash;
   };
 
@@ -40,6 +41,7 @@ stdenv.mkDerivation rec {
 
   flex-sce = fetchzip {
     url = "https://github.com/newrelic/nri-flex/releases/download/v${flexVersion}/nri-flex_linux_${flexVersion}_amd64.tar.gz";
+    stripRoot = false;
     sha256 = lib.fakeHash;
   };
 
