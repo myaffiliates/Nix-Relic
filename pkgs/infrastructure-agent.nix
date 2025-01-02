@@ -49,7 +49,7 @@ stdenv.mkDerivation rec {
 
   fb =  builtins.fetchurl {
     url = "https://github.com/newrelic/newrelic-fluent-bit-output/releases/download/v${fbVersion}/out_newrelic-linux-amd64-${fbVersion}.so";
-    sha256 = "sha256-0chy0w7aajb5mhxa6k1nbsgd2670xvsxj96wvchachf7=";
+    sha256 = "sha256-0chy0w7aajb5mhxa6k1nbsgd2670xvsxj96wvchachf751ibdwzs";
   };   
 
   fbParsers = builtins.fetchurl {
