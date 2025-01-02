@@ -26,7 +26,7 @@ stdenv.mkDerivation rec {
   nag-sce = fetchzip {
     url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/nri-nagios_linux_${nagVersion}_amd64.tar.gz";
     stripRoot = false;
-    sha256 = "1grajwz0iypdhxkaadrrc115cya763qfas35d7fn24p7mdikx6ga";
+    sha256 = "sha256-99VcpXZuTg4PP193o1WV9Jl1FFr+Pm7iJgy0ygHhak8=";
   };
 
   nginx-sce = fetchzip {
