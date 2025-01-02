@@ -57,6 +57,8 @@ stdenv.mkDerivation rec {
     sha256 = "1rgc61mwczn31rs33w8ha843z2ywdjqn9aiilxp5v8w4q4gqp4l3";
   };
 
+  buildInputs = [ pkgs.curl ];
+
   installPhase = ''
     mkdir -p $out/bin
     mkdir -p $out/etc/newrelic-infra/logging.d
