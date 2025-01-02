@@ -18,27 +18,27 @@ stdenv.mkDerivation rec {
   phpVersion = "11.4.0.17";
   flexVersion = "1.16.3";
 
-  src = builtins.fetchzip {
+  src = fetchzip {
     url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/newrelic-infra_linux_${version}_amd64.tar.gz";
     sha256 = lib.fakeHash;
   };
 
-  nag-sce = builtins.fetchzip {
+  nag-sce = fetchzip {
     url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/nri-nagios_linux_${nagVersion}_amd64.tar.gz";
     sha256 = lib.fakeHash;
   };
 
-  nginx-sce = builtins.fetchzip {
+  nginx-sce = fetchzip {
     url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/newrelic-infra_linux_${nginxVersion}_amd64.tar.gz";
     sha256 = lib.fakeHash;
   };
 
-  php-sce =  builtins.fetchzip {
+  php-sce =  fetchzip {
     url = "https://download.newrelic.com/php_agent/release/newrelic-php5-${phpVersion}-linux.tar.gz";
     sha256 = lib.fakeHash;
   };
 
-  flex-sce = builtins.fetchzip {
+  flex-sce = fetchzip {
     url = "https://github.com/newrelic/nri-flex/releases/download/v${flexVersion}/nri-flex_linux_${flexVersion}_amd64.tar.gz";
     sha256 = lib.fakeHash;
   };
