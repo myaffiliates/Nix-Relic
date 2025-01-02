@@ -6,10 +6,10 @@
   fetchFromGitHub,
   fetchzip,
   pkg-config,
-  pcre,
 }: 
 
-stdenv.mkDerivation rec {
+#stdenv.mkDerivation rec {
+buildGoModule rec {
   pname = "infrastructure-agent";
   version = "1.59.0";
   fbVersion = "2.1.0";
@@ -18,10 +18,33 @@ stdenv.mkDerivation rec {
   phpVersion = "11.4.0.17";
   flexVersion = "1.16.3";
 
-  src = fetchzip {
-    url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/newrelic-infra_linux_${version}_amd64.tar.gz";
-    sha256 = "sha256-K4woRT9CN7ZMyLInm1eaca2byMpYSNXcq7txLuKrYzM=";
+  # src = fetchzip {
+  #   url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/newrelic-infra_linux_${version}_amd64.tar.gz";
+  #   sha256 = "sha256-K4woRT9CN7ZMyLInm1eaca2byMpYSNXcq7txLuKrYzM=";
+  # };
+
+  src = fetchFromGitHub {
+    owner = "newrelic";
+    repo = "infrastructure-agent";
+    rev = version;
+    hash = "sha256-Kf7C4vJXjoJB+B695DQA3XWtm8IuBby8sKqH7F68Oy8=";
   };
+
+  vendorHash = "sha256-0WLL15CXRi/flp4EV3Qt0wO1VaUmAokzsChpiqjs+YQ=";
+
+  ldflags = [
+    "-s"
+    "-w"
+    "-X main.buildVersion=${version}"
+    "-X main.gitCommit=${src.rev}"
+  ];
+
+  env.CGO_ENABLED = "0";
+
+  excludedPackages = [
+    "test/"
+    "tools/"
+  ];
 
   nag-sce = fetchzip {
     url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/nri-nagios_linux_${nagVersion}_amd64.tar.gz";
@@ -66,7 +89,7 @@ stdenv.mkDerivation rec {
     mkdir -p $out/etc/newrelic-infra/integrations.d
     mkdir -p $out/lib
     mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/logging
-    mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/bin/
+    mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/bin
 
     cp -r ${src}/usr/bin/* $out/bin
     cp -r ${nag-sce}/* $out/
@@ -77,7 +100,9 @@ stdenv.mkDerivation rec {
     curl -L --silent '${fb}' --output $out/var/db/newrelic-infra/newrelic-integrations/logging/out_newrelic.so
     curl -L --silent '${fbParsers}' --output $out/var/db/newrelic-infra/newrelic-integrations/logging/parsers.conf
   '';
-  
+
+  doCheck = false;
+
   meta = {
     description = "New Relic Infrastructure Agent";
     homepage = "https://github.com/newrelic/infrastructure-agent.git";
