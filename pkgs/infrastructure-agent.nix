@@ -7,6 +7,12 @@
 buildGoModule rec {
   pname = "infrastructure-agent";
   version = "1.59.0";
+  fbVersion = "2.1.0";
+  
+  fb =  builtins.fetchurl {
+    url = "https://github.com/newrelic/newrelic-fluent-bit-output/releases/download/v${fbVersion}/out_newrelic-linux-amd64-${fbVersion}.so";
+    sha256 = lib.fakeHash;
+  };
 
   src = fetchFromGitHub {
     owner = "newrelic";
@@ -24,7 +30,7 @@ buildGoModule rec {
     "-X main.gitCommit=${src.rev}"
   ];
 
-  env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
+  env.CGO_ENABLED = "0";
 
   excludedPackages = [
     "test/"
@@ -40,6 +46,9 @@ buildGoModule rec {
   #   "internal/integrations"
   #   "internal/plugins"
   # ];
+   installPhase = ''
+    curl -L --silent '${fb}' --output $out/fluent-bit-plugin/amd64/out_newrelic.so
+  '';
   
   doCheck = false;
 

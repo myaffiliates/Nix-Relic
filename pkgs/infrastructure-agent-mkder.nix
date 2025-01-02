@@ -4,48 +4,72 @@
   stdenv,
   buildGoModule,
   fetchFromGitHub,
+  fetchzip,
   pkg-config,
   pcre,
-}:
+}: 
+
 stdenv.mkDerivation rec {
   pname = "infrastructure-agent";
   version = "1.59.0";
+  fbVersion = "2.1.0";
+  nagVersion = "2.9.7";
+  nginxVersion = "3.5.0";
+  phpVersion = "11.4.0.17";
+  flexVersion = "1.16.3";
 
-  src = fetchFromGitHub {
-    owner = "newrelic";
-    repo = "infrastructure-agent";
-    rev = version;
-    hash = "sha256-Kf7C4vJXjoJB+B695DQA3XWtm8IuBby8sKqH7F68Oy8=";
+  src = builtins.fetchzip {
+    url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/newrelic-infra_linux_${version}_amd64.tar.gz";
+    sha256 = lib.fakeHash;
   };
 
-  nativeBuildInputs = [ pkg-config ];
-  buildInputs = [ pkgs.pcre pkgs.protobufc pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git pkgs.bash pkgs.go ];
+  nag-sce = builtins.fetchzip {
+    url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/nri-nagios_linux_${nagVersion}_amd64.tar.gz";
+    sha256 = lib.fakeHash;
+  };
 
-  buildPhase = ''
-    export HOME=$(pwd)
-    export GOPROXY="direct"
+  nginx-sce = builtins.fetchzip {
+    url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/newrelic-infra_linux_${nginxVersion}_amd64.tar.gz";
+    sha256 = lib.fakeHash;
+  };
 
-    substituteInPlace Makefile \
-      --replace-quiet "go" "${pkgs.go}/bin/go"
+  php-sce =  builtins.fetchzip {
+    url = "https://download.newrelic.com/php_agent/release/newrelic-php5-${phpVersion}-linux.tar.gz";
+    sha256 = lib.fakeHash;
+  };
 
-    substituteInPlace Makefile \
-      --replace-quiet "include \$\(INCLUDE_TEST_DIR\)" "\# include \$\(INCLUDE_TEST_DIR\)"
-    
-    substituteInPlace Makefile \
-      --replace-quiet "include \$\(INCLUDE_TOOLS_DIR\)" "\# include \$\(INCLUDE_TOOLS_DIR\)"
-    
+  flex-sce = builtins.fetchzip {
+    url = "https://github.com/newrelic/nri-flex/releases/download/v${flexVersion}/nri-flex_linux_${flexVersion}_amd64.tar.gz";
+    sha256 = lib.fakeHash;
+  };
 
-    make compile
-    make dist
-  '';
+  fb =  builtins.fetchurl {
+    url = "https://github.com/newrelic/newrelic-fluent-bit-output/releases/download/v${fbVersion}/out_newrelic-linux-amd64-${fbVersion}.so";
+    sha256 = lib.fakeHash;
+  };
+
+  fbParsers = builtins.fetchurl {
+    url = "https://github.com/newrelic/fluent-bit-package/blob/main/parsers.conf";
+    sha256 = lib.fakeHash;
+  };
+
+
   installPhase = ''
     mkdir -p $out/bin
-    cp -r target/bin/x86_64-linux/ $out/bin
+    mkdir -p $out/etc/newrelic-infra/logging.d
+    mkdir -p $out/lib
+    mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/logging
+
+    cp -r ${src}/newrelic-infra/usr/bin/* $out/bin
+    cp -r ${nag-sce}/* $out
+    cp -r ${nginx-sce}/* $out
+    cp -r ${php-sce}/agent/x64/newrelic-20220829.so $out/lib/newrelic.so
+    cp -r ${php-sce}/daemon/newrelic-daemon.x64 $out/bin/daemon
+    cp -r ${flex-sce}/nri-flex $out/var/db/newrelic-infra/newrelic-integrations/bin
+    curl -L --silent '${fb}' --output $out/var/db/newrelic-infra/newrelic-integrations/logging/out_newrelic.so
+    curl -L --silent '${fbParsers}' --output $out/var/db/newrelic-infra/newrelic-integrations/logging/parsers.conf
   '';
-
-    
-  vendorHash = lib.fakeHash;
-
+  
   meta = {
     description = "New Relic Infrastructure Agent";
     homepage = "https://github.com/newrelic/infrastructure-agent.git";
@@ -54,3 +78,4 @@ stdenv.mkDerivation rec {
     mainProgram = "newrelic-infra";
   };
 }
+
