@@ -20,7 +20,7 @@ stdenv.mkDerivation rec {
 
   src = fetchzip {
     url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/newrelic-infra_linux_${version}_amd64.tar.gz";
-    sha256 = "sha256-K4woRT9CN7ZMyLInm1eaca2byMpYSNXcq7txLuKrYzM=";
+    sha256 = "sha256-GMB86hg6B3WB1C6x5JzdO7Uo0lf0iyBXNqqfE5sXP+Q=";
   };
 
   nag-sce = fetchzip {
