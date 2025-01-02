@@ -98,8 +98,11 @@ buildGoModule rec {
     cp -r ${php-sce}/agent/x64/newrelic-20220829.so $out/lib/newrelic.so
     cp -r ${php-sce}/daemon/newrelic-daemon.x64 $out/bin/daemon
     cp -r ${flex-sce}/nri-flex $out/var/db/newrelic-infra/newrelic-integrations/bin
-    ${pkgs.curl}/bin/curl -L --silent '${fb}' --output $out/var/db/newrelic-infra/newrelic-integrations/logging/out_newrelic.so
-    ${pkgs.curl}/bin/curl -L --silent '${fbParsers}' --output $out/var/db/newrelic-infra/newrelic-integrations/logging/parsers.conf
+    cp -r ${fb} $out/var/db/newrelic-infra/newrelic-integrations/logging/out_newrelic.so
+    cp -r ${fbParsers} $out/var/db/newrelic-infra/newrelic-integrations/logging/parsers.conf
+
+    #curl -L --silent '${fb}' --output $out/var/db/newrelic-infra/newrelic-integrations/logging/out_newrelic.so
+    #curl -L --silent '${fbParsers}' --output $out/var/db/newrelic-infra/newrelic-integrations/logging/parsers.conf
   '';
 
   doCheck = false;
