@@ -44,7 +44,7 @@ stdenv.mkDerivation rec {
   flex-sce = fetchzip {
     url = "https://github.com/newrelic/nri-flex/releases/download/v${flexVersion}/nri-flex_linux_${flexVersion}_amd64.tar.gz";
     stripRoot = false;
-    sha256 = "01mzsqm52qiha6i0ycw589j0pwavzhha98klzd38jc1dgfv7h63n";
+    sha256 = "sha256-GMB86hg6B3WB1C6x5JzdO7Uo0lf0iyBXNqqfE5sXP+Q=";
   };
 
   fb =  builtins.fetchurl {
