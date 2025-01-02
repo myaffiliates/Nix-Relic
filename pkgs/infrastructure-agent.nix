@@ -31,6 +31,7 @@ stdenv.mkDerivation rec {
 
   nginx-sce = fetchzip {
     url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/nri-nginx_linux_${nginxVersion}_amd64.tar.gz";
+    stripRoot = false;
     sha256 = "0y6dzwd8v9ypfvw0bfcr7g2237gfjkr6v27yiwd8yqdy40xfzpmw";
   };
 
