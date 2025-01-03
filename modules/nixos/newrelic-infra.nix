@@ -47,7 +47,6 @@ in {
           then settingsFormat.generate "config.yaml" cfg.settings
           else cfg.configFile;
       in {
-        RuntimeDirectory = "newrelic-infra";
         Type = "simple";
         ExecStart = "${pkgs.infrastructure-agent}/bin/newrelic-infra-service -config ${conf}";
         ReadWritePaths = [ "/etc/newrelic-infra" "/var/db/newrelic-infra" ];
