@@ -49,15 +49,10 @@ let
   };
 
 in
-#stdenv.mkDerivation rec {
+
 buildGoModule rec {
   pname = "infrastructure-agent";
   version = "1.59.0";
-
-  # src = fetchzip {
-  #   url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/newrelic-infra_linux_${version}_amd64.tar.gz";
-  #   sha256 = "sha256-K4woRT9CN7ZMyLInm1eaca2byMpYSNXcq7txLuKrYzM=";
-  # };
 
   src = fetchFromGitHub {
     owner = "newrelic";
@@ -100,9 +95,6 @@ buildGoModule rec {
     cp -r ${flex-sce}/nri-flex $out/var/db/newrelic-infra/newrelic-integrations/bin
     cp -r ${fb} $out/var/db/newrelic-infra/newrelic-integrations/logging/out_newrelic.so
     cp -r ${fbParsers} $out/var/db/newrelic-infra/newrelic-integrations/logging/parsers.conf
-
-    #curl -L --silent '${fb}' --output $out/var/db/newrelic-infra/newrelic-integrations/logging/out_newrelic.so
-    #curl -L --silent '${fbParsers}' --output $out/var/db/newrelic-infra/newrelic-integrations/logging/parsers.conf
   '';
 
   doCheck = false;
