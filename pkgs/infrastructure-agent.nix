@@ -94,7 +94,7 @@ buildGoModule rec {
     cp -r ${php-sce}/d nix-relic.nixosModules.newrelic-daemonemon/newrelic-daemon.x64 $out/bin/daemon
     cp -r ${flex-sce}/nri-flex $out/var/db/newrelic-infra/newrelic-integrations/bin
     cp -r ${fb} $out/var/db/newrelic-infra/newrelic-integrations/logging/out_newrelic.so
-    # cp -r ${fbParsers} $out/var/db/newrelic-infra/newrelic-integrations/logging/parsers.conf
+    # cp -r \$\{fbParsers\} $out/var/db/newrelic-infra/newrelic-integrations/logging/parsers.conf
   '';
 
   doCheck = false;
