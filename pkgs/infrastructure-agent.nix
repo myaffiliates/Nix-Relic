@@ -43,10 +43,10 @@ let
     sha256 = "0chy0w7aajb5mhxa6k1nbsgd2670xvsxj96wvchachf751ibdwzs";
   };
 
-  # fbParsers = builtins.fetchurl {
-  #   url = "https://github.com/newrelic/fluent-bit-package/blob/main/parsers.conf";
-  #   sha256 = "1rgc61mwczn31rs33w8ha843z2ywdjqn9aiilxp5v8w4q4gqp4l3";
-  # };
+  fbParsers = builtins.fetchurl {
+    url = "https://github.com/newrelic/fluent-bit-package/blob/main/parsers.conf";
+    sha256 = "1rgc61mwczn31rs33w8ha843z2ywdjqn9aiilxp5v8w4q4gqp4l3";
+  };
 
 in
 
@@ -91,10 +91,10 @@ buildGoModule rec {
     cp -r ${nag-sce}/* $out/
     cp -r ${nginx-sce}/* $out/
     cp -r ${php-sce}/agent/x64/newrelic-20220829.so $out/lib/newrelic.so
-    cp -r ${php-sce}/d nix-relic.nixosModules.newrelic-daemonemon/newrelic-daemon.x64 $out/bin/daemon
+    cp -r ${php-sce}/daemon/newrelic-daemon.x64 $out/bin/daemon
     cp -r ${flex-sce}/nri-flex $out/var/db/newrelic-infra/newrelic-integrations/bin
     cp -r ${fb} $out/var/db/newrelic-infra/newrelic-integrations/logging/out_newrelic.so
-    # cp -r \$\{fbParsers\} $out/var/db/newrelic-infra/newrelic-integrations/logging/parsers.conf
+    #cp -r \$\{fbParsers\} $out/var/db/newrelic-infra/newrelic-integrations/logging/parsers.conf
   '';
 
   doCheck = false;
