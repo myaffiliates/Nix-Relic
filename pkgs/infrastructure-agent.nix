@@ -43,10 +43,10 @@ let
     sha256 = "0chy0w7aajb5mhxa6k1nbsgd2670xvsxj96wvchachf751ibdwzs";
   };
 
-  fbParsers = builtins.fetchurl {
-    url = "https://github.com/newrelic/fluent-bit-package/blob/main/parsers.conf";
-    sha256 = "1rgc61mwczn31rs33w8ha843z2ywdjqn9aiilxp5v8w4q4gqp4l3";
-  };
+  # fbParsers = builtins.fetchurl {
+  #   url = "https://github.com/newrelic/fluent-bit-package/blob/main/parsers.conf";
+  #   sha256 = "1rgc61mwczn31rs33w8ha843z2ywdjqn9aiilxp5v8w4q4gqp4l3";
+  # };
 
 in
 
