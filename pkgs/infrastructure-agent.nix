@@ -87,7 +87,7 @@ buildGoModule rec {
     mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/logging
     mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/bin
 
-    # cp -r ${src}/usr/bin/* $out/bin
+    # cp -r \$\{src\}/usr/bin/* $out/bin
     cp -r ${nag-sce}/* $out/
     cp -r ${nginx-sce}/* $out/
     cp -r ${php-sce}/agent/x64/newrelic-20220829.so $out/lib/newrelic.so
