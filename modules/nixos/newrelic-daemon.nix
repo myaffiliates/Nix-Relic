@@ -45,7 +45,7 @@ in {
       in {
         RuntimeDirectory = "newrelic";
         Type = "simple";
-        ExecStart = "/usr/bin/daemon -f -c ${conf}";
+        ExecStart = "/usr/bin/newrelic-php-daemon -f -c ${conf}";
         ExecReload = "${pkgs.coreutils}/bin/kill -USR2 $MAINPID";
         ExecStop = "${pkgs.coreutils}/bin/kill -TERM $MAINPID";
         ReadWritePaths = [ "/var/log" "/etc/newrelic" "/etc/php" ];        
