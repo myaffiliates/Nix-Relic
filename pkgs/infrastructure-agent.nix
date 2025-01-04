@@ -77,7 +77,7 @@ buildGoModule rec {
     "tools/"
   ];
 
-  buildInputs = [ pkgs.curl ];
+  buildInputs = [ pkgs.go ];
 
   preInstall = ''
     mkdir -p $out/bin
@@ -86,6 +86,12 @@ buildGoModule rec {
     mkdir -p $out/lib
     mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/logging
     mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/bin
+
+    go get -u
+    go mod tidy
+
+    # substituteInPlace Makefile \
+    #   --replace-quiet "github.com/newrelic/go-agent/v3 v3.27.0" "github.com/newrelic/go-agent/v3 v3.35.1
 
     # cp -r \$\{src\}/usr/bin/* $out/bin
     cp -r ${nag-sce}/* $out/
