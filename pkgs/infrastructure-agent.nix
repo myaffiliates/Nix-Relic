@@ -78,7 +78,7 @@ buildGoModule rec {
   ];
 
   buildInputs = [ pkgs.go ];
-
+  env.GOPROXY="direct";
   preInstall = ''
     mkdir -p $out/bin
     mkdir -p $out/etc/newrelic-infra/logging.d
