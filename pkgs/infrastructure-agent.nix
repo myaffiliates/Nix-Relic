@@ -77,7 +77,7 @@ buildGoModule rec {
     "tools/"
   ];
 
-  buildInputs = [ pkgs.go ];
+  buildInputs = [ pkgs.go pkgs.git];
 
   preBuild = ''
     export GOPROXY="direct"
