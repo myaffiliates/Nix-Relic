@@ -89,6 +89,7 @@ buildGoModule rec {
 
     go get -u
     go mod tidy
+    go get -u ./...
 
     # substituteInPlace Makefile \
     #   --replace-quiet "github.com/newrelic/go-agent/v3 v3.27.0" "github.com/newrelic/go-agent/v3 v3.35.1
