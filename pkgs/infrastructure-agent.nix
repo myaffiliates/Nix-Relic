@@ -80,11 +80,13 @@ buildGoModule rec {
   buildInputs = [ pkgs.go pkgs.git ];
 
   preBuild = ''
-    export GOPROXY="direct"
-    export PATH=${pkgs.git}/bin:$PATH
-    go get -u
-    go mod tidy
-    go get -u ./...
+    # export GOPROXY="direct"
+    # export PATH=\$\{pkgs.git\}/bin:\$PATH
+    # go get -u
+    # go mod tidy
+    # go get -u ./...
+    substituteInPlace Makefile \
+       --replace-quiet "github.com/newrelic/go-agent/v3 v3.27.0" "github.com/newrelic/go-agent/v3 v3.35.1"
   '';
   
   preInstall = ''
@@ -94,13 +96,6 @@ buildGoModule rec {
     mkdir -p $out/lib
     mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/logging
     mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/bin
-
-    go get -u
-    go mod tidy
-    go get -u ./...
-
-    # substituteInPlace Makefile \
-    #   --replace-quiet "github.com/newrelic/go-agent/v3 v3.27.0" "github.com/newrelic/go-agent/v3 v3.35.1
 
     # cp -r \$\{src\}/usr/bin/* $out/bin
     cp -r ${nag-sce}/* $out/
