@@ -48,7 +48,7 @@ in {
           else cfg.configFile;
       in {
         Type = "simple";
-        ExecStart = "${pkgs.infrastructure-agent}/bin/newrelic-infra-service -config ${conf}";
+        ExecStart = "/usr/bin/newrelic-infra-service -config ${conf}";
         ReadWritePaths = [ "/etc/newrelic-infra" "/var/db/newrelic-infra" ];
         LogsDirectory = "newrelic"; 
         RuntimeDirectory = "newrelic-infra";       
