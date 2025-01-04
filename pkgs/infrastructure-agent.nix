@@ -77,10 +77,11 @@ buildGoModule rec {
     "tools/"
   ];
 
-  buildInputs = [ pkgs.go pkgs.git];
+  buildInputs = [ pkgs.go pkgs.git ];
 
   preBuild = ''
     export GOPROXY="direct"
+    export PATH=${pkgs.git}/bin:$PATH
     go get -u
     go mod tidy
     go get -u ./...
