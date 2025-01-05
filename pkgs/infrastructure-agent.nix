@@ -71,7 +71,6 @@ buildGoModule rec {
     "-s"
     "-w"
     "-X main.buildVersion=${version}"
-    "-X main.gitCommit=${src.rev}"
   ];
 
   env.CGO_ENABLED = "0";
