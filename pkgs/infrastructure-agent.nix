@@ -75,10 +75,17 @@ buildGoModule rec {
 
   env.CGO_ENABLED = "0";
 
-  excludedPackages = [
-    "test/"
-    "tools/"
+  subPackages = [
+    "cmd/newrelic-infra"
+    "cmd/newrelic-infra-ctl"
+    "cmd/newrelic-infra-service"
   ];
+
+
+  # excludedPackages = [
+  #   "test/"
+  #   "tools/"
+  # ];
 
   preInstall = ''
     mkdir -p $out/bin
