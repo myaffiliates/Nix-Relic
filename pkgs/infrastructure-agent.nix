@@ -54,11 +54,15 @@ buildGoModule rec {
   pname = "infrastructure-agent";
   version = "1.59.0";
 
-  src = fetchFromGitHub {
-    owner = "myaffiliates";
-    repo = "infrastructure-agent";
-    rev = version;
-    hash = lib.fakeHash;
+  # src = fetchFromGitHub {
+  #   owner = "myaffiliates";
+  #   repo = "infrastructure-agent";
+  #   rev = version;
+  #   hash = lib.fakeHash;
+  # };
+  src = fetchzip {
+    url = "https://github.com/myaffiliates/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
+    sha256 = lib.fakeHash;
   };
 
   vendorHash = lib.fakeHash;
@@ -76,7 +80,7 @@ buildGoModule rec {
     "test/"
     "tools/"
   ];
- 
+
   preInstall = ''
     mkdir -p $out/bin
     mkdir -p $out/etc/newrelic-infra/logging.d
