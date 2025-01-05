@@ -62,7 +62,7 @@ buildGoModule rec {
   # };
   src = fetchzip {
     url = "https://github.com/myaffiliates/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
-    sha256 = "1p1nrvf041ns5wqkyx7yx17fbky0x5xb6sbc23k33zghbcvnzqh2";
+    sha256 = "sha256-jxubdlXAbuveIQrKBfl4OZGdftWYECHfcdL5nTooKsI=";
   };
 
   vendorHash = lib.fakeHash;
