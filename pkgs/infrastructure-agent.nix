@@ -55,13 +55,13 @@ buildGoModule rec {
   version = "1.59.0";
 
   src = fetchFromGitHub {
-    owner = "newrelic";
+    owner = "myaffiliates";
     repo = "infrastructure-agent";
     rev = version;
-    hash = "sha256-Kf7C4vJXjoJB+B695DQA3XWtm8IuBby8sKqH7F68Oy8=";
+    hash = lib.fakeHash;
   };
 
-  vendorHash = "sha256-0WLL15CXRi/flp4EV3Qt0wO1VaUmAokzsChpiqjs+YQ=";
+  vendorHash = lib.fakeHash;
 
   ldflags = [
     "-s"
@@ -76,19 +76,7 @@ buildGoModule rec {
     "test/"
     "tools/"
   ];
-
-  buildInputs = [ pkgs.go pkgs.git ];
-
-  preBuild = ''
-    # export GOPROXY="direct"
-    # export PATH=\$\{pkgs.git\}/bin:\$PATH
-    # go get -u
-    # go mod tidy
-    # go get -u ./...
-    substituteInPlace Makefile \
-       --replace-quiet "github.com/newrelic/go-agent/v3 v3.27.0" "github.com/newrelic/go-agent/v3 v3.35.1"
-  '';
-  
+ 
   preInstall = ''
     mkdir -p $out/bin
     mkdir -p $out/etc/newrelic-infra/logging.d
