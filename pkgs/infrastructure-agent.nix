@@ -52,7 +52,7 @@ in
 
 buildGoModule rec {
   pname = "infrastructure-agent";
-  version = "1.59.0";
+  version = "1.59.1";
 
   # src = fetchFromGitHub {
   #   owner = "myaffiliates";
