@@ -61,11 +61,11 @@ buildGoModule rec {
   #   hash = lib.fakeHash;
   # };
   src = fetchzip {
-    url = "https://github.com/myaffiliates/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
-    sha256 = "sha256-jxubdlXAbuveIQrKBfl4OZGdftWYECHfcdL5nTooKsI=";
+    url = "https://github.com/myaffiliates/infrastructure-agent/archive/refs/tags/Myaff-${version}.tar.gz";
+    sha256 = lib.fakeHash;
   };
 
-  vendorHash = "sha256-3yUYhZh/BkGyjiSMTDKsw4Te+jkqgil07TEWOAuiHD8=";
+  vendorHash = lib.fakeHash;
 
   ldflags = [
     "-s"
