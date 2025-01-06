@@ -13,6 +13,13 @@ let
   nginxVersion = "3.5.0";
   phpVersion = "11.4.0.17";
   flexVersion = "1.16.3";
+  mysqlVersion = "1.11.1";
+
+  mysql-sce = fetchzip {
+    url = "https://github.com/newrelic/nri-mysql/releases/download/v${mysqlVersion}/nri-mysql_linux_${mysqlVersion}_amd64.tar.gz";
+    stripRoot = false;
+    sha256 = lib.fakeHash;
+  };
 
   nag-sce = fetchzip {
     url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/nri-nagios_linux_${nagVersion}_amd64.tar.gz";
@@ -43,16 +50,11 @@ let
     sha256 = "0chy0w7aajb5mhxa6k1nbsgd2670xvsxj96wvchachf751ibdwzs";
   };
 
-  # fbParsers = builtins.fetchurl {
-  #   url = "https://github.com/newrelic/fluent-bit-package/blob/main/parsers.conf";
-  #   sha256 = "1rgc61mwczn31rs33w8ha843z2ywdjqn9aiilxp5v8w4q4gqp4l3";
-  # };
-
 in
 
 buildGoModule rec {
   pname = "infrastructure-agent";
-  version = "1.59.1";
+  version = "1.59.0";
 
   # src = fetchFromGitHub {
   #   owner = "myaffiliates";
@@ -61,8 +63,8 @@ buildGoModule rec {
   #   hash = lib.fakeHash;
   # };
   src = fetchzip {
-    url = "https://github.com/myaffiliates/infrastructure-agent/archive/refs/tags/Myaff-${version}.tar.gz";
-    sha256 = "sha256-VUtN/Mnt0E9YennBSBegfywGI3wpwK/23bbVirQOSYE=";
+    url = "https://github.com/newrelic/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
+    sha256 = lib.fakeHash;
   };
 
   vendorHash = lib.fakeHash;
@@ -81,7 +83,6 @@ buildGoModule rec {
     "cmd/newrelic-infra-service"
   ];
 
-
   # excludedPackages = [
   #   "test/"
   #   "tools/"
@@ -95,14 +96,13 @@ buildGoModule rec {
     mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/logging
     mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/bin
 
-    # cp -r \$\{src\}/usr/bin/* $out/bin
     cp -r ${nag-sce}/* $out/
     cp -r ${nginx-sce}/* $out/
+    cp -r ${mysql-sce}/* $out/
     cp -r ${php-sce}/agent/x64/newrelic-20220829.so $out/lib/newrelic.so
     cp -r ${php-sce}/daemon/newrelic-daemon.x64 $out/bin/daemon
     cp -r ${flex-sce}/nri-flex $out/var/db/newrelic-infra/newrelic-integrations/bin
     cp -r ${fb} $out/var/db/newrelic-infra/newrelic-integrations/logging/out_newrelic.so
-    #cp -r \$\{fbParsers\} $out/var/db/newrelic-infra/newrelic-integrations/logging/parsers.conf
   '';
 
   doCheck = false;
