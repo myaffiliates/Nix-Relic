@@ -47,9 +47,9 @@ let
   };
 
   redis-sce = fetchzip {
-    url = "https://github.com/newrelic/nri-redis/releases/download/v${redisVersion}/nri-redis_linux_${flexVersion}_amd64.tar.gz";
+    url = "https://github.com/newrelic/nri-redis/releases/download/v${redisVersion}/nri-redis_linux_${redisVersion}_amd64.tar.gz";
     stripRoot = false;
-    sha256 = lib.fakeHash;
+    sha256 ="sha256-PUtqxOOkxnhkMr+XNGVe7CB4ybnZSTHkg/O3tcQ0TlM=";
   };
 
   fb =  builtins.fetchurl {

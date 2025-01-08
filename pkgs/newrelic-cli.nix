@@ -11,7 +11,7 @@
 
     src = fetchzip {
       url = "https://github.com/newrelic/newrelic-cli/archive/refs/tags/v${version}.tar.gz";
-      sha256 = lib.fakeHash;
+      sha256 = "sha256-PUtqxOOkxnhkMr+XNGVe7CB4ybnZSTHkg/O3tcQ0TlM=";
     };
 
   vendorHash = lib.fakeHash;
