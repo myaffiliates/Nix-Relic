@@ -14,7 +14,7 @@
       sha256 = "sha256-PUtqxOOkxnhkMr+XNGVe7CB4ybnZSTHkg/O3tcQ0TlM=";
     };
 
-  vendorHash = lib.fakeHash;
+  vendorHash = "sha256-Uag2fN4M4vRxSEa3nRyvou88bBGrGCNIS3ofxXL+EMY=";
 
   ldflags = [
     "-w"
