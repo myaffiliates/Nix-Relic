@@ -48,6 +48,7 @@ let
 
   redis-sce = fetchzip {
     url = "https://github.com/newrelic/nri-redis/releases/download/v${redisVersion}/nri-redis_linux_${redisVersion}_amd64.tar.gz";
+    stripRoot = false;
     sha256 = "sha256-RVJsqIAfDYBf5MtefWgbDrQA33kQad4TndTxz8Akoc8=";
   };
 
