@@ -14,6 +14,7 @@ let
   phpVersion = "11.4.0.17";
   flexVersion = "1.16.3";
   mysqlVersion = "1.11.1";
+  redisVersion = "1.12.0";
 
   mysql-sce = fetchzip {
     url = "https://github.com/newrelic/nri-mysql/releases/download/v${mysqlVersion}/nri-mysql_linux_${mysqlVersion}_amd64.tar.gz";
@@ -41,6 +42,12 @@ let
 
   flex-sce = fetchzip {
     url = "https://github.com/newrelic/nri-flex/releases/download/v${flexVersion}/nri-flex_linux_${flexVersion}_amd64.tar.gz";
+    stripRoot = false;
+    sha256 = "sha256-GMB86hg6B3WB1C6x5JzdO7Uo0lf0iyBXNqqfE5sXP+Q=";
+  };
+
+  redis-sce = fetchzip {
+    url = "https://github.com/newrelic/nri-redis/releases/download/v${redisVersion}/nri-redis_linux_${flexVersion}_amd64.tar.gz";
     stripRoot = false;
     sha256 = "sha256-GMB86hg6B3WB1C6x5JzdO7Uo0lf0iyBXNqqfE5sXP+Q=";
   };
@@ -99,6 +106,7 @@ buildGoModule rec {
     cp -r ${nag-sce}/* $out/
     cp -r ${nginx-sce}/* $out/
     cp -r ${mysql-sce}/* $out/
+    cp -r ${redis-sce}/* $out/
     cp -r ${php-sce}/agent/x64/newrelic-20220829.so $out/lib/newrelic.so
     cp -r ${php-sce}/daemon/newrelic-daemon.x64 $out/bin/daemon
     cp -r ${flex-sce}/nri-flex $out/var/db/newrelic-infra/newrelic-integrations/bin
