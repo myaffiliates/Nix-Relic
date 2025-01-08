@@ -49,7 +49,7 @@ let
   redis-sce = fetchzip {
     url = "https://github.com/newrelic/nri-redis/releases/download/v${redisVersion}/nri-redis_linux_${flexVersion}_amd64.tar.gz";
     stripRoot = false;
-    sha256 = "sha256-GMB86hg6B3WB1C6x5JzdO7Uo0lf0iyBXNqqfE5sXP+Q=";
+    sha256 = lib.fakeHash;
   };
 
   fb =  builtins.fetchurl {
@@ -63,12 +63,6 @@ buildGoModule rec {
   pname = "infrastructure-agent";
   version = "1.59.0";
 
-  # src = fetchFromGitHub {
-  #   owner = "myaffiliates";
-  #   repo = "infrastructure-agent";
-  #   rev = version;
-  #   hash = lib.fakeHash;
-  # };
   src = fetchzip {
     url = "https://github.com/newrelic/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
     sha256 = "sha256-Kf7C4vJXjoJB+B695DQA3XWtm8IuBby8sKqH7F68Oy8=";
@@ -89,11 +83,6 @@ buildGoModule rec {
     "cmd/newrelic-infra-ctl"
     "cmd/newrelic-infra-service"
   ];
-
-  # excludedPackages = [
-  #   "test/"
-  #   "tools/"
-  # ];
 
   preInstall = ''
     mkdir -p $out/bin
