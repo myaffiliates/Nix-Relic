@@ -5,6 +5,7 @@
   go-agent = pkgs.callPackage ./go-agent.nix {};
   newrelic-php-agent = pkgs.callPackage ./newrelic-php-agent.nix {};
   newrelic-php-daemon = pkgs.callPackage ./newrelic-php-daemon.nix {};
+  newrelic-cli = pkgs.callPackage ./newrelic-cli.nix {};
 
   nr-otel-collector = pkgs.callPackage ./nr-otel-collector {
     # nr-otel-collector needs a specific version of ocb at this moment, hence this hack
