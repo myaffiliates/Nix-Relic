@@ -92,6 +92,9 @@ in
     substituteInPlace Makefile \
       --replace-quiet 'include $(INCLUDE_TOOLS' '# include $(INCLUDE_TOOLS' \
       --replace-quiet 'include $(INCLUDE_TEST' '# include $(INCLUDE_TEST'
+    
+    ${pkgs.go}/bin/go mod tidy
+
   '';
 
   modPostBuild = ''
