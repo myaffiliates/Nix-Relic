@@ -38,9 +38,9 @@ in
       --replace 'v3.27.0/go.mod h1:TUzePinDc0BMH4Sui66rl4SBe6yOKJ5X/bRJekwuAtM=' "v3.35.1/go.mod h1:GNTda53CohAhkgsc7/gqSsJhDZjj8vaky5u+vKz7wqM='
   
     substituteInPlace Makefile \
-      --replace "go-agent/v3 v3.27.0" "go-agent/v3 v3.35.1"
-      --replace 'include $(INCLUDE_TOOLS' "# include \$(INCLUDE_TOOLS" \
-      --replace 'include $(INCLUDE_TEST' "# include \$(INCLUDE_TEST"
+      --replace 'go-agent/v3 v3.27.0' 'go-agent/v3 v3.35.1' \
+      --replace 'include $(INCLUDE_TOOLS' '# include $(INCLUDE_TOOLS' \
+      --replace 'include $(INCLUDE_TEST' '# include $(INCLUDE_TEST'
  
     make compile
     make dist
