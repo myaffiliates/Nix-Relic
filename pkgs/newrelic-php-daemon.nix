@@ -23,7 +23,7 @@
     "-X main.version=${version}"
   ];
 
-  # env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
+  env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
   
   sourceRoot = "${src.name}/daemon";
 

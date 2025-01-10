@@ -1,6 +1,7 @@
 # You can build the below packages using 'nix build .#example'
 {pkgs}: rec {
   infrastructure-agent = pkgs.callPackage ./infrastructure-agent.nix {};
+  test-agent = pkgs.callPackage ./infrastructure-agent-test.nix {};  
   ocb = pkgs.callPackage ./ocb.nix {};
   go-agent = pkgs.callPackage ./go-agent.nix {};
   newrelic-php-agent = pkgs.callPackage ./newrelic-php-agent.nix {};

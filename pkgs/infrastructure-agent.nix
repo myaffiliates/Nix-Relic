@@ -76,7 +76,7 @@ buildGoModule rec {
     "-X main.buildVersion=${version}"
   ];
 
-  # env.CGO_ENABLED = "0";
+  env.CGO_ENABLED = "0";
 
   subPackages = [
     "cmd/newrelic-infra"
