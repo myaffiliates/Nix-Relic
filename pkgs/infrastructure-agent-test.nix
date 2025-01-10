@@ -32,6 +32,11 @@ in
   env.NIX_CFLAGS_COMPILE = "-O2";
   env_GO_BIN_PATH = "${pkgs.go}/bin/go";
 
+  preBuild = ''
+    export HOME=$(pwd)
+    export GOPROXY="direct"
+  '';  
+
   buildPhase = ''
     substituteInPlace go.sum \
       --replace-quiet 'v3.27.0 h1:Z3XB49d8FKjRcGzCyViCO9itBxiLPSpwjY1HlMvgamQ=' 'v3.35.1 h1:N43qBNDILmnwLDCSfnE1yy6adyoVEU95nAOtdUgG4vA=' \
@@ -43,16 +48,12 @@ in
       --replace-quiet 'include $(INCLUDE_TEST' '# include $(INCLUDE_TEST'
   '';
 
-  preBuild = ''
-    export HOME=$(pwd)
-    export GOPROXY="direct"
-  '';  
 
-  # installPhase = ''
-  #    mkdir -p $out
+  installPhase = ''
+     mkdir -p $out
 
-  #    cp -r agent/.libs/newrelic.so $out/lib
-  # '';
+     cp -r ./* $out/
+  '';
   
   doCheck = false;
 
