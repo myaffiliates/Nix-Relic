@@ -20,7 +20,7 @@ in
     owner = "newrelic";
     repo = "infrastructure-agent";
     rev = version;
-    hash = lib.fakeHash;
+    hash = "sha256-IfPiexh6vPOFkMz1OqNouozKJoKXeQMYYhaPg/tU0sg=";
   };
 
   nativeBuildInputs = [ pkg-config ];
