@@ -33,22 +33,17 @@ in
     export HOME=$(pwd)
     export GOPROXY="direct"
 
-    substituteInPlace Makefile \
-      --replace-quiet "go-agent/v3 v3.27.0" "go-agent/v3 v3.35.1"
-
     substituteInPlace go.sum \
-      --replace-quiet "v3.27.0 h1:Z3XB49d8FKjRcGzCyViCO9itBxiLPSpwjY1HlMvgamQ=" "v3.35.1 h1:N43qBNDILmnwLDCSfnE1yy6adyoVEU95nAOtdUgG4vA="
-
-    substituteInPlace go.sum \     
-      --replace-quiet "v3.27.0/go.mod h1:TUzePinDc0BMH4Sui66rl4SBe6yOKJ5X/bRJekwuAtM=" "v3.35.1/go.mod h1:GNTda53CohAhkgsc7/gqSsJhDZjj8vaky5u+vKz7wqM="
+      --replace 'v3.27.0 h1:Z3XB49d8FKjRcGzCyViCO9itBxiLPSpwjY1HlMvgamQ=' 'v3.35.1 h1:N43qBNDILmnwLDCSfnE1yy6adyoVEU95nAOtdUgG4vA=' \
+      --replace 'v3.27.0/go.mod h1:TUzePinDc0BMH4Sui66rl4SBe6yOKJ5X/bRJekwuAtM=' "v3.35.1/go.mod h1:GNTda53CohAhkgsc7/gqSsJhDZjj8vaky5u+vKz7wqM='
   
     substituteInPlace Makefile \
-      --replace-quiet "include \$(INCLUDE_TOOLS" "# include \$(INCLUDE_TOOLS"
-
-    substituteInPlace Makefile \  
-      --replace-quiet "include \$(INCLUDE_TEST" "# include \$(INCLUDE_TEST"
+      --replace "go-agent/v3 v3.27.0" "go-agent/v3 v3.35.1"
+      --replace 'include $(INCLUDE_TOOLS' "# include \$(INCLUDE_TOOLS" \
+      --replace 'include $(INCLUDE_TEST' "# include \$(INCLUDE_TEST"
  
-    make
+    make compile
+    make dist
   '';
   # installPhase = ''
   #    mkdir -p $out
