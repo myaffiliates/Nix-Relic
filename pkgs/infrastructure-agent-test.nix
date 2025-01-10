@@ -50,7 +50,7 @@ in
 
 
   installPhase = ''
-     mkdir -p $out
+     mkdir -p $out/bin
 
      cp -r target/* $out/
   '';
