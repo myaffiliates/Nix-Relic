@@ -42,18 +42,18 @@ github.com/newrelic/go-agent/v3 v3.35.1/go.mod h1:GNTda53CohAhkgsc7/gqSsJhDZjj8v
 EOF
   
     substituteInPlace Makefile \
-      --replace-quiet "include \$\(INCLUDE_TOOLS_DIR\)" "\# include \$\(INCLUDE_TOOLS_DIR\)" \
+      --replace-quiet "include \$\(INCLUDE_TOOLS_DIR\)" "\# include \$\(INCLUDE_TOOLS_DIR\)"
 
     substituteInPlace Makefile \  
       --replace-quiet "include \$\(INCLUDE_TEST_DIR\)" "\# include \$\(INCLUDE_TEST_DIR\)"
  
     make
   '';
-  installPhase = ''
-     mkdir -p $out/lib
+  # installPhase = ''
+  #    mkdir -p $out
 
-     cp -r agent/.libs/newrelic.so $out/lib
-  '';
+  #    cp -r agent/.libs/newrelic.so $out/lib
+  # '';
   
   doCheck = false;
 
