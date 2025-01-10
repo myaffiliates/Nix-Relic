@@ -76,7 +76,7 @@ in
   env.NIX_CFLAGS_COMPILE = "-O2";
   env_GO_BIN_PATH = "${pkgs.go}/bin/go";
 
-  proxyVendor = true;
+  # proxyVendor = true;
 
   preBuild = ''
     export HOME=$(pwd)
