@@ -100,7 +100,6 @@ in
     mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/logging
     mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/bin
 
-    cp -r ${nag-sce}/* $out/
     cp -r ${nginx-sce}/* $out/
     cp -r ${mysql-sce}/* $out/
     cp -r ${redis-sce}/* $out/
