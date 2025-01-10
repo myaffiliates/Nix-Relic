@@ -52,7 +52,7 @@ in
   installPhase = ''
      mkdir -p $out
 
-     cp -r ./* $out/
+     cp -r target/* $out/
   '';
   
   doCheck = false;
