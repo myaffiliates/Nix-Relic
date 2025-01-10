@@ -29,7 +29,7 @@ in
   env.NIX_CFLAGS_COMPILE = "-O2";
   env_GO_BIN_PATH = "${pkgs.go}/bin/go";
 
-  buildPhase = ''
+  preBuild = ''
     export HOME=$(pwd)
     export GOPROXY="direct"
 
@@ -41,10 +41,8 @@ in
       --replace 'go-agent/v3 v3.27.0' 'go-agent/v3 v3.35.1' \
       --replace 'include $(INCLUDE_TOOLS' '# include $(INCLUDE_TOOLS' \
       --replace 'include $(INCLUDE_TEST' '# include $(INCLUDE_TEST'
- 
-    make compile
-    make dist
   '';
+  
   # installPhase = ''
   #    mkdir -p $out
 
