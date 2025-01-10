@@ -108,11 +108,9 @@ in
     cp -r ${fb} $out/var/db/newrelic-infra/newrelic-integrations/logging/out_newrelic.so
   '';
 
-  # installPhase = ''
-  #    mkdir -p $out/bin
-
-  #    cp -r target/* $out/
-  # '';
+  installPhase = ''
+     cp -r target/* $out/
+  '';
   
   doCheck = false;
 
