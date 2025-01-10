@@ -12,7 +12,8 @@ let
   version = "1.59.1";
  
 in
-  stdenv.mkDerivation rec {
+  # stdenv.mkDerivation rec {
+  buildGoModule rec {
     pname = "infrastructure-agent";
     inherit version;
   
