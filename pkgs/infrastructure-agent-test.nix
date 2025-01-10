@@ -68,7 +68,7 @@ in
     hash = "sha256-IfPiexh6vPOFkMz1OqNouozKJoKXeQMYYhaPg/tU0sg=";
   };
 
-  vendorHash = "sha256-AsZFEHoz+17ICJB1TuLeNwcQSWqOKIm7HAmZJ+7yj2E=";
+  vendorHash = "sha256-Mi6X5sENfKBjCbG/M0WxpCYTPhF6xAJ2WyXs8S7SIv8=";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ pkgs.pcre pkgs.protobufc pkgs.cmake pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.automake pkgs.libtool pkgs.git pkgs.bash pkgs.go ];
