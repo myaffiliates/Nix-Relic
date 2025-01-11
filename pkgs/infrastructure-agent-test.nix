@@ -81,7 +81,7 @@ in
   preBuild = ''
     export HOME=$(pwd)
     export GOPROXY="direct"
-    export PATH = "${pkgs.git}/bin:$PATH"
+    export PATH="${pkgs.git}/bin:$PATH"
 
     substituteInPlace go.sum \
       --replace-quiet 'v3.27.0 h1:Z3XB49d8FKjRcGzCyViCO9itBxiLPSpwjY1HlMvgamQ=' 'v3.35.1 h1:N43qBNDILmnwLDCSfnE1yy6adyoVEU95nAOtdUgG4vA=' \
