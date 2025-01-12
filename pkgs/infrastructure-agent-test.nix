@@ -57,7 +57,7 @@ let
 
 in
   # stdenv.mkDerivation rec {
-  buildGoModule rec {
+buildGoModule rec {
     pname = "infrastructure-agent";
     inherit version;
   

@@ -22,12 +22,6 @@ let
     sha256 = "sha256-J4xl75ZkDkvnY87RQl8973CL1FASWqp3qilU/9xiamU=";
   };
 
-  nag-sce = fetchzip {
-    url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/nri-nagios_linux_${nagVersion}_amd64.tar.gz";
-    stripRoot = false;
-    sha256 = "sha256-99VcpXZuTg4PP193o1WV9Jl1FFr+Pm7iJgy0ygHhak8=";
-  };
-
   nginx-sce = fetchzip {
     url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/nri-nginx_linux_${nginxVersion}_amd64.tar.gz";
     stripRoot = false;
@@ -37,7 +31,6 @@ let
   php-sce =  fetchzip {
     url = "https://download.newrelic.com/php_agent/release/newrelic-php5-${phpVersion}-linux.tar.gz";
     sha256 = "sha256-acTNfszCcX6RKF+XY2yb4S/dahuyHoEWa11//ua6MaY=";
-
   };
 
   flex-sce = fetchzip {
@@ -75,8 +68,17 @@ buildGoModule rec {
     "-w"
     "-X main.buildVersion=${version}"
   ];
-
+  
   env.CGO_ENABLED = "0";
+  
+  preBuild = ''
+    substituteInPlace go.sum \
+      --replace-quiet 'v3.27.0 h1:Z3XB49d8FKjRcGzCyViCO9itBxiLPSpwjY1HlMvgamQ=' 'v3.35.1 h1:N43qBNDILmnwLDCSfnE1yy6adyoVEU95nAOtdUgG4vA=' \
+      --replace-quiet 'v3.27.0/go.mod h1:TUzePinDc0BMH4Sui66rl4SBe6yOKJ5X/bRJekwuAtM=' 'v3.35.1/go.mod h1:GNTda53CohAhkgsc7/gqSsJhDZjj8vaky5u+vKz7wqM='
+
+    substituteInPlace go.mod \
+      --replace-quiet 'go-agent/v3 v3.27.0' 'go-agent/v3 v3.35.1'
+  '';
 
   subPackages = [
     "cmd/newrelic-infra"
@@ -92,7 +94,6 @@ buildGoModule rec {
     mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/logging
     mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/bin
 
-    cp -r ${nag-sce}/* $out/
     cp -r ${nginx-sce}/* $out/
     cp -r ${mysql-sce}/* $out/
     cp -r ${redis-sce}/* $out/
