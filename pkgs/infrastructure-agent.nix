@@ -78,6 +78,8 @@ buildGoModule rec {
 
     substituteInPlace go.mod \
       --replace-quiet 'go-agent/v3 v3.27.0' 'go-agent/v3 v3.35.1'
+
+    go mod vendor
   '';
 
   subPackages = [
