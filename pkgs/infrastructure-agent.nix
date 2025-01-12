@@ -54,7 +54,7 @@ in
 
 buildGoModule rec {
   pname = "infrastructure-agent";
-  version = "1.59.1";
+  version = "1.59.1-A";
 
   src = fetchzip {
     url = "https://github.com/myaffiliates/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
