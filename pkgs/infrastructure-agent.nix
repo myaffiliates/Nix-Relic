@@ -11,7 +11,7 @@ let
   fbVersion = "2.1.0";
   nagVersion = "2.9.7";
   nginxVersion = "3.5.0";
-  phpVersion = "11.4.0.17";
+  phpVersion = "11.5.0.18";
   flexVersion = "1.16.3";
   mysqlVersion = "1.11.1";
   redisVersion = "1.12.0";
@@ -58,7 +58,6 @@ buildGoModule rec {
 
   src = fetchzip {
     url = "https://github.com/myaffiliates/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
-    # "https://github.com/newrelic/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
     sha256 = "sha256-Kf7C4vJXjoJB+B695DQA3XWtm8IuBby8sKqH7F68Oy8=";
   };
 
