@@ -29,8 +29,8 @@ let
   };
 
   php-sce =  fetchzip {
-    url = "https://download.newrelic.com/php_agent/release/newrelic-php5-${phpVersion}-linux.tar.gz";
-    sha256 = "sha256-acTNfszCcX6RKF+XY2yb4S/dahuyHoEWa11//ua6MaY=";
+    url = "https://download.newrelic.com/php_agent/archive/newrelic-php5-${phpVersion}-linux.tar.gz";
+    sha256 = "sha256-ZPwVUUuhGHDT5owIlihzwcWeb5UX9NWr+43VrAdVYkU=";
   };
 
   flex-sce = fetchzip {
