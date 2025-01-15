@@ -33,10 +33,12 @@ in
     rev =  "v${version}";
     hash = "sha256-376pa8GOGlI9rIpQFfeibIim4JEGvfBsNwQutmMT7oU=";
     postFetch = ''
+      export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
       export HOME=$(pwd)
       cd $out/v3
-      ${pkgs.go}/bin/go mod tidy
-     
+      go get -u
+      go get -u ./... 
+      go mod tidy     
     '';
   };
  #cp ${sum} $out/v3/go.sum
@@ -48,6 +50,8 @@ in
 
   # subPackages = [
   #   "v3/newrelic"
+  # /integrations/logcontext-v2/logWriter
+  # v3/integrations/nrmysql
   # ];
 
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
