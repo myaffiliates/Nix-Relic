@@ -89,6 +89,15 @@ stdenv.mkDerivation rec {
   env.NIX_CFLAGS_COMPILE = "-O2";
   env_GO_BIN_PATH = "${pkgs.go}/bin/go";
 
+  buildPhase = ''
+    export GOPROXY="direct"
+    export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
+    export HOME=$(pwd)
+    cd $src
+    make compile
+    make dist
+  '';
+
   modPostBuild = ''
     mkdir -p $out/bin
     mkdir -p $out/etc/newrelic-infra/logging.d
