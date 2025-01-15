@@ -14,7 +14,7 @@ let
   fbVersion = "2.1.0";
   nagVersion = "2.9.7";
   nginxVersion = "3.5.0";
-  phpVersion = "11.4.0.17";
+  phpVersion = "11.5.0.18";
   flexVersion = "1.16.3";
   mysqlVersion = "1.11.1";
   redisVersion = "1.12.0";
@@ -32,7 +32,7 @@ let
   };
 
   php-sce =  fetchzip {
-    url = "https://download.newrelic.com/php_agent/release/newrelic-php5-${phpVersion}-linux.tar.gz";
+    url = "https://download.newrelic.com/php_agent/archive/${phpVersion}/newrelic-php5-${phpVersion}-linux.tar.gz";
     sha256 = "sha256-acTNfszCcX6RKF+XY2yb4S/dahuyHoEWa11//ua6MaY=";
 
   };
