@@ -88,6 +88,11 @@ stdenv.mkDerivation rec {
 
   env.NIX_CFLAGS_COMPILE = "-O2";
   env_GO_BIN_PATH = "${pkgs.go}/bin/go";
+  ldflags = [
+    "-s"
+    "-w"
+    "-X main.buildVersion=${version}"
+  ];
 
   buildPhase = ''
     export GOPROXY="direct"
