@@ -45,7 +45,7 @@ in
 
 
   preBuild = ''
-    cp ${sum} ${sourceRoot}
+    cp ${sum} ${sourceRoot}/go.sum
   '';
   
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
