@@ -33,6 +33,7 @@ in
     rev =  "v${version}";
     hash = "sha256-zso8iirWPzspXgdFo4XU2Rmx2lAXMhrMkfTOezFm3PA=";
     postFetch = ''
+      export HOME=$(pwd)
       cd $out/v3
       ${pkgs.go}/bin/go mod tidy
      
