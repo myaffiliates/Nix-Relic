@@ -36,23 +36,25 @@ in
       export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
       export HOME=$(pwd)
       cd $out/v3
-      go get -u
-      go get -u ./... 
       go mod tidy     
+      cd $out/v3/integrations/logcontext-v2/logWriter
+      go mod tidy
+      cd $out/v3/integrations/logcontext-v2/nrwriter
+      go mod tidy
     '';
   };
  #cp ${sum} $out/v3/go.sum
   vendorHash = "sha256-FYuZQZH0wlshg3YIeyDtrpIv2wCTLseqQwdcFbdJf6Y=";
 
-  sourceRoot = "${src.name}/v3";
+  # sourceRoot = "${src.name}/v3";
 
   buildInputs = [ stdenv pkgs.go pkgs.git ];
 
-  # subPackages = [
-  #   "v3/newrelic"
-  # /integrations/logcontext-v2/logWriter
-  # v3/integrations/nrmysql
-  # ];
+  subPackages = [
+    "v3"
+    "v3/integrations/logcontext-v2/logWriter"
+    "v3/integrations/nrmysql"
+  ];
 
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
   env.HOME = "$(pwd)";
