@@ -33,13 +33,16 @@ in
     rev =  "v${version}";
     hash = "sha256-zso8iirWPzspXgdFo4XU2Rmx2lAXMhrMkfTOezFm3PA=";
     postFetch = ''
-      cp ${sum} $out/v3/go.sum
+      go mod tidy
+     
     '';
   };
-
+ #cp ${sum} $out/v3/go.sum
   vendorHash = lib.fakeHash;
 
   sourceRoot = "${src.name}/v3";
+
+  buildInputs = [ stdenv pkgs.go pkgs.git ];
 
   # subPackages = [
   #   "v3/newrelic"
