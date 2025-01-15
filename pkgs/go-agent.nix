@@ -33,7 +33,7 @@ in
     rev =  "v${version}";
     hash = "sha256-5baGIv8K5U2qH9Ly4YDirVQsEV09aVdyGZ+ohiTO7oc=";
     postFetch = ''
-      cp ${sum} ${out}/v3/go.sum
+      cp ${sum} $out/v3/go.sum
     '';
   };
 
