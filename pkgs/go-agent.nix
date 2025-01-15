@@ -43,7 +43,7 @@ in
   # ];
 
   preBuild = ''
-    cp ${sum} ${sce.name}
+    cp ${sum} ${src}
   '';
   
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
