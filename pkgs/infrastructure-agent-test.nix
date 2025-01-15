@@ -9,7 +9,7 @@
   pcre,
 }:
 let
-  version = "1.59.1";
+  version = "1.59.2";
  
   fbVersion = "2.1.0";
   nagVersion = "2.9.7";
@@ -71,14 +71,14 @@ stdenv.mkDerivation rec {
       export GOPROXY="direct"
       export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
 
-    substituteInPlace go.sum \
+    substituteInPlace $out/go.sum \
       --replace-quiet 'v3.27.0 h1:Z3XB49d8FKjRcGzCyViCO9itBxiLPSpwjY1HlMvgamQ=' 'v3.35.1 h1:N43qBNDILmnwLDCSfnE1yy6adyoVEU95nAOtdUgG4vA=' \
       --replace-quiet 'v3.27.0/go.mod h1:TUzePinDc0BMH4Sui66rl4SBe6yOKJ5X/bRJekwuAtM=' 'v3.35.1/go.mod h1:GNTda53CohAhkgsc7/gqSsJhDZjj8vaky5u+vKz7wqM='
 
-    substituteInPlace go.mod \
+    substituteInPlace $out/go.mod \
       --replace-quiet 'go-agent/v3 v3.27.0' 'go-agent/v3 v3.35.1'
 
-    substituteInPlace Makefile \
+    substituteInPlace $out/Makefile \
       --replace-quiet 'include $(INCLUDE_TOOLS' '# include $(INCLUDE_TOOLS' \
       --replace-quiet 'include $(INCLUDE_TEST' '# include $(INCLUDE_TEST'
     
