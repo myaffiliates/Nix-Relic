@@ -31,7 +31,7 @@ in
     owner = "newrelic";
     repo = "go-agent";
     rev =  "v${version}";
-    hash = "sha256-5baGIv8K5U2qH9Ly4YDirVQsEV09aVdyGZ+ohiTO7oc=";
+    hash = "sha256-zso8iirWPzspXgdFo4XU2Rmx2lAXMhrMkfTOezFm3PA=";
     postFetch = ''
       cp ${sum} $out/v3/go.sum
     '';
