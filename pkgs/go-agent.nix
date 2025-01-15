@@ -1,6 +1,7 @@
 { pkgs, lib, stdenv, buildGoModule, fetchFromGitHub }:
 
   buildGoModule rec {
+# stdenv.mkDerivation rec {
     pname = "go-agent";
     version = "3.35.1";
     
@@ -13,11 +14,19 @@
 
   vendorHash = lib.fakeHash;
 
-  sourceRoot = "${src.name}/v3/newrelic";
+  sourceRoot = "${src.name}/v3";
+
 
   subPackages = [
     "v3/newrelic"
   ];
+
+
+
+
+  preInstall = ''
+  go mod tidy
+  '';
   
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
   env.HOME = "$(pwd)";
