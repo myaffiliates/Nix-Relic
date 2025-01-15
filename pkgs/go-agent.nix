@@ -33,7 +33,7 @@ in
     rev =  "v${version}";
     hash = "sha256-zso8iirWPzspXgdFo4XU2Rmx2lAXMhrMkfTOezFm3PA=";
     postFetch = ''
-      go mod tidy
+      ${pkgs.go}/bin/go mod tidy
      
     '';
   };
