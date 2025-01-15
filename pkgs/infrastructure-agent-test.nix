@@ -76,7 +76,6 @@ stdenv.mkDerivation rec {
       export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
 
       go get -u
-      go get -u ./...
       go mod tidy
     '';    
   };
