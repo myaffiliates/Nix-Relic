@@ -1,6 +1,8 @@
 { pkgs, lib, stdenv, buildGoModule, fetchFromGitHub }:
 let
-sum = pkgs.writeTextFile  "go.sum" ''                                                                           
+sum = pkgs.writeTextFile {
+  name = "go.sum";
+  text = ''                                                                         
 github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
 github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
 golang.org/x/net v0.25.0 h1:d/OCCoBEUq33pjydKrGQhw7IlUPI2Oylr+8qLx49kac=
@@ -15,7 +17,8 @@ google.golang.org/grpc v1.65.0 h1:bs/cUb4lp1G5iImFFd3u5ixQzweKizoZJAwBNLR42lc=
 google.golang.org/grpc v1.65.0/go.mod h1:WgYC2ypjlB0EiQi6wdKixMqukr6lBc0Vo+oOgjrM5ZQ=
 google.golang.org/protobuf v1.34.2 h1:6xV6lTsCfpGD21XK49h7MhtcApnLqkfYgPcdHftf6hg=
 google.golang.org/protobuf v1.34.2/go.mod h1:qYOHts0dSfpeUzUFpOMr/WGzszTmLH+DiWniOlNbLDw=
-'';
+  '';
+};
 
 in
   buildGoModule rec {
@@ -42,7 +45,7 @@ in
 
 
   preBuild = ''
-    cp ${sum} ${sourceRoot}/go.sum 
+    cp ${sum} ${sourceRoot}
   '';
   
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
