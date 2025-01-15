@@ -25,13 +25,14 @@ in
 # stdenv.mkDerivation rec {
     pname = "go-agent";
     version = "3.35.1";
+    inherit sum;
     
   src = fetchFromGitHub {
     owner = "newrelic";
     repo = "go-agent";
     rev =  "v${version}";
     hash = "sha256-5baGIv8K5U2qH9Ly4YDirVQsEV09aVdyGZ+ohiTO7oc=";
-  };
+   } + "/v3";
 
   vendorHash = lib.fakeHash;
 
