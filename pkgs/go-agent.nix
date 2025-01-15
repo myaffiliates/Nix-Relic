@@ -31,7 +31,7 @@ in
     owner = "newrelic";
     repo = "go-agent";
     rev =  "v${version}";
-    hash = "sha256-zso8iirWPzspXgdFo4XU2Rmx2lAXMhrMkfTOezFm3PA=";
+    hash = "sha256-376pa8GOGlI9rIpQFfeibIim4JEGvfBsNwQutmMT7oU=";
     postFetch = ''
       export HOME=$(pwd)
       cd $out/v3
