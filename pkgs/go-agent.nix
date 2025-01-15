@@ -42,11 +42,8 @@ in
   #   "v3/newrelic"
   # ];
 
-
-
-
   preBuild = ''
-    cp ${sum} ${sourceRoot}/go.sum
+    cp ${sum} ${sce}
   '';
   
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
