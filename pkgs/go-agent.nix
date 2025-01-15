@@ -32,20 +32,19 @@ in
     repo = "go-agent";
     rev =  "v${version}";
     hash = "sha256-5baGIv8K5U2qH9Ly4YDirVQsEV09aVdyGZ+ohiTO7oc=";
-   } + "/v3";
+    postFetch = ''
+      cp ${sum} ${out}/v3/go.sum
+    '';
+  };
 
   vendorHash = lib.fakeHash;
 
-  # sourceRoot = "${src.name}/v3";
+  sourceRoot = "${src.name}/v3";
 
   # subPackages = [
   #   "v3/newrelic"
   # ];
 
-  preBuild = ''
-    cp ${sum} ${src}
-  '';
-  
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
   env.HOME = "$(pwd)";
   env.GOPROXY = "direct";
