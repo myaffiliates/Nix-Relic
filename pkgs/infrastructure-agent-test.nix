@@ -71,8 +71,8 @@ stdenv.mkDerivation rec {
     url = "https://github.com/myaffiliates/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
     sha256 = "sha256-Kf7C4vJXjoJB+B695DQA3XWtm8IuBby8sKqH7F68Oy8=";
     postFetch = ''
-      export HOME=$(pwd)
-      export GOPROXY="direct"
+      # export HOME=$(pwd)
+      # export GOPROXY="direct"
       export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
 
       go get -u
