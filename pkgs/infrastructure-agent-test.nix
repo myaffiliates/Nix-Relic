@@ -61,29 +61,23 @@ stdenv.mkDerivation rec {
     pname = "infrastructure-agent";
     inherit version;
   
-  src = fetchFromGitHub {
-    owner = "newrelic";
-    repo = "infrastructure-agent";
-    rev = version;
-    hash = "sha256-IfPiexh6vPOFkMz1OqNouozKJoKXeQMYYhaPg/tU0sg=";
+  # src = fetchFromGitHub {
+  #   owner = "newrelic";
+  #   repo = "infrastructure-agent";
+  #   rev = version;
+  #   hash = "sha256-IfPiexh6vPOFkMz1OqNouozKJoKXeQMYYhaPg/tU0sg=";
+  
+   src = fetchzip {
+    url = "https://github.com/myaffiliates/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
+    sha256 = "sha256-Kf7C4vJXjoJB+B695DQA3XWtm8IuBby8sKqH7F68Oy8=";
     postFetch = ''
       export HOME=$(pwd)
       export GOPROXY="direct"
       export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
 
-    cd $out
-    substituteInPlace go.sum \
-      --replace-quiet 'v3.27.0 h1:Z3XB49d8FKjRcGzCyViCO9itBxiLPSpwjY1HlMvgamQ=' 'v3.35.1 h1:N43qBNDILmnwLDCSfnE1yy6adyoVEU95nAOtdUgG4vA=' \
-      --replace-quiet 'v3.27.0/go.mod h1:TUzePinDc0BMH4Sui66rl4SBe6yOKJ5X/bRJekwuAtM=' 'v3.35.1/go.mod h1:GNTda53CohAhkgsc7/gqSsJhDZjj8vaky5u+vKz7wqM='
-
-    substituteInPlace go.mod \
-      --replace-quiet 'go-agent/v3 v3.27.0' 'go-agent/v3 v3.35.1'
-
-    substituteInPlace Makefile \
-      --replace-quiet 'include $(INCLUDE_TOOLS' '# include $(INCLUDE_TOOLS' \
-      --replace-quiet 'include $(INCLUDE_TEST' '# include $(INCLUDE_TEST'
-    
-    go mod tidy
+      go get -u
+      go get -u ./...
+      go mod tidy
     '';    
   };
 
