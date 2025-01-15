@@ -40,7 +40,7 @@ in
     '';
   };
  #cp ${sum} $out/v3/go.sum
-  vendorHash = lib.fakeHash;
+  vendorHash = "sha256-FYuZQZH0wlshg3YIeyDtrpIv2wCTLseqQwdcFbdJf6Y=";
 
   sourceRoot = "${src.name}/v3";
 
