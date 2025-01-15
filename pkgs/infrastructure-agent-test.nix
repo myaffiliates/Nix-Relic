@@ -74,7 +74,8 @@ stdenv.mkDerivation rec {
       # export HOME=$(pwd)
       # export GOPROXY="direct"
       export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
-
+      
+      cd $out
       go get -u
       go mod tidy
     '';    
