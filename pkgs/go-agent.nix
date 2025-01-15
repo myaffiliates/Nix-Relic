@@ -26,7 +26,7 @@ in
     pname = "go-agent";
     version = "3.35.1";
     inherit sum;
-    
+
   src = fetchFromGitHub {
     owner = "newrelic";
     repo = "go-agent";
@@ -36,7 +36,7 @@ in
 
   vendorHash = lib.fakeHash;
 
-  sourceRoot = "${src.name}/v3";
+  # sourceRoot = "${src.name}/v3";
 
   # subPackages = [
   #   "v3/newrelic"
