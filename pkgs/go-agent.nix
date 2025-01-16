@@ -48,11 +48,11 @@ in
 
   buildInputs = [ stdenv pkgs.go pkgs.git ];
 
-  subPackages = [
-    "newrelic"
-    "integrations/logcontext-v2/logWriter"
-    "integrations/logcontext-v2/nrmysql"
-  ];
+  # subPackages = [
+  #   "newrelic"
+  #   "integrations/logcontext-v2/logWriter"
+  #   "integrations/logcontext-v2/nrmysql"
+  # ];
 
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
   env.HOME = "$(pwd)";
