@@ -37,7 +37,7 @@ in
       export HOME=$(pwd)
       cd $out/v3
       go mod tidy
-      go mod download github.com/newrelic/go-agent/v3 
+      # go mod download github.com/newrelic/go-agent/v3
       #github.com/newrelic/go-agent/v3/integrations/logcontext-v2/logWriter
       #go mod download github.com/newrelic/go-agent/v3/integrations/logcontext-v2/nrwriter      
       # cd $out/v3/integrations/logcontext-v2/logWriter
@@ -54,6 +54,7 @@ in
   buildInputs = [ stdenv pkgs.go pkgs.git ];
 
   subPackages = [
+    "newrelic"
     "integrations/logcontext-v2/logWriter"
     "integrations/logcontext-v2/nrmysql"
   ];
