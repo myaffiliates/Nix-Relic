@@ -36,7 +36,7 @@ in
       export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
       export HOME=$(pwd)
       cd $out/v3
-      chmod -r . 777
+      chmod -R 777 .
       go mod tidy
       go mod vendor
       # mkdir $out/v3/vendor
