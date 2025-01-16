@@ -61,7 +61,7 @@ in
 
   installPhase = ''
     mkdir -p $out
-    cp -r $src/* $out
+    cp -r $GOPATH/bin $out
   '';
 
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
