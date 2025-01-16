@@ -39,18 +39,10 @@ in
       chmod -R 777 .
       go mod tidy
       go mod vendor
-      # mkdir $out/v3/vendor
-      # go mod download github.com/newrelic/go-agent/v3
-      #github.com/newrelic/go-agent/v3/integrations/logcontext-v2/logWriter
-      #go mod download github.com/newrelic/go-agent/v3/integrations/logcontext-v2/nrwriter      
-      # cd $out/v3/integrations/logcontext-v2/logWriter
-      # go mod tidy
-      # cd $out/v3/integrations/logcontext-v2/nrwriter
-      # go mod tidy
     '';
   };
   
-  vendorHash = "sha256-FYuZQZH0wlshg3YIeyDtrpIv2wCTLseqQwdcFbdJf6Y=";
+  vendorHash = null;
 
   sourceRoot = "${src.name}/v3";
 
