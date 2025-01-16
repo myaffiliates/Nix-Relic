@@ -52,15 +52,15 @@ in
   
   vendorHash = "sha256-FYuZQZH0wlshg3YIeyDtrpIv2wCTLseqQwdcFbdJf6Y=";
 
-  sourceRoot = "${src.name}/v3/newrelic";
+  sourceRoot = "${src.name}/v3";
 
   buildInputs = [ stdenv pkgs.go pkgs.git ];
 
-  # subPackages = [
-  #   "newrelic"
-  #   "integrations/logcontext-v2/logWriter"
-  #   "integrations/logcontext-v2/nrmysql"
-  # ];
+  subPackages = [
+    "newrelic"
+    "integrations/logcontext-v2/logWriter"
+    "integrations/logcontext-v2/nrmysql"
+  ];
 
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
   env.HOME = "$(pwd)";
