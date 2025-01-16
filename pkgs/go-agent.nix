@@ -44,7 +44,7 @@ in
   
   vendorHash = null;
 
-  sourceRoot = "${src.name}/v3";
+  modRoot = "./v3";
 
   buildInputs = [ stdenv pkgs.go pkgs.git ];
 
