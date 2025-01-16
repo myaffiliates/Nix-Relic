@@ -59,6 +59,10 @@ in
     "integrations/logcontext"
   ];
 
+  installPhase = ''
+    cp -r $src/* $out
+  '';
+
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
   env.HOME = "$(pwd)";
   env.GOPROXY = "direct";
