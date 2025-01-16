@@ -46,7 +46,11 @@ in
       # go mod tidy
     '';
   };
- #cp ${sum} $out/v3/go.sum
+  
+  preBuild = ''
+    mkdir /build/source/v3/vendor
+  '';
+ 
   vendorHash = "sha256-FYuZQZH0wlshg3YIeyDtrpIv2wCTLseqQwdcFbdJf6Y=";
 
   sourceRoot = "${src.name}/v3/newrelic";
