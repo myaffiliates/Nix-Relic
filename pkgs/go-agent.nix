@@ -37,7 +37,8 @@ in
       export HOME=$(pwd)
       cd $out/v3
       go mod tidy
-      mkdir $out/v3/vendor
+      go mod vendor
+      # mkdir $out/v3/vendor
       # go mod download github.com/newrelic/go-agent/v3
       #github.com/newrelic/go-agent/v3/integrations/logcontext-v2/logWriter
       #go mod download github.com/newrelic/go-agent/v3/integrations/logcontext-v2/nrwriter      
