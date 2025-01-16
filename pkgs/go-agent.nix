@@ -56,7 +56,7 @@ in
 
   subPackages = [
     "newrelic"
-    "integrations/logcontext"
+    # "integrations/logcontext"
   ];
 
   installPhase = ''
