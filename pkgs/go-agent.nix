@@ -59,10 +59,10 @@ in
     # "integrations/logcontext"
   ];
 
-  installPhase = ''
-    mkdir -p $out
-    cp -r /build/* $out
-  '';
+  # installPhase = ''
+  #   mkdir -p $out
+  #   cp -r /build/* $out
+  # '';
 
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
   env.HOME = "$(pwd)";
