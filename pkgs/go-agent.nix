@@ -39,6 +39,12 @@ in
       chmod -R 777 .
       go mod tidy
       go mod vendor
+      cd $out/v3/integrations/logcontext-v2/logWriter
+      go mod tidy
+      go mod vendor
+      cd $out/v3/integrations/logcontext-v2/nrwriter
+      go mod tidy
+      go mod vendor
     '';
   };
   
@@ -48,11 +54,11 @@ in
 
   buildInputs = [ stdenv pkgs.go pkgs.git ];
 
-  # subPackages = [
-  #   "newrelic"
-  #   "integrations/logcontext-v2/logWriter"
-  #   "integrations/logcontext-v2/nrmysql"
-  # ];
+  subPackages = [
+    "newrelic"
+    "integrations/logcontext-v2/logWriter"
+    "integrations/logcontext-v2/nrwriter"
+  ];
 
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
   env.HOME = "$(pwd)";
