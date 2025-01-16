@@ -60,6 +60,7 @@ in
   ];
 
   installPhase = ''
+    mkdir -p $out
     cp -r $src/* $out
   '';
 
