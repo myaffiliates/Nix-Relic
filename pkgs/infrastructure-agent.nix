@@ -24,8 +24,7 @@ let
   nginx-sce = fetchzip {
     url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/nri-nginx_linux_${nginxVersion}_amd64.tar.gz";
     stripRoot = false;
-    sha256 = "1ri2j56f24f7mvys4dmkwgq9qabxw8yq6g7w1lwnfqsv3y13cn0r";
-    #sha256 = "sha256-y1sNjQf8MPTUHWlRO4szk1jm4/Q/lXIKM7+aI4LcMQ0=";
+    sha256 = "sha256-2HONjnH0BSxu13gXsvoJoTF+aMt20r61CS4lDCAknx8=";
   };
 
   php-sce =  fetchzip {
