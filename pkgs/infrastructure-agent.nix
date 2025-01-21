@@ -57,7 +57,9 @@ buildGoModule rec {
     postFetch = ''
       export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
       cd $out
-      go mod edit github.com/newrelic/go-agent/v3 v3.36.0
+      go mod edit -replace (
+        github.com/newrelic/go-agent/v3 => github.com/newrelic/go-agent/v3 v3.36.0
+      )
       go mod tidy
       go mod vendor
     '';  
