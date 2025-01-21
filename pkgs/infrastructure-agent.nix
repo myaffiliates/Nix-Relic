@@ -9,56 +9,61 @@
 }: 
 let 
   fbVersion = "2.1.0";
-  nagVersion = "2.9.7";
-  nginxVersion = "3.5.0";
+  nginxVersion = "3.5.1";
   phpVersion = "11.5.0.18";
-  flexVersion = "1.16.3";
   mysqlVersion = "1.11.1";
   redisVersion = "1.12.0";
 
   mysql-sce = fetchzip {
     url = "https://github.com/newrelic/nri-mysql/releases/download/v${mysqlVersion}/nri-mysql_linux_${mysqlVersion}_amd64.tar.gz";
     stripRoot = false;
-    sha256 = "sha256-J4xl75ZkDkvnY87RQl8973CL1FASWqp3qilU/9xiamU=";
+    sha256 = "0di7038i0pwpjipicmf7sfmbv28g7ns0svfayxgmw6z5ly60qa5q";
+    #sha256 = "sha256-J4xl75ZkDkvnY87RQl8973CL1FASWqp3qilU/9xiamU=";
   };
 
   nginx-sce = fetchzip {
     url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/nri-nginx_linux_${nginxVersion}_amd64.tar.gz";
     stripRoot = false;
-    sha256 = "sha256-y1sNjQf8MPTUHWlRO4szk1jm4/Q/lXIKM7+aI4LcMQ0=";
+    sha256 = "1ri2j56f24f7mvys4dmkwgq9qabxw8yq6g7w1lwnfqsv3y13cn0r";
+    #sha256 = "sha256-y1sNjQf8MPTUHWlRO4szk1jm4/Q/lXIKM7+aI4LcMQ0=";
   };
 
   php-sce =  fetchzip {
     url = "https://download.newrelic.com/php_agent/archive/${phpVersion}/newrelic-php5-${phpVersion}-linux.tar.gz";
-    sha256 = "sha256-ZPwVUUuhGHDT5owIlihzwcWeb5UX9NWr+43VrAdVYkU=";
-  };
-
-  flex-sce = fetchzip {
-    url = "https://github.com/newrelic/nri-flex/releases/download/v${flexVersion}/nri-flex_linux_${flexVersion}_amd64.tar.gz";
-    stripRoot = false;
-    sha256 = "sha256-GMB86hg6B3WB1C6x5JzdO7Uo0lf0iyBXNqqfE5sXP+Q=";
+    sha256 = "1vxy3bk9pm57f9c4ipldz26104igj4fxammbazd23mwyym3prbjl";
+    #sha256 = "sha256-ZPwVUUuhGHDT5owIlihzwcWeb5UX9NWr+43VrAdVYkU=";
   };
 
   redis-sce = fetchzip {
     url = "https://github.com/newrelic/nri-redis/releases/download/v${redisVersion}/nri-redis_linux_${redisVersion}_amd64.tar.gz";
     stripRoot = false;
-    sha256 = "sha256-RVJsqIAfDYBf5MtefWgbDrQA33kQad4TndTxz8Akoc8=";
+    sha256 = "1x7ly8f890h9qw1czh8kaw129zn58531gcbd9md9085bizj9834l";
+    #sha256 = "sha256-RVJsqIAfDYBf5MtefWgbDrQA33kQad4TndTxz8Akoc8=";
   };
 
   fb =  builtins.fetchurl {
     url = "https://github.com/newrelic/newrelic-fluent-bit-output/releases/download/v${fbVersion}/out_newrelic-linux-amd64-${fbVersion}.so";
     sha256 = "0chy0w7aajb5mhxa6k1nbsgd2670xvsxj96wvchachf751ibdwzs";
+    #sha256 = "0chy0w7aajb5mhxa6k1nbsgd2670xvsxj96wvchachf751ibdwzs";
   };
 
 in
 
 buildGoModule rec {
   pname = "infrastructure-agent";
-  version = "1.59.1-A";
+  version = "1.60.0";
 
   src = fetchzip {
-    url = "https://github.com/myaffiliates/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
-    sha256 = "sha256-Kf7C4vJXjoJB+B695DQA3XWtm8IuBby8sKqH7F68Oy8=";
+    url = "https://github.com/newrelic/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
+    sha256 = "0k494mwf4f56vqpfcidys508gbhx7dnbvxnjqp90nj2k4hhf9x7z";
+    #sha256 = "sha256-Kf7C4vJXjoJB+B695DQA3XWtm8IuBby8sKqH7F68Oy8=";
+    postFetch = ''
+      export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
+      cd $out
+      go mod edit github.com/newrelic/go-agent/v3 v3.36.0
+      go mod tidy
+      go mod vendor
+    '';  
   };
 
   vendorHash = "sha256-0WLL15CXRi/flp4EV3Qt0wO1VaUmAokzsChpiqjs+YQ=";
