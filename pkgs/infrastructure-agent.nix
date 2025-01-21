@@ -54,6 +54,7 @@ buildGoModule rec {
     url = "https://github.com/newrelic/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
     sha256 = "sha256-ZPwVUUuhGHDT5owIlihzwcWeb5UX9NWr+43VrAdVYkU=";
     postFetch = ''
+      export HOME=$PWD
       export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
       cd $out
       go get github.com/newrelic/go-agent@3.36.0
