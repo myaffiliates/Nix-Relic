@@ -52,8 +52,7 @@ buildGoModule rec {
 
   src = fetchzip {
     url = "https://github.com/newrelic/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
-    sha256 = "0k494mwf4f56vqpfcidys508gbhx7dnbvxnjqp90nj2k4hhf9x7z";
-    #sha256 = "sha256-Kf7C4vJXjoJB+B695DQA3XWtm8IuBby8sKqH7F68Oy8=";
+    sha256 = "sha256-ZPwVUUuhGHDT5owIlihzwcWeb5UX9NWr+43VrAdVYkU=";
     postFetch = ''
       export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
       cd $out
@@ -63,7 +62,7 @@ buildGoModule rec {
     '';  
   };
 
-  vendorHash = "sha256-0WLL15CXRi/flp4EV3Qt0wO1VaUmAokzsChpiqjs+YQ=";
+  vendorHash = null;
 
   ldflags = [
     "-s"
