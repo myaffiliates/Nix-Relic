@@ -36,8 +36,7 @@ let
   redis-sce = fetchzip {
     url = "https://github.com/newrelic/nri-redis/releases/download/v${redisVersion}/nri-redis_linux_${redisVersion}_amd64.tar.gz";
     stripRoot = false;
-    sha256 = "1x7ly8f890h9qw1czh8kaw129zn58531gcbd9md9085bizj9834l";
-    #sha256 = "sha256-RVJsqIAfDYBf5MtefWgbDrQA33kQad4TndTxz8Akoc8=";
+    sha256 = "sha256-RVJsqIAfDYBf5MtefWgbDrQA33kQad4TndTxz8Akoc8=";
   };
 
   fb =  builtins.fetchurl {
