@@ -54,7 +54,6 @@ buildGoModule rec {
     postFetch = ''
       export HOME=$PWD
       export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
-      cd $out
       go mod edit -replace github.com/newrelic/go-agent/v3=github.com/newrelic/go-agent/v3@v3.36.0
       go mod tidy
       go mod vendor
@@ -71,8 +70,6 @@ buildGoModule rec {
   
   env.CGO_ENABLED = "0";
   
-  sourceRoot = "${src.name}/";
-
   # preBuild = ''
   #   export GOPROXY="direct"
   #   export PATH="${pkgs.git}/bin:$PATH"
