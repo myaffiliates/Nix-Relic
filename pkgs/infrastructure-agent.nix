@@ -46,13 +46,12 @@ in
 
 buildGoModule rec {
   pname = "infrastructure-agent";
-  version = "1.60.0";
+  version = "1.60.1";
 
   src = fetchzip {
     url = "https://github.com/newrelic/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
     sha256 = "sha256-ZPwVUUuhGHDT5owIlihzwcWeb5UX9NWr+43VrAdVYkU=";
     postFetch = ''
-      export HOME=$PWD
       export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
       go mod edit -replace github.com/newrelic/go-agent/v3=github.com/newrelic/go-agent/v3@v3.36.0
       go mod tidy
