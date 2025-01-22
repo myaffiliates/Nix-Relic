@@ -97,8 +97,6 @@ buildGoModule rec {
     cp -r ${nginx-sce}/* $out/
     cp -r ${mysql-sce}/* $out/
     cp -r ${redis-sce}/* $out/
-    # cp -r ${php-sce}/agent/x64/newrelic-*.so $out/lib/
-    # cp -r ${php-sce}/daemon/newrelic-daemon.x64 $out/bin/daemon
     cp -r ${fb} $out/var/db/newrelic-infra/newrelic-integrations/logging/out_newrelic.so
   '';
 
