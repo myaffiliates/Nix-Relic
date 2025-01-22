@@ -23,7 +23,7 @@ in
       sha256 = "sha256-zZrvk+Sn16J4wj76OFH/wjpNiulRFaoSpp+zEFq53IY=";
     };
 
-  vendorHash = "sha256-B5EJDzZlUMt70ndCe7anEQQ1inU7NQQ7m05E/mpCmT4=";
+  vendorHash = "sha256-1oZIPqy0wfYpoAKVU5fGaItK2wkepjuE5Bew7IcBZPY=";
 
   ldflags = [
     "-w"
