@@ -71,7 +71,7 @@ buildGoModule rec {
   
   env.CGO_ENABLED = "0";
   
-  sourceRoot = "${src.name}/v3";
+  sourceRoot = "${src.name}/";
 
   # preBuild = ''
   #   export GOPROXY="direct"
