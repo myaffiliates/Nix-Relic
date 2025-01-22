@@ -11,7 +11,7 @@
 let 
   fbVersion = "2.1.0";
   nginxVersion = "3.5.1";
-  phpVersion = "11.5.0.18";
+  # phpVersion = "11.5.0.18";
   mysqlVersion = "1.11.1";
   redisVersion = "1.12.0";
 
@@ -51,7 +51,7 @@ buildGoModule rec {
 
   src = fetchzip {
     url = "https://github.com/newrelic/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
-    sha256 = "sha256-ZPwVUUuhGHDT5owIlihzwcWeb5UX9NWr+43VrAdVYkU=";
+    sha256 = "sha256-ZLRaNEERDu2oVcZJ3xUrqJZ7eIt1bB8vihdweXFMLTg=";
     # postFetch = ''
     #   export HOME=$PWD
     #   export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
