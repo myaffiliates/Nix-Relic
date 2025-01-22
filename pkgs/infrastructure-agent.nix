@@ -51,15 +51,16 @@ buildGoModule rec {
   src = fetchzip {
     url = "https://github.com/newrelic/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
     sha256 = "sha256-ZPwVUUuhGHDT5owIlihzwcWeb5UX9NWr+43VrAdVYkU=";
-    postFetch = ''
-      export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
-      go mod edit -replace github.com/newrelic/go-agent/v3=github.com/newrelic/go-agent/v3@v3.36.0
-      go mod tidy
-      go mod vendor
-    '';  
+    # postFetch = ''
+    #   export HOME=$PWD
+    #   export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
+    #   go mod edit -replace github.com/newrelic/go-agent/v3=github.com/newrelic/go-agent/v3@v3.36.0
+    #   go mod tidy
+    #   go mod vendor
+    # '';  
   };
 
-  vendorHash = null;
+  vendorHash = lib.fakeSha256;
 
   ldflags = [
     "-s"
@@ -69,18 +70,14 @@ buildGoModule rec {
   
   env.CGO_ENABLED = "0";
   
-  # preBuild = ''
-  #   export GOPROXY="direct"
-  #   export PATH="${pkgs.git}/bin:$PATH"
-
-  #   substituteInPlace go.sum \
-  #     --replace-quiet 'v3.27.0 h1:Z3XB49d8FKjRcGzCyViCO9itBxiLPSpwjY1HlMvgamQ=' 'v3.35.1 h1:N43qBNDILmnwLDCSfnE1yy6adyoVEU95nAOtdUgG4vA=' \
-  #     --replace-quiet 'v3.27.0/go.mod h1:TUzePinDc0BMH4Sui66rl4SBe6yOKJ5X/bRJekwuAtM=' 'v3.35.1/go.mod h1:GNTda53CohAhkgsc7/gqSsJhDZjj8vaky5u+vKz7wqM='
-
-  #   substituteInPlace go.mod \
-  #     --replace-quiet 'go-agent/v3 v3.27.0' 'go-agent/v3 v3.35.1'
-  #   go mod vendor
-  # '';
+  preBuild = ''
+    export HOME=$PWD
+    export GOPROXY="direct"
+    export PATH="${pkgs.git}/bin:${pkgs.git}/bin:$PATH"
+    go mod edit -replace github.com/newrelic/go-agent/v3=github.com/newrelic/go-agent/v3@v3.36.0
+    go mod tidy
+    go mod vendor
+  '';
 
   subPackages = [
     "cmd/newrelic-infra"
