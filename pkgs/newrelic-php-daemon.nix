@@ -39,9 +39,9 @@ in
 
   postInstall = ''
     mkdir -p $out/lib
-    cp -r ${ext-sce}/agent/x64/newrelic-20220829.so $out/lib/ newrelic-php82.so
-    cp -r ${ext-sce}/agent/x64/newrelic-20230831.so $out/lib/ newrelic-php83.so
-    cp -r ${ext-sce}/agent/x64/newrelic-20240924.so $out/lib/ newrelic-php84.so
+    cp -r ${ext-sce}/agent/x64/newrelic-20220829.so $out/lib/newrelic-php82.so
+    cp -r ${ext-sce}/agent/x64/newrelic-20230831.so $out/lib/newrelic-php83.so
+    cp -r ${ext-sce}/agent/x64/newrelic-20240924.so $out/lib/newrelic-php84.so
   '';
 
   meta = {
