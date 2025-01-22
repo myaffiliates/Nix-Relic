@@ -6,6 +6,7 @@
   fetchFromGitHub,
   fetchzip,
   pkg-config,
+  ...
 }: 
 let 
   fbVersion = "2.1.0";
@@ -26,10 +27,10 @@ let
     sha256 = "sha256-2HONjnH0BSxu13gXsvoJoTF+aMt20r61CS4lDCAknx8=";
   };
 
-  php-sce =  fetchzip {
-    url = "https://download.newrelic.com/php_agent/archive/${phpVersion}/newrelic-php5-${phpVersion}-linux.tar.gz";
-    sha256 = "sha256-ZPwVUUuhGHDT5owIlihzwcWeb5UX9NWr+43VrAdVYkU=";
-  };
+  # php-sce = fetchzip {
+  #   url = "https://download.newrelic.com/php_agent/archive/${phpVersion}/newrelic-php5-${phpVersion}-linux.tar.gz";
+  #   sha256 = "sha256-ZPwVUUuhGHDT5owIlihzwcWeb5UX9NWr+43VrAdVYkU=";
+  # };
 
   redis-sce = fetchzip {
     url = "https://github.com/newrelic/nri-redis/releases/download/v${redisVersion}/nri-redis_linux_${redisVersion}_amd64.tar.gz";
@@ -70,14 +71,14 @@ buildGoModule rec {
   
   env.CGO_ENABLED = "0";
   
-  preBuild = ''
-    export HOME=$PWD
-    export GOPROXY="direct"
-    export PATH="${pkgs.git}/bin:${pkgs.git}/bin:$PATH"
-    go mod edit -replace github.com/newrelic/go-agent/v3=github.com/newrelic/go-agent/v3@v3.36.0
-    go mod tidy
-    go mod vendor
-  '';
+  # preBuild = ''
+  #   export HOME=$PWD
+  #   export GOPROXY="direct"
+  #   export PATH="${pkgs.git}/bin:${pkgs.git}/bin:$PATH"
+  #   go mod edit -replace github.com/newrelic/go-agent/v3=github.com/newrelic/go-agent/v3@v3.36.0
+  #   go mod tidy
+  #   go mod vendor
+  # '';
 
   subPackages = [
     "cmd/newrelic-infra"
@@ -96,8 +97,8 @@ buildGoModule rec {
     cp -r ${nginx-sce}/* $out/
     cp -r ${mysql-sce}/* $out/
     cp -r ${redis-sce}/* $out/
-    cp -r ${php-sce}/agent/x64/newrelic-*.so $out/lib/
-    cp -r ${php-sce}/daemon/newrelic-daemon.x64 $out/bin/daemon
+    # cp -r ${php-sce}/agent/x64/newrelic-*.so $out/lib/
+    # cp -r ${php-sce}/daemon/newrelic-daemon.x64 $out/bin/daemon
     cp -r ${fb} $out/var/db/newrelic-infra/newrelic-integrations/logging/out_newrelic.so
   '';
 
