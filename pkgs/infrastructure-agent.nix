@@ -28,8 +28,7 @@ let
 
   php-sce =  fetchzip {
     url = "https://download.newrelic.com/php_agent/archive/${phpVersion}/newrelic-php5-${phpVersion}-linux.tar.gz";
-    sha256 = "1vxy3bk9pm57f9c4ipldz26104igj4fxammbazd23mwyym3prbjl";
-    #sha256 = "sha256-ZPwVUUuhGHDT5owIlihzwcWeb5UX9NWr+43VrAdVYkU=";
+    sha256 = "sha256-ZPwVUUuhGHDT5owIlihzwcWeb5UX9NWr+43VrAdVYkU=";
   };
 
   redis-sce = fetchzip {
@@ -41,7 +40,6 @@ let
   fb =  builtins.fetchurl {
     url = "https://github.com/newrelic/newrelic-fluent-bit-output/releases/download/v${fbVersion}/out_newrelic-linux-amd64-${fbVersion}.so";
     sha256 = "0chy0w7aajb5mhxa6k1nbsgd2670xvsxj96wvchachf751ibdwzs";
-    #sha256 = "0chy0w7aajb5mhxa6k1nbsgd2670xvsxj96wvchachf751ibdwzs";
   };
 
 in
