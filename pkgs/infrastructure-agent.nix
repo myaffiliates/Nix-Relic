@@ -57,7 +57,7 @@ buildGoModule rec {
       export HOME=$PWD
       export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
       cd $out
-      go get github.com/newrelic/go-agent@3.36.0
+      go get github.com/newrelic/go-agent/v3@3.36.0
       go mod tidy
       go mod vendor
     '';  
