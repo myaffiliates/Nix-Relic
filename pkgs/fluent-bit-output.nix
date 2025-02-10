@@ -2,6 +2,7 @@
   lib,
   pkgs,
   stdenv,
+  system,
   buildGoModule,
   fetchFromGitHub,
   fetchzip,
