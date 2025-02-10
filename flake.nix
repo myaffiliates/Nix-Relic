@@ -32,7 +32,6 @@
     in {
       
       packages = import ./pkgs {
-        inherit system;
         inherit pkgs;
       };
 
