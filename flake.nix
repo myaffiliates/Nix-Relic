@@ -28,9 +28,9 @@
     # in
     # {
     flake-utils.lib.eachDefaultSystem (system: 
-    let pkgs = nixpkgs.legacyPackages.${system}; in
-    {
-      packages = import ./pkgs;#  { pkgs = nixpkgs.legacyPackages.${system}; };
+    let packages = import ./pkgs  { pkgs = nixpkgs.legacyPackages.${system}; };
+    in {
+      
     
       nixosModules = import ./modules/nixos;
 
