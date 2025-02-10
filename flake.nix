@@ -9,7 +9,7 @@
   };
 
   outputs =
-    { self, nixpkgs, flake-utils, ... }@inputs:
+    { self, nixpkgs, flake-utils, ... }:
 
     # let
     #   # # Supported systems for flake packages, shell, etc.
@@ -41,8 +41,5 @@
       # darwinModules = import ./modules/darwin;
 
       overlays = import ./overlays { inherit pkgs; };
-
-      system = builtins.currentSystem;
-           
     });
 }
