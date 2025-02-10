@@ -1,8 +1,8 @@
 { 
   lib,
-  pkgs,
+  system ? builtins.currentSystem,  
+  pkgs ? import <nixpkgs> { inherit system; },
   stdenv,
-  system,
   buildGoModule,
   fetchFromGitHub,
   fetchzip,
