@@ -40,8 +40,8 @@ in
   buildInputs = [ stdenv pkgs.pcre pkgs.protobufc pkgs.cmake pkgs.gnumake pkgs.autoconf pkgs.gcc go-version ];
   env.HOME = "$(pwd)";
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
-  env.GOOS = linux;
-  env.GOARCH = amd64;
+  env.GOOS = "linux";
+  env.GOARCH = "amd64";
 
   doCheck = false;
 
