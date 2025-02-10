@@ -38,12 +38,21 @@ in
   ];
 
   buildInputs = [ stdenv pkgs.pcre pkgs.protobufc pkgs.cmake pkgs.gnumake pkgs.autoconf pkgs.gcc go-version ];
-  env.HOME = "$(pwd)";
-  env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
-  env.GOOS = "linux";
-  env.GOARCH = "amd64";
+  # env.HOME = "$(pwd)";
+  # env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
+  # env.GOOS = "linux";
+  # env.GOARCH = "amd64";
+
+  buildPhase = ''
+    export GOPROXY="direct"
+    export PATH="${pkgs.git}/bin:${go-version}/bin:$PATH"
+    export HOME=$(pwd)
+    cd $src
+    make linux/amd64
+  '';
 
   doCheck = false;
+
 
   # postInstall = ''
   #   mkdir -p $out
