@@ -25,7 +25,6 @@ in
   ldflags = [
     "-w"
     "-s"
-    "-X main.version=${version}"
   ];
 
   buildInputs = [ stdenv pkgs.pcre pkgs.protobufc pkgs.cmake pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.go ];
