@@ -51,6 +51,7 @@ in
     # export PATH="${pkgs.git}/bin:${go-version}/bin:$PATH"
     # export HOME=$(pwd)
     cd $src
+    chmod -R 777 .
     make linux/amd64
   '';
 
