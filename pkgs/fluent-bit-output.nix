@@ -1,6 +1,6 @@
 { 
   lib,
-  # pkgs,
+  pkgs,
   stdenv,
   buildGoModule,
   fetchFromGitHub,
@@ -9,7 +9,6 @@
 }:
 let
   version = "2.1.0";
-  pkgs = import nixpkgs { inherit system; };
 
   oldGo120 = import (builtins.fetchTarball {
       url = "https://github.com/NixOS/nixpkgs/archive/0a25e2c87e784bf7e06e7833ec0e06d34836959a.tar.gz";
@@ -23,7 +22,7 @@ let
 in
   buildGoModule rec {
     pname = "fluent-bit-output";
-    inherit version go-version pkgs;
+    inherit version go-version pkgs system;
 
     src = fetchzip {
       url = "https://github.com/newrelic/newrelic-fluent-bit-output/archive/refs/tags/v${version}.tar.gz";
