@@ -2,7 +2,6 @@
   lib,
   pkgs,
   stdenv,
-  system,
   buildGoModule,
   fetchFromGitHub,
   fetchzip,
@@ -10,6 +9,8 @@
 }:
 let
   version = "2.1.0";
+ 
+  system = "x86_64-linux";
 
   oldGo120 = import (builtins.fetchTarball {
       url = "https://github.com/NixOS/nixpkgs/archive/0a25e2c87e784bf7e06e7833ec0e06d34836959a.tar.gz";
