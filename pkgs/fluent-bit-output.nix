@@ -20,7 +20,7 @@ in
       sha256 = "sha256-01SyjlHlt/yd1r3QU0J2siMHIX+30xoMeYZrDi8iQ90=";
     };
 
-  vendorHash = lib.fakeHash;
+  vendorHash = null;
 
   ldflags = [
     "-w"
