@@ -27,7 +27,14 @@ in
     src = fetchzip {
       url = "https://github.com/newrelic/newrelic-fluent-bit-output/archive/refs/tags/v${version}.tar.gz";
       sha256 = "sha256-01SyjlHlt/yd1r3QU0J2siMHIX+30xoMeYZrDi8iQ90=";
+      postFetch = ''
+        cd $out
+        chmod -R 777 .
+        #go mod tidy
+        #go mod vendor
+      '';
     };
+
 
   vendorHash = null;
 
@@ -42,16 +49,11 @@ in
 
   buildInputs = [ stdenv pkgs.pcre pkgs.protobufc pkgs.cmake pkgs.gnumake pkgs.autoconf pkgs.gcc go-version ];
   env.HOME = "$(pwd)";
-  env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
+  env.CGO_ENABLED = "1";
   # env.GOOS = "linux";
   # env.GOARCH = "amd64";
 
   buildPhase = ''
-    # export GOPROXY="direct"
-    # export PATH="${pkgs.git}/bin:${go-version}/bin:$PATH"
-    # export HOME=$(pwd)
-    cd $src
-    chmod -R 777 .
     make linux/amd64
   '';
 
