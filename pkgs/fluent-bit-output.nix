@@ -8,6 +8,7 @@
   fetchzip,
   ... 
 }:
+with pkgs;
 let
   version = "2.1.0";
  
