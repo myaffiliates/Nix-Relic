@@ -31,13 +31,14 @@
     let pkgs = nixpkgs.legacyPackages.${system};
     in {
       
-      packages = import ./pkgs {
-        inherit pkgs;
-      };
+      packages = import ./pkgs { inherit inputs; };
+      #  {
+      #   inherit pkgs;
+      # };
 
-      nixosModules = import ./modules/nixos;
+      nixosModules = import ./modules/nixos { inherit inputs; };
 
-      darwinModules = import ./modules/darwin;
+      # darwinModules = import ./modules/darwin;
 
       overlays = import ./overlays { inherit inputs; };
 
