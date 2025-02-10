@@ -28,10 +28,14 @@
     # in
     # {
     flake-utils.lib.eachDefaultSystem (system: 
-    let packages = import ./pkgs  { pkgs = nixpkgs.legacyPackages.${system}; };
+    let pkgs = nixpkgs.legacyPackages.${system};
     in {
       
-    
+      packages = import ./pkgs {
+        inherit system;
+        inherit pkgs;
+      };
+
       nixosModules = import ./modules/nixos;
 
       darwinModules = import ./modules/darwin;
