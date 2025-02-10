@@ -28,22 +28,18 @@
     # in
     # {
     flake-utils.lib.eachDefaultSystem (system: 
-    let 
-      packages = import ./pkgs  { pkgs = nixpkgs.legacyPackages.${system}; };
-
+    let pkgs = nixpkgs.legacyPackages.${system}; in
+    {
+      packages = import ./pkgs;#  { pkgs = nixpkgs.legacyPackages.${system}; };
+    
       nixosModules = import ./modules/nixos;
 
       darwinModules = import ./modules/darwin;
 
       overlays = import ./overlays { inherit inputs; };
 
-      # pkgs = nixpkgs.legacyPackages.${system};     
-    in
-        {
-          system = builtins.currentSystem;
-        }
-    );
-      
-      # packages = (system: import ./pkgs { pkgs = nixpkgs.legacyPackages.${system}; });
-}
+      system = builtins.currentSystem;
+           
+    });
+  
 
