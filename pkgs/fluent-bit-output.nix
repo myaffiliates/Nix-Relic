@@ -2,7 +2,6 @@
   lib,
   pkgs,
   stdenv,
-  system,
   buildGoModule,
   fetchFromGitHub,
   fetchzip,
@@ -11,6 +10,8 @@
 let
   version = "2.1.0";
   
+  system = builtins.currentSystem;
+
   oldGo120 = import (builtins.fetchTarball {
       url = "https://github.com/NixOS/nixpkgs/archive/0a25e2c87e784bf7e06e7833ec0e06d34836959a.tar.gz";
       sha256 = "sha256:0gp3rincm83m2b26dbyvr5dh4zk5i0cbva3lzbzd38k1c6mfyyws";
@@ -22,7 +23,7 @@ let
 in
   buildGoModule rec {
     pname = "fluent-bit-output";
-    inherit version go-version;
+    inherit version go-version system;
 
     src = fetchzip {
       url = "https://github.com/newrelic/newrelic-fluent-bit-output/archive/refs/tags/v${version}.tar.gz";
