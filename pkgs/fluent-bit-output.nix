@@ -36,9 +36,9 @@ in
     "-s"
   ];
 
-  subPackages = [
-    "out_newrelic"
-  ];
+  # subPackages = [
+  #   "out_newrelic"
+  # ];
 
   buildInputs = [ stdenv pkgs.pcre pkgs.protobufc pkgs.cmake pkgs.gnumake pkgs.autoconf pkgs.gcc go-version ];
   env.HOME = "$(pwd)";
@@ -46,13 +46,13 @@ in
   # env.GOOS = "linux";
   # env.GOARCH = "amd64";
 
-  # buildPhase = ''
-  #   export GOPROXY="direct"
-  #   export PATH="${pkgs.git}/bin:${go-version}/bin:$PATH"
-  #   export HOME=$(pwd)
-  #   cd $src
-  #   make linux/amd64
-  # '';
+  buildPhase = ''
+    # export GOPROXY="direct"
+    # export PATH="${pkgs.git}/bin:${go-version}/bin:$PATH"
+    # export HOME=$(pwd)
+    cd $src
+    make linux/amd64
+  '';
 
   doCheck = false;
 
