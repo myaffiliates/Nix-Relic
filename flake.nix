@@ -42,7 +42,7 @@
         {
           system = builtins.currentSystem;
         }
-    )
+    );
       
       # packages = (system: import ./pkgs { pkgs = nixpkgs.legacyPackages.${system}; });
 }
