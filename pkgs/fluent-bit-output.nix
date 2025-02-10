@@ -9,11 +9,18 @@
 }:
 let
   version = "2.1.0";
+  
+  oldGo120 = import (builtins.fetchTarball {
+      url = "https://github.com/NixOS/nixpkgs/archive/0a25e2c87e784bf7e06e7833ec0e06d34836959a.tar.gz";
+    }) {};
+
+  go-version = oldGo120.go;
+
 
 in
   buildGoModule rec {
     pname = "fluent-bit-output";
-    inherit version;
+    inherit version go-version;
 
     src = fetchzip {
       url = "https://github.com/newrelic/newrelic-fluent-bit-output/archive/refs/tags/v${version}.tar.gz";
@@ -27,7 +34,7 @@ in
     "-s"
   ];
 
-  buildInputs = [ stdenv pkgs.pcre pkgs.protobufc pkgs.cmake pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.go ];
+  buildInputs = [ stdenv pkgs.pcre pkgs.protobufc pkgs.cmake pkgs.gnumake pkgs.autoconf pkgs.gcc go-version ];
   env.HOME = "$(pwd)";
   env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
 
