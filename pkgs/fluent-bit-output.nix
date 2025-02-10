@@ -1,6 +1,6 @@
 { 
   lib,
-  pkgs,
+  # pkgs,
   stdenv,
   buildGoModule,
   fetchFromGitHub,
@@ -9,8 +9,7 @@
 }:
 let
   version = "2.1.0";
-  
-  system = builtins.currentSystem;
+  pkgs = import nixpkgs { inherit system; };
 
   oldGo120 = import (builtins.fetchTarball {
       url = "https://github.com/NixOS/nixpkgs/archive/0a25e2c87e784bf7e06e7833ec0e06d34836959a.tar.gz";
@@ -19,6 +18,7 @@ let
 
   go-version = oldGo120.go;
 
+  
 
 in
   buildGoModule rec {
