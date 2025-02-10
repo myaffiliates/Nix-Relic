@@ -22,7 +22,7 @@ let
 in
   buildGoModule rec {
     pname = "fluent-bit-output";
-    inherit version go-version pkgs system;
+    inherit version go-version system;
 
     src = fetchzip {
       url = "https://github.com/newrelic/newrelic-fluent-bit-output/archive/refs/tags/v${version}.tar.gz";
