@@ -29,7 +29,7 @@
     # {
     flake-utils.lib.eachDefaultSystem (system: 
     let 
-      packages = import ./pkgs  { pkgs = nixpkgs.legacyPackages.${system}; });
+      packages = import ./pkgs  { pkgs = nixpkgs.legacyPackages.${system}; };
 
       nixosModules = import ./modules/nixos;
 
@@ -42,7 +42,8 @@
         {
           system = builtins.currentSystem;
         }
+    )
       
       # packages = (system: import ./pkgs { pkgs = nixpkgs.legacyPackages.${system}; });
-
 }
+
