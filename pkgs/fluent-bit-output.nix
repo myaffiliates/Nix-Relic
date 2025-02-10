@@ -34,10 +34,10 @@ in
 
   doCheck = false;
 
-  postInstall = ''
-    mkdir -p $out
-    cp -r ${build}/* $out/
-  '';
+  # postInstall = ''
+  #   mkdir -p $out
+  #   cp -r ${build}/* $out/
+  # '';
 
   meta = {
     description = "New Relic PHP Agent Daemon";
