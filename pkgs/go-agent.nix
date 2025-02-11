@@ -110,7 +110,7 @@ in
       chmod -R 777 .
       go mod tidy
       go mod vendor
-      cd $out/v3/integrations/logcontext-v2/nrwriter
+      cd $out/v3/integrations/logcontext-v2/nrlogrus
       cp ${maingo} main.go
       go mod tidy
       go mod vendor
@@ -119,13 +119,13 @@ in
   
   vendorHash = null;
 
-  # modRoot = "./v3";
+  modRoot = "./v3";
 
   buildInputs = [ stdenv pkgs.go pkgs.git ];
 
   subPackages = [
-    "v3/newrelic"
-    "v3/integrations/logcontext-v2/nrlogrus"
+    "newrelic"
+    "integrations/logcontext-v2/nrlogrus"
   ];
 
   installPhase = ''
