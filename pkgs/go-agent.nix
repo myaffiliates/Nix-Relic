@@ -121,7 +121,6 @@ in
 
   subPackages = [
     "newrelic"
-    "integrations/logcontext-v2/nrlogrus"
   ];
 
   installPhase = ''
