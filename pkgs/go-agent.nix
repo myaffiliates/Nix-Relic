@@ -102,7 +102,7 @@ in
     owner = "newrelic";
     repo = "go-agent";
     rev =  "v${version}";
-    hash = "sha256-om2HGQU+PYOwKWfaWzdZSTq8nll6gV6kxT8TLd8LdUM=";
+    hash = "sha256-KRB454JYAzJUjxxQIlsh1fGUUwUHbTOg8lbY5j07cFY=";
     postFetch = ''
       export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
       export HOME=$(pwd)
