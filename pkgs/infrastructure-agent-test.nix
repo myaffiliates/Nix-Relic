@@ -9,15 +9,18 @@
   pcre,
 }:
 let
-  version = "1.59.2";
+  version = "1.60.1";
  
   fbVersion = "2.1.0";
-  nagVersion = "2.9.7";
-  nginxVersion = "3.5.0";
+  mysqlVersion = "1.13.0";
+  nginxVersion = "3.5.2";
   phpVersion = "11.5.0.18";
-  flexVersion = "1.16.3";
-  mysqlVersion = "1.11.1";
-  redisVersion = "1.12.0";
+  redisVersion = "1.12.1";
+
+  fb =  builtins.fetchurl {
+    url = "https://github.com/newrelic/newrelic-fluent-bit-output/releases/download/v${fbVersion}/out_newrelic-linux-amd64-${fbVersion}.so";
+    sha256 = "0chy0w7aajb5mhxa6k1nbsgd2670xvsxj96wvchachf751ibdwzs";
+  }; 
 
   mysql-sce = fetchzip {
     url = "https://github.com/newrelic/nri-mysql/releases/download/v${mysqlVersion}/nri-mysql_linux_${mysqlVersion}_amd64.tar.gz";
@@ -37,23 +40,11 @@ let
 
   };
 
-  flex-sce = fetchzip {
-    url = "https://github.com/newrelic/nri-flex/releases/download/v${flexVersion}/nri-flex_linux_${flexVersion}_amd64.tar.gz";
-    stripRoot = false;
-    sha256 = "sha256-GMB86hg6B3WB1C6x5JzdO7Uo0lf0iyBXNqqfE5sXP+Q=";
-  };
-
   redis-sce = fetchzip {
     url = "https://github.com/newrelic/nri-redis/releases/download/v${redisVersion}/nri-redis_linux_${redisVersion}_amd64.tar.gz";
     stripRoot = false;
     sha256 = "sha256-RVJsqIAfDYBf5MtefWgbDrQA33kQad4TndTxz8Akoc8=";
   };
-
-  fb =  builtins.fetchurl {
-    url = "https://github.com/newrelic/newrelic-fluent-bit-output/releases/download/v${fbVersion}/out_newrelic-linux-amd64-${fbVersion}.so";
-    sha256 = "0chy0w7aajb5mhxa6k1nbsgd2670xvsxj96wvchachf751ibdwzs";
-  };
-
 
 in
 stdenv.mkDerivation rec {
@@ -67,18 +58,9 @@ stdenv.mkDerivation rec {
   #   rev = version;
   #   hash = "sha256-IfPiexh6vPOFkMz1OqNouozKJoKXeQMYYhaPg/tU0sg=";
   
-   src = fetchzip {
+  src = fetchzip {
     url = "https://github.com/myaffiliates/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
     sha256 = "sha256-Kf7C4vJXjoJB+B695DQA3XWtm8IuBby8sKqH7F68Oy8=";
-    postFetch = ''
-      # export HOME=$(pwd)
-      # export GOPROXY="direct"
-      export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
-      
-      cd $out
-      go get -u
-      go mod tidy
-    '';    
   };
 
   # vendorHash = "sha256-1acOfcjIvFG9pbkSktFQ4AypymvSphHZ5gvkvmkIkU8=";
@@ -96,10 +78,6 @@ stdenv.mkDerivation rec {
   ];
 
   buildPhase = ''
-    export GOPROXY="direct"
-    export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
-    export HOME=$(pwd)
-    cd $src
     make compile
     make dist
   '';
