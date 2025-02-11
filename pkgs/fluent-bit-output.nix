@@ -26,7 +26,7 @@ in
 
     src = fetchzip {
       url = "https://github.com/newrelic/newrelic-fluent-bit-output/archive/refs/tags/v${version}.tar.gz";
-      sha256 = "sha256-01SyjlHlt/yd1r3QU0J2siMHIX+30xoMeYZrDi8iQ90=";
+      sha256 = "sha256-CZD/+vVWwZoPuhmh0FY9fzzhd9M3xZKTEQcozu4Hpe0=";
       postFetch = ''
         cd $out
         chmod -R 777 .
