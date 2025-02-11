@@ -119,13 +119,13 @@ in
   
   vendorHash = null;
 
-  modRoot = "./v3";
+  # modRoot = "./v3";
 
   buildInputs = [ stdenv pkgs.go pkgs.git ];
 
   subPackages = [
-    "newrelic"
-    "integrations/logcontext-v2/nrlogrus"
+    "v3/newrelic"
+    "v3/integrations/logcontext-v2/nrlogrus"
   ];
 
   installPhase = ''
