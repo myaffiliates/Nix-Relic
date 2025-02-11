@@ -25,7 +25,7 @@ let
   mysql-sce = fetchzip {
     url = "https://github.com/newrelic/nri-mysql/releases/download/v${mysqlVersion}/nri-mysql_linux_${mysqlVersion}_amd64.tar.gz";
     stripRoot = false;
-    sha256 = "sha256-J4xl75ZkDkvnY87RQl8973CL1FASWqp3qilU/9xiamU=";
+    sha256 = "sha256-xfGCsCgwGX9uLulqOWDIH5O/jqtEg2SNzNRfzNbRIbo=";
   };
 
   nginx-sce = fetchzip {
