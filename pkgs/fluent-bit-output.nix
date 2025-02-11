@@ -43,11 +43,8 @@ in
     "-s"
   ];
 
-  buildInputs = [ stdenv pkgs.pcre pkgs.protobufc pkgs.cmake pkgs.gnumake pkgs.autoconf pkgs.gcc go-version ];
+  buildInputs = [ stdenv pkgs.pcre pkgs.protobufc pkgs.cmake pkgs.gnumake pkgs.autoconf pkgs.gcc pkgs.go ];
   env.HOME = "$(pwd)";
-  env.CGO_ENABLED = "1";
-  # env.GOOS = "linux";
-  # env.GOARCH = "amd64";
 
   buildPhase = ''
     make linux/amd64
