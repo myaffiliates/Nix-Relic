@@ -110,6 +110,10 @@ in
       chmod -R 777 .
       go mod tidy
       go mod vendor
+      cd $out/v3/integrations/logcontext-v2/nrlogrus
+      cp ${maingo} main.go
+      go mod tidy
+      go mod vendor
     '';
   };
   
@@ -124,9 +128,10 @@ in
   ];
 
   installPhase = ''
-    mkdir -p $out/logging
+    mkdir -p $out
     cp -r /build/* $out
-    cp ${maingo} $out/logging/main.go
+    cp -r $src/v3/integrations/logcontext-v2/nrlogrus $out
+    
   '';
 
   env.CGO_ENABLED = "0";

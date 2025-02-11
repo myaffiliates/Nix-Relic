@@ -37,7 +37,6 @@ let
   php-sce =  fetchzip {
     url = "https://download.newrelic.com/php_agent/archive/${phpVersion}/newrelic-php5-${phpVersion}-linux.tar.gz";
     sha256 = "sha256-ZPwVUUuhGHDT5owIlihzwcWeb5UX9NWr+43VrAdVYkU=";
-
   };
 
   redis-sce = fetchzip {
@@ -78,8 +77,15 @@ stdenv.mkDerivation rec {
   ];
 
   buildPhase = ''
-    make compile
-    make dist
+    # make compile
+    # make dist
+    release/deps release/clean
+    generate-goreleaser-amd64
+    release/get-integrations-amd64
+release/get-fluentbit-linux-amd64
+    make release/deps
+    make release/get-fluentbit-linux-amd64
+    make dist-for-os GOOS=linux GOARCH=amd64
   '';
 
   modPostBuild = ''
