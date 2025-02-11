@@ -94,7 +94,6 @@ stdenv.mkDerivation rec {
     cp -r ${mysql-sce}/* $out/
     cp -r ${redis-sce}/* $out/
     cp -r ${php-sce}/agent/x64/newrelic-20220829.so $out/lib/newrelic.so
-    cp -r ${flex-sce}/nri-flex $out/var/db/newrelic-infra/newrelic-integrations/bin
     cp -r ${fb} $out/var/db/newrelic-infra/newrelic-integrations/logging/out_newrelic.so
   '';
 
