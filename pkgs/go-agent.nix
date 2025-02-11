@@ -124,6 +124,7 @@ in
   buildInputs = [ stdenv pkgs.go pkgs.git ];
 
   subPackages = [
+    "v3"
     "v3/newrelic"
     "v3/integrations/logcontext-v2/nrlogrus"
   ];
