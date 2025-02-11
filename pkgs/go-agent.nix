@@ -25,7 +25,7 @@
 # stdenv.mkDerivation rec {
     pname = "go-agent";
     version = "3.36.0";
-    inherit sum;
+    # inherit sum;
 
   src = fetchFromGitHub {
     owner = "newrelic";
@@ -56,12 +56,12 @@
     "integrations/logcontext/nrlogrus"
   ];
 
-  # installPhase = ''
-  #   mkdir -p $out
-  #   cp -r /build/* $out
-  # '';
+  installPhase = ''
+    mkdir -p $out
+    cp -r /build/* $out
+  '';
 
-  env.CGO_ENABLED = if stdenv.hostPlatform.isDarwin then "1" else "0";
+  env.CGO_ENABLED = "0";
   env.HOME = "$(pwd)";
   env.GOPROXY = "direct";
 

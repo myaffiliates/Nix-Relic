@@ -43,10 +43,6 @@ in
     "-s"
   ];
 
-  # subPackages = [
-  #   "out_newrelic"
-  # ];
-
   buildInputs = [ stdenv pkgs.pcre pkgs.protobufc pkgs.cmake pkgs.gnumake pkgs.autoconf pkgs.gcc go-version ];
   env.HOME = "$(pwd)";
   env.CGO_ENABLED = "1";
@@ -60,10 +56,10 @@ in
   doCheck = false;
 
 
-  # postInstall = ''
-  #   mkdir -p $out
-  #   cp -r ${build}/* $out/
-  # '';
+  postInstall = ''
+    mkdir -p $out
+    cp -r ${build}/* $out/
+  '';
 
   meta = {
     description = "New Relic PHP Agent Daemon";
