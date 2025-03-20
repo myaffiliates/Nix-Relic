@@ -9,12 +9,12 @@
   ...
 }:
 let
-  version = "11.4.0.17";
+  version = "11.7.0.21";
  
   phpSource = pkgs.fetchFromGitHub {
     owner = "php";
     repo = "php-src";
-    rev = "php-8.2.27";
+    rev = "php-8.2.28";
     sha256 = "sha256-UbS+4kBrc3ohSHyl0VyjeeS72ZDjLh8PIIylodZFYOE=";
   };
 in

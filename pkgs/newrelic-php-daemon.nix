@@ -7,11 +7,11 @@
   ... 
 }:
 let
-  version = "11.5.0.18";
+  version = "11.7.0.21";
 
   ext-sce = fetchzip {
     url = "https://download.newrelic.com/php_agent/archive/${version}/newrelic-php5-${version}-linux.tar.gz";
-    sha256 = "sha256-ZPwVUUuhGHDT5owIlihzwcWeb5UX9NWr+43VrAdVYkU=";
+    sha256 = "sha256-LGkX9P98udbiCnjiBpW0DXQtyQaRMuWTtoSuHgUYpFA=";
   };
 in
   buildGoModule rec {
@@ -20,10 +20,10 @@ in
 
     src = fetchzip {
       url = "https://github.com/newrelic/newrelic-php-agent/archive/refs/tags/v${version}.tar.gz";
-      sha256 = "sha256-zZrvk+Sn16J4wj76OFH/wjpNiulRFaoSpp+zEFq53IY=";
+      sha256 = "sha256-h5R2b8L1NT0KF4ZZXWb0d25ukARLRZ4KYSVN7weVUjw=";
     };
 
-  vendorHash = "sha256-1oZIPqy0wfYpoAKVU5fGaItK2wkepjuE5Bew7IcBZPY=";
+  vendorHash = "sha256-+PW0tu5iwudsqPR9tByOOLozT3WFXNgSlPWDY0e8e/U=";
 
   ldflags = [
     "-w"

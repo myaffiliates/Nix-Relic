@@ -7,11 +7,11 @@
 }:
   buildGoModule rec {
     pname = "newrelic";
-    version = "0.97.3";
+    version = "0.97.7";
 
     src = fetchzip {
       url = "https://github.com/newrelic/newrelic-cli/archive/refs/tags/v${version}.tar.gz";
-      sha256 = "sha256-PUtqxOOkxnhkMr+XNGVe7CB4ybnZSTHkg/O3tcQ0TlM=";
+      sha256 = "sha256-7NlSbAzh8j7Y61jB84Mg1EDPdg6xSZrzywfaaWB/grI=";
     };
 
   vendorHash = "sha256-Uag2fN4M4vRxSEa3nRyvou88bBGrGCNIS3ofxXL+EMY=";

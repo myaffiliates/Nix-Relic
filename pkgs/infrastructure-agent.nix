@@ -9,45 +9,39 @@
   ...
 }: 
 let 
-  fbVersion = "2.1.0";
-  nginxVersion = "3.5.1";
-  # phpVersion = "11.5.0.18";
-  mysqlVersion = "1.11.1";
-  redisVersion = "1.12.0";
+  fbVersion = "2.3.0";
+  nginxVersion = "3.6.0";
+  mysqlVersion = "1.14.0";
+  redisVersion = "1.12.1";
 
   mysql-sce = fetchzip {
     url = "https://github.com/newrelic/nri-mysql/releases/download/v${mysqlVersion}/nri-mysql_linux_${mysqlVersion}_amd64.tar.gz";
     stripRoot = false;
-    sha256 = "sha256-J4xl75ZkDkvnY87RQl8973CL1FASWqp3qilU/9xiamU=";
+    sha256 = "sha256-07G+sXPvF966ylhiXlTNpdYxMRApD8FANYQASzSqUS0=";
   };
 
   nginx-sce = fetchzip {
     url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/nri-nginx_linux_${nginxVersion}_amd64.tar.gz";
     stripRoot = false;
-    sha256 = "sha256-2HONjnH0BSxu13gXsvoJoTF+aMt20r61CS4lDCAknx8=";
+    sha256 = "sha256-GBdLGJDq3+opjg146dz4YPXmiBpy4tLblJ8+QnC6x00=";
   };
-
-  # php-sce = fetchzip {
-  #   url = "https://download.newrelic.com/php_agent/archive/${phpVersion}/newrelic-php5-${phpVersion}-linux.tar.gz";
-  #   sha256 = "sha256-ZPwVUUuhGHDT5owIlihzwcWeb5UX9NWr+43VrAdVYkU=";
-  # };
 
   redis-sce = fetchzip {
     url = "https://github.com/newrelic/nri-redis/releases/download/v${redisVersion}/nri-redis_linux_${redisVersion}_amd64.tar.gz";
     stripRoot = false;
-    sha256 = "sha256-RVJsqIAfDYBf5MtefWgbDrQA33kQad4TndTxz8Akoc8=";
+    sha256 = "sha256-XtzVF14LXMCwkJl8IsHk88xuWnUXimi+ij9c+zg8GWk=";
   };
 
   fb =  builtins.fetchurl {
     url = "https://github.com/newrelic/newrelic-fluent-bit-output/releases/download/v${fbVersion}/out_newrelic-linux-amd64-${fbVersion}.so";
-    sha256 = "0chy0w7aajb5mhxa6k1nbsgd2670xvsxj96wvchachf751ibdwzs";
+    sha256 = "0mcs7l8kzkia328dimwlmxdxrik9nry43jgdbghpjs5zic53b0z2";
   };
 
 in
 
 buildGoModule rec {
   pname = "infrastructure-agent";
-  version = "1.60.1";
+  version = "1.62.0";
 
   src = fetchzip {
     url = "https://github.com/newrelic/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
