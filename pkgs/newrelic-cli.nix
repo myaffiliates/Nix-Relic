@@ -1,28 +1,25 @@
-{ 
+{
   lib,
-  stdenv,
   buildGoModule,
   fetchzip,
-  ... 
+  ...
 }:
-  buildGoModule rec {
-    pname = "newrelic";
-    version = "0.97.7";
+buildGoModule rec {
+  pname = "newrelic";
+  version = "0.106.23";
 
-    src = fetchzip {
-      url = "https://github.com/newrelic/newrelic-cli/archive/refs/tags/v${version}.tar.gz";
-      sha256 = "sha256-7NlSbAzh8j7Y61jB84Mg1EDPdg6xSZrzywfaaWB/grI=";
-    };
+  src = fetchzip {
+    url = "https://github.com/newrelic/newrelic-cli/archive/refs/tags/v${version}.tar.gz";
+    sha256 = "sha256-9V/GP/ISsgiRewXckXdjHOLlDvEy9MTCb/wo5RDX7NY=";
+  };
 
-  vendorHash = "sha256-Uag2fN4M4vRxSEa3nRyvou88bBGrGCNIS3ofxXL+EMY=";
+  vendorHash = "sha256-0URuEsGxxP0Toy8ek1KUrrzhcbFJc4qbSssS2XnIBuc=";
 
   ldflags = [
     "-w"
     "-s"
     "-X main.version=${version}"
   ];
-
-  # env.CGO_ENABLED = "0";
 
   subPackages = [
     "cmd/newrelic"

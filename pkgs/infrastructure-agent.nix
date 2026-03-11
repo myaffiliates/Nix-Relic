@@ -1,78 +1,81 @@
-{
-  pkgs,
-  lib,
-  stdenv,
-  buildGoModule,
-  fetchFromGitHub,
-  fetchzip,
-  pkg-config,
-  ...
-}: 
-let 
-  fbVersion = "2.3.0";
-  nginxVersion = "3.6.0";
-  mysqlVersion = "1.14.0";
-  redisVersion = "1.12.1";
+{  pkgs, lib, buildGoModule, fetchzip, ... }:
+let
+  docker_Version = "2.6.8";
+  flex_Version = "1.17.4";  
+  fluent_bit_version = "3.4.0";
+  nginx_Version = "3.6.5";
+  mysql_Version = "1.18.4";
+  redis_Version = "1.12.8";
 
-  mysql-sce = fetchzip {
-    url = "https://github.com/newrelic/nri-mysql/releases/download/v${mysqlVersion}/nri-mysql_linux_${mysqlVersion}_amd64.tar.gz";
-    stripRoot = false;
-    sha256 = "sha256-07G+sXPvF966ylhiXlTNpdYxMRApD8FANYQASzSqUS0=";
-  };
+docker_src = fetchzip {
+  url = "https://github.com/newrelic/nri-docker/releases/download/v${docker_Version}/nri-docker_linux_${docker_Version}_${pkgs.go.GOARCH}.tar.gz";
+  stripRoot = false;
+  sha256 = if pkgs.go.GOARCH == "amd64" then
+    "sha256-V5Dn1JqS1tuLxhQTWQw7iQR0qRuxLoD34aokaWlKNNM="
+    else
+    "sha256-knFISojK/NtkmIGDGT9sWWUi2MS99VCkMsYOsxA1sCk=";
+};
 
-  nginx-sce = fetchzip {
-    url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/amd64/nri-nginx_linux_${nginxVersion}_amd64.tar.gz";
-    stripRoot = false;
-    sha256 = "sha256-GBdLGJDq3+opjg146dz4YPXmiBpy4tLblJ8+QnC6x00=";
-  };
+flex_src = fetchzip {
+  url = "https://github.com/newrelic/nri-flex/releases/download/v${flex_Version}/nri-flex_linux_${flex_Version}_${pkgs.go.GOARCH}.tar.gz";
+  stripRoot = false;
+  sha256 = if pkgs.go.GOARCH == "amd64" then
+    "sha256-Tsnyr4fyhvBODDDZAb9w7iPr50ELKWTlM125vsNpVVM="
+    else
+    "sha256-pTwzy/46jVmSJW6FHUJAiLZzz3wlZxdNIBJ3+93O4N0=";
+};
 
-  redis-sce = fetchzip {
-    url = "https://github.com/newrelic/nri-redis/releases/download/v${redisVersion}/nri-redis_linux_${redisVersion}_amd64.tar.gz";
-    stripRoot = false;
-    sha256 = "sha256-XtzVF14LXMCwkJl8IsHk88xuWnUXimi+ij9c+zg8GWk=";
-  };
+fluent-bit_src = builtins.fetchurl {
+  url = "https://github.com/newrelic/newrelic-fluent-bit-output/releases/download/v${fluent_bit_version}/out_newrelic-linux-${pkgs.go.GOARCH}-${fluent_bit_version}.so";
+  sha256 = if pkgs.go.GOARCH == "amd64" then
+    "sha256:0n2dx889jk3pivxqnz2664q5ff6aqw1vrw4j8w6p31k5cz7h9ml0"
+    else
+    "sha256:033nfbydd4pvl7j8nkim3rl45l0p3qcqn1jq5fhnjifdxxi3s7yw";
+};
 
-  fb =  builtins.fetchurl {
-    url = "https://github.com/newrelic/newrelic-fluent-bit-output/releases/download/v${fbVersion}/out_newrelic-linux-amd64-${fbVersion}.so";
-    sha256 = "0mcs7l8kzkia328dimwlmxdxrik9nry43jgdbghpjs5zic53b0z2";
-  };
+mysql_src = fetchzip {
+  url = "https://github.com/newrelic/nri-mysql/releases/download/v${mysql_Version}/nri-mysql_linux_${mysql_Version}_${pkgs.go.GOARCH}.tar.gz";
+  stripRoot = false;
+  sha256 = if pkgs.go.GOARCH == "amd64" then
+    "sha256-emJ5DfLChKktQ2B5EeG5EWc2417hsHnudsH/PUHFNEc="
+    else
+    "sha256-BSe08XyXq5OGxUhWOf6PTdBx726Y8j5C3GCIf6xukfM=";
+};
+
+nginx_src = fetchzip {
+  url = "https://download.newrelic.com/infrastructure_agent/binaries/linux/${pkgs.go.GOARCH}/nri-nginx_linux_${nginx_Version}_${pkgs.go.GOARCH}.tar.gz";
+  stripRoot = false;
+  sha256 = if pkgs.go.GOARCH == "amd64" then
+    "sha256-3LtelEUNs3WjDFj+sHYCpNJDcjCp0Gf1al3Vr16phgg="
+    else
+    "sha256-0b1kG669yiTpWviVo8/IQ98xYMEZ4zM+Q5rLo7EmsFs=";
+};
+
+redis_src = fetchzip {
+  url = "https://github.com/newrelic/nri-redis/releases/download/v${redis_Version}/nri-redis_linux_${redis_Version}_${pkgs.go.GOARCH}.tar.gz";
+  stripRoot = false;
+  sha256 = if pkgs.go.GOARCH == "amd64" then
+    "sha256-9AUpkXOU6MKuZ5GcHCdFSkZaDL/pcR5mSNuiSAtS33c="
+    else
+    "sha256-b0+9skQYC5y5MBoPaACa0JE+pZEiAtJR2D9HA8ezZx4=";
+};
 
 in
-
 buildGoModule rec {
   pname = "infrastructure-agent";
-  version = "1.62.0";
+  version = "1.72.4";
 
   src = fetchzip {
     url = "https://github.com/newrelic/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
-    sha256 = "sha256-ZLRaNEERDu2oVcZJ3xUrqJZ7eIt1bB8vihdweXFMLTg=";
-    # postFetch = ''
-    #   export HOME=$PWD
-    #   export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
-    #   go mod edit -replace github.com/newrelic/go-agent/v3=github.com/newrelic/go-agent/v3@v3.36.0
-    #   go mod tidy
-    #   go mod vendor
-    # '';  
+    sha256 = "sha256-u5Bd7PD5f180SVWBawtKnCg/tpdYtuEc0pVrogqxEXI=";
+    postFetch = ''
+      export HOME=$PWD
+      export PATH="${pkgs.git}/bin:${pkgs.go}/bin:$PATH"
+      cd $out
+      go mod tidy
+      go mod vendor
+    '';
   };
-
-  vendorHash = "sha256-5w2pzyS5z6Zxg77UoE/c3saPHOo8+70zqlrBQb6V5FU=";
-
-  ldflags = [
-    "-s"
-    "-w"
-    "-X main.buildVersion=${version}"
-  ];
-  
-  env.CGO_ENABLED = "0";
-  
-  # preBuild = ''
-  #   export HOME=$PWD
-  #   export GOPROXY="direct"
-  #   export PATH="${pkgs.git}/bin:${pkgs.git}/bin:$PATH"
-  #   go mod edit -replace github.com/newrelic/go-agent/v3=github.com/newrelic/go-agent/v3@v3.36.0
-  #   go mod tidy
-  #   go mod vendor
-  # '';
 
   subPackages = [
     "cmd/newrelic-infra"
@@ -88,20 +91,30 @@ buildGoModule rec {
     mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/logging
     mkdir -p $out/var/db/newrelic-infra/newrelic-integrations/bin
 
-    cp -r ${nginx-sce}/* $out/
-    cp -r ${mysql-sce}/* $out/
-    cp -r ${redis-sce}/* $out/
-    cp -r ${fb} $out/var/db/newrelic-infra/newrelic-integrations/logging/out_newrelic.so
+    cp -r ${flex_src}/nri-flex $out/var/db/newrelic-infra/newrelic-integrations/bin/
+    cp -r ${fluent-bit_src} $out/var/db/newrelic-infra/newrelic-integrations/logging/out_newrelic.so
+    cp -r ${docker_src}/* $out/
+    cp -r ${mysql_src}/* $out/
+    cp -r ${nginx_src}/* $out/
+    cp -r ${redis_src}/* $out/
   '';
+
+  vendorHash = null;
+
+  ldflags = [
+    "-w"
+    "-s"
+    "-X main.version=${version}"
+  ];
 
   doCheck = false;
 
   meta = {
+    inherit version;
     description = "New Relic Infrastructure Agent";
-    homepage = "https://github.com/newrelic/infrastructure-agent.git";
+    homepage = "https://github.com/newrelic/infrastructure-agent/archive/refs/tags/${version}.tar.gz";
     license = lib.licenses.asl20;
-    maintainers = with lib.maintainers; [ davsanchez ];
-    mainProgram = "newrelic-infra";
+    maintainers = with lib.maintainers; [ ];
+    mainProgram = "infrastructure-agent";
   };
 }
-
